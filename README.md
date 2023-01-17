@@ -66,11 +66,11 @@ not keeped across sessions, you will have to do this logic yourself.
 twitchInterface.init(url: 'url');
 ```
 
-If you want to print the requests for debug purpose :
+If you want to print the requests for debug purpose while you initialize the Twitch interface object :
 
 ````dart
-twitchInterface.debugMode = true;
-````
+ showRequestLogs: true
+ ````
 
 ## Additional information
 
