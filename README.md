@@ -11,13 +11,20 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
+### Be careful this package is a work in progress :)
+<em>
+This project might encounter breaking changes while i still work on it, that's why is not yet released on pub.dev
+It will be once all unit tests are done and architecture is finished.
+
+Do not use event subs yet there's work to be done there still :)
+</em>
+
 Twitch Client is a package that allows you to connect with the Twitch API and 
 interact with data like Bits, Channels, Chats, Games, Moderation ...
 
 Twitch API documentation : https://dev.twitch.tv/docs/api
 
 ## Features
-
 
 ## Getting started
 
@@ -51,11 +58,13 @@ Something like :
 <redirection_url_you_gave>#access_token=<access_token>&scope=analytics%3Aread%3Aextensions&token_type=bearer')
 ````
 
-Parse the URL to keep the access token and add it to the TwitchInterface.
+Give the url that was returned after used logged in to the package and it will 
+parse the URL to keep the access token and add it to the TwitchInterface, this information is
+not keeped across sessions, you will have to do this logic yourself.
 
-````dart
-twitchInterface.twitchInterface.accessToken = 'token';
-````
+```dart
+twitchInterface.init(url: 'url');
+```
 
 If you want to print the requests for debug purpose :
 
@@ -71,4 +80,4 @@ they can audit your add and ask you to resolve the issue if you don't do it.
 More here : 
 https://dev.twitch.tv/docs/authentication/validate-tokens#who-must-validate-tokens
 
-Please call verifyToken() to do this request.# twitch_dart_api
+Please call verifyToken() to do this request.
