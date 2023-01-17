@@ -1,0 +1,83 @@
+import 'dart:convert';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:twitch_client/src/datasource/twitch_data_source.dart';
+import 'package:twitch_client/src/error/exceptions.dart';
+import 'package:twitch_client/src/interface/bits_repository.dart';
+import 'package:twitch_client/src/props/bits_leaderboard_props.dart';
+import 'package:twitch_client/src/props/cheermotes_props.dart';
+import 'package:twitch_client/src/response/bits_leaderboard_response.dart';
+import 'package:twitch_client/src/response/cheermotes_response.dart';
+
+import '../../json/asset_reader.dart';
+import 'bits_interface_test.mocks.dart';
+
+@GenerateNiceMocks([MockSpec<TwitchDataSource>()])
+void main() {
+  final mockedDataSource = MockTwitchDataSource();
+  final bitsInterface = BitsInterfaceImpl(mockedDataSource);
+
+  group('getBitsLeaderBoard', () {
+    final props = BitsLeaderBoardProps();
+    const String _path = 'bits/';
+    String apiResponse = assetReader('response_bitsleaderboard.json');
+    final response = BitsLeaderboardResponse.fromJson(jsonDecode(apiResponse));
+
+    test('On success', () async {
+      when(mockedDataSource.get(
+              path: '$_path/leaderboard', queryParams: props.toJson()))
+          .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
+
+      final result = await bitsInterface.getBitsLeaderBoard(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/leaderboard', queryParams: props.toJson()));
+      expect(result.isRight(), true);
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.get(
+              path: '$_path/leaderboard', queryParams: props.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await bitsInterface.getBitsLeaderBoard(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/leaderboard', queryParams: props.toJson()));
+      expect(result.isLeft(), true);
+    });
+  });
+
+  group('getCheermotes', () {
+    final props = CheermotesProps(broadcasterId: '123');
+    const String _path = 'bits/';
+    String apiResponse = assetReader('response_cheermotes.json');
+    final response = CheermotesResponse.fromJson(jsonDecode(apiResponse));
+
+    test('On success', () async {
+      when(mockedDataSource.get(
+              path: '$_path/cheermotes', queryParams: props.toJson()))
+          .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
+
+      final result = await bitsInterface.getCheermotes(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/cheermotes', queryParams: props.toJson()));
+      expect(result.isRight(), true);
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.get(
+              path: '$_path/cheermotes', queryParams: props.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await bitsInterface.getCheermotes(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/cheermotes', queryParams: props.toJson()));
+      expect(result.isLeft(), true);
+    });
+  });
+}
