@@ -2,6 +2,10 @@
 
 part of 'ban_user_props.dart';
 
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
 _$_BanUserProps _$$_BanUserPropsFromJson(Map<String, dynamic> json) =>
     _$_BanUserProps(
       data: BanUserData.fromJson(json['data'] as Map<String, dynamic>),

@@ -1,30 +1,27 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 
-class ChannelVipsResponse {
-  final List<ChannelVipsResponseData>? data;
-  final Pagination? pagination;
+part 'channel_vips_response.freezed.dart';
 
-  ChannelVipsResponse({required this.data, required this.pagination});
+part 'channel_vips_response.g.dart';
+
+@freezed
+class ChannelVipsResponse with _$ChannelVipsResponse {
+
+  const factory ChannelVipsResponse(
+      {final List<ChannelVipsResponseData>? data, final Pagination? pagination})
+      = _ChannelVipResponse;
 
   factory ChannelVipsResponse.fromJson(Map<String, dynamic> json) =>
-      ChannelVipsResponse(
-          data: List<ChannelVipsResponseData>.from(
-              json['data']?.map((e) => ChannelVipsResponseData.fromJson(e))),
-          pagination: Pagination.fromJson(json['pagination']));
+      _$ChannelVipsResponseFromJson(json);
 }
 
-class ChannelVipsResponseData {
-  final String? userId;
-  final String? userName;
-  final String? userLogin;
-
-  ChannelVipsResponseData(
-      {required this.userId, required this.userName, required this.userLogin});
+@freezed
+class ChannelVipsResponseData with _$ChannelVipsResponseData {
+  const factory ChannelVipsResponseData(
+      { final String? userId, final String? userName, final String? userLogin})
+      = _ChannelVipsResponseData;
 
   factory ChannelVipsResponseData.fromJson(Map<String, dynamic> json) =>
-      ChannelVipsResponseData(
-        userId: json['user_id'],
-        userName: json['user_name'],
-        userLogin: json['user_login'],
-      );
+      _$ChannelVipsResponseDataFromJson(json);
 }

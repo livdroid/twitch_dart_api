@@ -1,15 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'pagination_response.freezed.dart';
 
 part 'pagination_response.g.dart';
 
-@JsonSerializable()
-class Pagination {
-  final String? cursor;
-
-  Pagination({this.cursor});
+@freezed
+class Pagination with _$Pagination {
+  const factory Pagination({required String cursor}) = _Pagination;
 
   factory Pagination.fromJson(Map<String, dynamic> json) =>
-      Pagination(cursor: json['cursor']);
-
-  Map toJson() => {'cursor' : cursor};
+      _$PaginationFromJson(json);
 }

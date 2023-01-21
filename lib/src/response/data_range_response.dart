@@ -1,17 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'data_range_response.freezed.dart';
+
 part 'data_range_response.g.dart';
 
-@JsonSerializable()
-class DateRange {
-  String? startedAt;
-  String? endedAt;
+@freezed
+class DateRange with _$DateRange {
+  const factory DateRange(String? startedAt, String? endedAt) = _DateRange;
 
-  DateRange({this.startedAt, this.endedAt});
-
-  DateRange.fromJson(Map<String, dynamic> json) {
-    startedAt = json['started_at'];
-    endedAt = json['ended_at'];
-  }
-  Map toJson() => {'started_at' : startedAt, 'ended_at': endedAt};
+  factory DateRange.fromJson(Map<String, dynamic> json) =>
+      _$DateRangeFromJson(json);
 }
