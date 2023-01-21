@@ -12,7 +12,7 @@ import 'package:twitch_client/src/response/bits_leaderboard_response.dart';
 import 'package:twitch_client/src/response/cheermotes_response.dart';
 
 import '../../json/asset_reader.dart';
-import 'bits_interface_test.mocks.dart';
+import 'bits_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {

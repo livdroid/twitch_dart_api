@@ -6,10 +6,11 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import '../../json/asset_reader.dart';
-import 'channel_interface_test.mocks.dart';
+import 'channel_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {
@@ -25,8 +26,7 @@ void main() {
       when(mockedDataSource.get(path: _path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
 
-      final result =
-          await interface.getChannelInformation(props: props);
+      final result = await interface.getChannelInformation(props: props);
 
       verify(mockedDataSource.get(path: _path, queryParams: props.toJson()));
       expect(result.isRight(), true);
@@ -50,8 +50,7 @@ void main() {
       when(mockedDataSource.get(path: _path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
-      final result =
-          await interface.getChannelInformation(props: props);
+      final result = await interface.getChannelInformation(props: props);
 
       verify(mockedDataSource.get(path: _path, queryParams: props.toJson()));
       expect(result.isLeft(), true);
@@ -208,7 +207,7 @@ void main() {
           queryParams: {}));
     });
 
-    test('On too length too long props', () async {
+    test('On length too long props', () async {
       when(mockedDataSource.post(
               path: '$_path/commercial',
               data: tooLongProps.toJson(),
@@ -235,6 +234,146 @@ void main() {
 
       verify(mockedDataSource.post(
           path: '$_path/commercial', data: props.toJson(), queryParams: {}));
+
+      expect(result.isLeft(), true);
+    });
+  });
+
+  group('getVips', () {
+    final BroadcasterProps emptyProps = BroadcasterProps(broadcasterId: '');
+    final BroadcasterProps props = BroadcasterProps(broadcasterId: '123');
+    final ChannelVipsResponse response = ChannelVipsResponse(data: [
+      ChannelVipsResponseData(userId: '123', userName: 'Joe', userLogin: 'joe')
+    ], pagination: Pagination(cursor: '123'));
+
+    test('On success', () async {
+      when(mockedDataSource.get(
+              path: '$_path/vips', queryParams: props.toJson()))
+          .thenAnswer((realInvocation) async => response.toJson());
+
+      final result = await interface.getVIPs(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/vips', queryParams: props.toJson()));
+
+      expect(result.isRight(), true);
+    });
+
+    test('On empty props', () async {
+      when(mockedDataSource.post(
+              path: '$_path/vips', data: emptyProps.toJson(), queryParams: {}))
+          .thenAnswer((realInvocation) async => response.toJson());
+
+      expect(() => interface.getVIPs(props: emptyProps), throwsAssertionError);
+
+      verifyNever(mockedDataSource.get(
+          path: '$_path/vips', queryParams: emptyProps.toJson()));
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.get(
+              path: '$_path/vips', queryParams: props.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await interface.getVIPs(props: props);
+
+      verify(mockedDataSource.get(
+          path: '$_path/vips', queryParams: props.toJson()));
+
+      expect(result.isLeft(), true);
+    });
+  });
+
+  group('addVips', () {
+    final AddVipProps emptyProps = AddVipProps(broadcasterId: '', userId: '');
+    final AddVipProps props = AddVipProps(broadcasterId: '123', userId: '123');
+    final RemoveVipProps removeVipProps =
+        RemoveVipProps(broadcasterId: '123', userId: '123');
+
+    test('On success', () async {
+      when(mockedDataSource.post(
+          path: '$_path/vips',
+          queryParams: props.toJson(),
+          data: {})).thenAnswer((realInvocation) async => null);
+
+      final result = await interface.addVip(props: props);
+
+      verify(mockedDataSource
+          .post(path: '$_path/vips', queryParams: props.toJson(), data: {}));
+
+      expect(result.isRight(), true);
+    });
+
+    test('On empty props', () async {
+      when(mockedDataSource.post(
+          path: '$_path/vips',
+          queryParams: emptyProps.toJson(),
+          data: {})).thenAnswer((realInvocation) async => null);
+
+      expect(() => interface.addVip(props: emptyProps), throwsAssertionError);
+
+      verifyNever(mockedDataSource.post(
+          path: '$_path/vips', queryParams: emptyProps.toJson(), data: {}));
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.post(
+          path: '$_path/vips',
+          queryParams: props.toJson(),
+          data: {})).thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await interface.addVip(props: props);
+
+      verify(mockedDataSource
+          .post(path: '$_path/vips', queryParams: props.toJson(), data: {}));
+
+      expect(result.isLeft(), true);
+    });
+  });
+
+  group('removeVips', () {
+    final RemoveVipProps props =
+        RemoveVipProps(broadcasterId: '123', userId: '123');
+    final RemoveVipProps emptyProps =
+        RemoveVipProps(broadcasterId: '', userId: '');
+
+    test('On success', () async {
+      when(mockedDataSource.delete(
+          path: '$_path/vips',
+          queryParams: props.toJson(),
+          data: {})).thenAnswer((realInvocation) async => null);
+
+      final result = await interface.removeVip(props: props);
+
+      verify(mockedDataSource
+          .delete(path: '$_path/vips', queryParams: props.toJson(), data: {}));
+
+      expect(result.isRight(), true);
+    });
+
+    test('On empty props', () async {
+      when(mockedDataSource.delete(
+          path: '$_path/vips',
+          queryParams: emptyProps.toJson(),
+          data: {})).thenAnswer((realInvocation) async => null);
+
+      expect(
+          () => interface.removeVip(props: emptyProps), throwsAssertionError);
+
+      verifyNever(mockedDataSource.delete(
+          path: '$_path/vips', queryParams: emptyProps.toJson(), data: {}));
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.delete(
+          path: '$_path/vips',
+          queryParams: props.toJson(),
+          data: {})).thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await interface.removeVip(props: props);
+
+      verify(mockedDataSource
+          .delete(path: '$_path/vips', queryParams: props.toJson(), data: {}));
 
       expect(result.isLeft(), true);
     });
