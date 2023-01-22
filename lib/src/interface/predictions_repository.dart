@@ -18,7 +18,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
       {required PredictionsProps props}) async {
     try {
       final response = await _twitchDataSource.get(
-          path: '$_path', queryParams: props.toJson());
+          path: _path, queryParams: props.toJson());
       return Right(PredictionResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -30,7 +30,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
       {required CreatePredictionsProps props}) async {
     try {
       final response = await _twitchDataSource
-          .post(path: '$_path', data: props.toJson(), queryParams: {});
+          .post(path: _path, data: props.toJson(), queryParams: {});
       return Right(PredictionResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -42,7 +42,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
       {required EndPredictionProps props}) async {
     try {
       final response = await _twitchDataSource
-          .patch(path: '$_path', data: props.toJson(), queryParams: {});
+          .patch(path: _path, data: props.toJson(), queryParams: {});
       return Right(PredictionResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
