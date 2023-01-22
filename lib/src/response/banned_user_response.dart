@@ -1,33 +1,22 @@
-class BannedUser {
-  final String? userId;
-  final String? userLogin;
-  final String? userName;
-  final String? expiresAt;
-  final String? createdAt;
-  final String? reason;
-  final String? moderatorId;
-  final String? moderatorLogin;
-  final String? moderatorName;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  BannedUser(
-      {this.userId,
-      this.userLogin,
-      this.userName,
-      this.expiresAt,
-      this.createdAt,
-      this.reason,
-      this.moderatorId,
-      this.moderatorLogin,
-      this.moderatorName});
+part 'banned_user_response.freezed.dart';
 
-  factory BannedUser.fromJson(Map<String, dynamic> json) => BannedUser(
-      userId: json['user_id'],
-      userLogin: json['user_login'],
-      userName: json['user_name'],
-      expiresAt: json['expires_at'],
-      createdAt: json['created_at'],
-      reason: json['reason'],
-      moderatorId: json['moderator_id'],
-      moderatorLogin: json['moderator_login'],
-      moderatorName: json['moderator_name']);
+part 'banned_user_response.g.dart';
+
+@freezed
+class BannedUser with _$BannedUser {
+  const factory BannedUser(
+      {String? userId,
+      String? userLogin,
+      String? userName,
+      String? expiresAt,
+      String? createdAt,
+      String? reason,
+      String? moderatorId,
+      String? moderatorLogin,
+      String? moderatorName}) = _BannedUser;
+
+  factory BannedUser.fromJson(Map<String, dynamic> json) =>
+      _$BannedUserFromJson(json);
 }

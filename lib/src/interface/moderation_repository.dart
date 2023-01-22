@@ -12,7 +12,7 @@ import 'package:twitch_client/src/response/banned_users_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
 
 class ModerationInterfaceImpl implements ModerationInterface {
-  static const String _path = 'moderation/';
+  static const String _path = 'moderation';
 
   final TwitchDataSource _twitchDataSource;
 
@@ -100,7 +100,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     assert(props.userId != props.broadcasterId);
 
     try {
-      final response = await _twitchDataSource
+      await _twitchDataSource
           .delete(path: '$_path/moderators', queryParams: props.toJson(), data: {});
       return Right(true);
     } on Exception catch (e) {

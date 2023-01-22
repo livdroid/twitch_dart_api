@@ -1,34 +1,28 @@
-class BanUserResponse {
-  final List<BanUserResponseData>? data;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  BanUserResponse({required this.data});
+part 'ban_user_response.freezed.dart';
+
+part 'ban_user_response.g.dart';
+
+@freezed
+class BanUserResponse with _$BanUserResponse {
+  const factory BanUserResponse({List<BanUserResponseData>? data}) =
+      _BanUserResponse;
 
   factory BanUserResponse.fromJson(Map<String, dynamic> json) =>
-      BanUserResponse(
-          data: List<BanUserResponseData>.from(
-              json['data'].map((e) => BanUserResponseData.fromJson(e))));
+      _$BanUserResponseFromJson(json);
 }
 
-class BanUserResponseData {
-  final String? broadcasterId;
-  final String? moderatorId;
-  final String? userId;
-  final String? createdAt;
-  final String? endTime;
-
-  BanUserResponseData(
-      {this.broadcasterId,
-      this.moderatorId,
-      this.userId,
-      this.createdAt,
-      this.endTime});
+@freezed
+class BanUserResponseData with _$BanUserResponseData {
+  const factory BanUserResponseData({
+    String? broadcasterId,
+    String? moderatorId,
+    String? userId,
+    String? createdAt,
+    String? endTime,
+  }) = _BanUserResponseData;
 
   factory BanUserResponseData.fromJson(Map<String, dynamic> json) =>
-      BanUserResponseData(
-        broadcasterId: json['broadcaster_id'],
-        moderatorId: json['moderator_id'],
-        userId: json['user_id'],
-        createdAt: json['created_at'],
-        endTime: json['end_time'],
-      );
+      _$BanUserResponseDataFromJson(json);
 }

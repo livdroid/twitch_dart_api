@@ -1,15 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twitch_client/src/response/banned_user_response.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 
-class BannedUsersResponse {
-  final List<BannedUser>? data;
-  final Pagination? pagination;
+part 'banned_users_response.freezed.dart';
 
-  BannedUsersResponse({this.data, this.pagination});
+part 'banned_users_response.g.dart';
+
+@freezed
+class BannedUsersResponse with _$BannedUsersResponse {
+  const factory BannedUsersResponse(
+      {List<BannedUser>? data, Pagination? pagination}) = _BannedUsersResponse;
 
   factory BannedUsersResponse.fromJson(Map<String, dynamic> json) =>
-      BannedUsersResponse(
-          data: List<BannedUser>.from(
-              json['data'].map((v) => BannedUser.fromJson(v))),
-          pagination: Pagination.fromJson(json['pagination']));
+      _$BannedUsersResponseFromJson(json);
 }
