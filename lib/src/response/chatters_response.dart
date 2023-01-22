@@ -1,17 +1,18 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twitch_client/src/response/chatters_data_response.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 
-class ChattersResponse {
-  final List<ChattersData>? data;
-  final Pagination? pagination;
-  final int? total;
+part 'chatters_response.freezed.dart';
 
-  ChattersResponse({this.data, this.pagination, this.total});
+part 'chatters_response.g.dart';
+
+@freezed
+class ChattersResponse with _$ChattersResponse {
+  const factory ChattersResponse(
+      {List<ChattersData>? data,
+      Pagination? pagination,
+      int? total}) = _ChattersResponse;
 
   factory ChattersResponse.fromJson(Map<String, dynamic> json) =>
-      ChattersResponse(
-          data: List<ChattersData>.from(
-              json['data']?.map((v) => (ChattersData.fromJson(v))) ?? []),
-          pagination: Pagination.fromJson(json['pagination']),
-          total: json['total']);
+      _$ChattersResponseFromJson(json);
 }

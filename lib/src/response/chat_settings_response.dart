@@ -1,52 +1,33 @@
-class ChatSettingsResponse {
-  final List<ChatSettingsData>? data;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ChatSettingsResponse({this.data});
+part 'chat_settings_response.freezed.dart';
+
+part 'chat_settings_response.g.dart';
+
+@freezed
+class ChatSettingsResponse with _$ChatSettingsResponse {
+  const factory ChatSettingsResponse({List<ChatSettingsData>? data}) =
+      _ChatSettingsResponse;
 
   factory ChatSettingsResponse.fromJson(Map<String, dynamic> json) =>
-      ChatSettingsResponse(
-          data: List<ChatSettingsData>.from(
-              json['data'].map((v) => ChatSettingsData.fromJson(v))));
+      _$ChatSettingsResponseFromJson(json);
 }
 
-class ChatSettingsData {
-  final String? broadcasterId;
-  final String? moderatorId;
-  final bool? slowMode;
-  final int? slowModeWaitTime;
-  final bool? followerMode;
-  final int? followerModeDuration;
-  final bool? subscriberMode;
-  final bool? emoteMode;
-  final bool? uniqueChatMode;
-  final bool? nonModeratorChatDelay;
-  final int? nonModeratorChatDelayDuration;
-
-  ChatSettingsData(
-      {this.broadcasterId,
-      this.moderatorId,
-      this.slowMode,
-      this.slowModeWaitTime,
-      this.followerMode,
-      this.followerModeDuration,
-      this.subscriberMode,
-      this.emoteMode,
-      this.uniqueChatMode,
-      this.nonModeratorChatDelay,
-      this.nonModeratorChatDelayDuration});
+@freezed
+class ChatSettingsData with _$ChatSettingsData {
+  const factory ChatSettingsData(
+      {String? broadcasterId,
+      String? moderatorId,
+      bool? slowMode,
+      int? slowModeWaitTime,
+      bool? followerMode,
+      int? followerModeDuration,
+      bool? subscriberMode,
+      bool? emoteMode,
+      bool? uniqueChatMode,
+      bool? nonModeratorChatDelay,
+      int? nonModeratorChatDelayDuration}) = _ChatSettingsData;
 
   factory ChatSettingsData.fromJson(Map<String, dynamic> json) =>
-      ChatSettingsData(
-          broadcasterId: json['broadcaster_id'],
-          moderatorId: json['moderator_id'],
-          slowMode: json['slow_mode'],
-          slowModeWaitTime: json['slow_mode_wait_time'],
-          followerMode: json['follower_mode'],
-          followerModeDuration: json['follower_mode_duration'],
-          subscriberMode: json['subscriber_mode'],
-          emoteMode: json['emote_mode'],
-          uniqueChatMode: json['unique_chat_mode'],
-          nonModeratorChatDelay: json['non_moderator_chat_delay'],
-          nonModeratorChatDelayDuration:
-              json['non_moderator_chat_delay_duration']);
+      _$ChatSettingsDataFromJson(json);
 }

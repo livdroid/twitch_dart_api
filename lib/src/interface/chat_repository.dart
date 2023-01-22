@@ -9,7 +9,7 @@ import 'package:twitch_client/src/response/chat_settings_response.dart';
 import 'package:twitch_client/src/response/chatters_response.dart';
 
 class ChatInterfaceImpl implements ChatInterface {
-  static const String _path = 'chat/';
+  static const String _path = 'chat';
 
   final TwitchDataSource _twitchDataSource;
 

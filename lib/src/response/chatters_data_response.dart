@@ -1,12 +1,17 @@
-class ChattersData {
-  final String? userId;
-  final String? userName;
-  final String? createdAt;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ChattersData({this.userId, this.userName, this.createdAt});
+part 'chatters_data_response.freezed.dart';
 
-  factory ChattersData.fromJson(Map<String, dynamic> json) => ChattersData(
-      userId: json['user_id'],
-      userName: json['user_name'],
-      createdAt: json['created_at']);
+part 'chatters_data_response.g.dart';
+
+@freezed
+class ChattersData with _$ChattersData {
+  const factory ChattersData({
+    String? userId,
+    String? userName,
+    String? createdAt,
+  }) = _ChattersData;
+
+  factory ChattersData.fromJson(Map<String, dynamic> json) =>
+      _$ChattersDataFromJson(json);
 }
