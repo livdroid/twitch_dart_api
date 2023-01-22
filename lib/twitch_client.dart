@@ -1,7 +1,7 @@
 library twitch_client;
 
 export 'src/error/failure.dart';
-export 'src/interface/token_status.dart';
+export 'src/model/token_status.dart';
 export 'src/interface/twitch_interface.dart';
 export 'src/model/twitch _subscription_type.dart';
 export 'src/model/twitch_api_scopes.dart';

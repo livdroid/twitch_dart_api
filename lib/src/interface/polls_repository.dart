@@ -17,7 +17,7 @@ class PollsRepositoryImpl implements PollsRepository {
       {required PollsProps props}) async {
     try {
       final response = await _twitchDataSource.get(
-          path: '$_path', queryParams: props.toJson());
+          path: _path, queryParams: props.toJson());
       return Right(PollsResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -29,7 +29,7 @@ class PollsRepositoryImpl implements PollsRepository {
       {required CreatePollProps props}) async {
     try {
       final response = await _twitchDataSource
-          .post(path: '$_path', data: props.toJson(), queryParams: {});
+          .post(path: _path, data: props.toJson(), queryParams: {});
       return Right(PollsResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -41,7 +41,7 @@ class PollsRepositoryImpl implements PollsRepository {
       {required EndPollProps props}) async {
     try {
       final response = await _twitchDataSource
-          .patch(path: '$_path', data: props.toJson(), queryParams: {});
+          .patch(path: _path, data: props.toJson(), queryParams: {});
       return Right(PollsResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));

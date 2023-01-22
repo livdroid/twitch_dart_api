@@ -6,8 +6,8 @@ part of 'polls_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PollsResponse _$PollsResponseFromJson(Map<String, dynamic> json) =>
-    PollsResponse(
+_$_PollsResponse _$$_PollsResponseFromJson(Map<String, dynamic> json) =>
+    _$_PollsResponse(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => PollsResponseData.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,7 +16,7 @@ PollsResponse _$PollsResponseFromJson(Map<String, dynamic> json) =>
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$PollsResponseToJson(PollsResponse instance) {
+Map<String, dynamic> _$$_PollsResponseToJson(_$_PollsResponse instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -30,8 +30,8 @@ Map<String, dynamic> _$PollsResponseToJson(PollsResponse instance) {
   return val;
 }
 
-PollsResponseData _$PollsResponseDataFromJson(Map<String, dynamic> json) =>
-    PollsResponseData(
+_$_PollsResponseData _$$_PollsResponseDataFromJson(Map<String, dynamic> json) =>
+    _$_PollsResponseData(
       id: json['id'] as String?,
       broadcasterId: json['broadcaster_id'] as String?,
       broadcasterName: json['broadcaster_name'] as String?,
@@ -50,7 +50,8 @@ PollsResponseData _$PollsResponseDataFromJson(Map<String, dynamic> json) =>
       startedAt: json['started_at'] as String?,
     );
 
-Map<String, dynamic> _$PollsResponseDataToJson(PollsResponseData instance) {
+Map<String, dynamic> _$$_PollsResponseDataToJson(
+    _$_PollsResponseData instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -76,7 +77,7 @@ Map<String, dynamic> _$PollsResponseDataToJson(PollsResponseData instance) {
   return val;
 }
 
-Choices _$ChoicesFromJson(Map<String, dynamic> json) => Choices(
+_$_Choices _$$_ChoicesFromJson(Map<String, dynamic> json) => _$_Choices(
       id: json['id'] as String?,
       title: json['title'] as String?,
       votes: json['votes'] as int?,
@@ -84,7 +85,7 @@ Choices _$ChoicesFromJson(Map<String, dynamic> json) => Choices(
       bitsVotes: json['bits_votes'] as int?,
     );
 
-Map<String, dynamic> _$ChoicesToJson(Choices instance) {
+Map<String, dynamic> _$$_ChoicesToJson(_$_Choices instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

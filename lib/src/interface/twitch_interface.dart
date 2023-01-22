@@ -9,7 +9,7 @@ import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
-import 'package:twitch_client/src/interface/token_status.dart';
+import 'package:twitch_client/src/model/token_status.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
 import 'package:twitch_client/src/interface/video_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
