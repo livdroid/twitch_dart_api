@@ -23,10 +23,10 @@ class VideoRepositoryImpl implements VideoRepository {
 
   @override
   Future<Either<Failure, bool>> deleteVideo(
-      {required String props}) async {
+      {required VideoProps props}) async {
     try {
       await _twitchDataSource
-          .delete(path: _path, queryParams: {'id': props}, data: {});
+          .delete(path: _path, queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -37,5 +37,5 @@ class VideoRepositoryImpl implements VideoRepository {
 abstract class VideoRepository {
   Future<Either<Failure, VideoResponse>> getVideo({required VideoProps props});
 
-  Future<Either<Failure, bool>> deleteVideo({required String props});
+  Future<Either<Failure, bool>> deleteVideo({required VideoProps props});
 }

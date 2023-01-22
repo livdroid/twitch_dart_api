@@ -265,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Delete video'),
               onPressed: () async {
                 final data = await twitchInterface.videoRepository
-                    ?.deleteVideo(props: '123');
+                    ?.deleteVideo(props: VideoProps(id: '123'));
                 data?.fold((l) => print(l.exception), (r) => print('ok'));
               }),
           TextButton(
