@@ -1,42 +1,26 @@
-class UserBlockListResponse {
-  List<UserBlockListResponseData>? data;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  UserBlockListResponse({this.data});
+part 'user_block_list_response.freezed.dart';
+part 'user_block_list_response.g.dart';
 
-  UserBlockListResponse.fromJson(Map<String, dynamic> json) {
-    data:
-    List<UserBlockListResponseData>.from(
-        json['data'].map((e) => UserBlockListResponseData.fromJson(e)));
-  }
+@freezed
+class UserBlockListResponse with _$UserBlockListResponse {
+  const factory UserBlockListResponse({
+    List<UserBlockListResponseData>? data
+}) = _UserBlockListResponse;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  factory UserBlockListResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserBlockListResponseFromJson(json);
 }
 
-class UserBlockListResponseData {
-  late final String? userId;
-  late final String? userLogin;
-  late final String? displayName;
+@freezed
+class UserBlockListResponseData with _$UserBlockListResponseData {
+  const factory UserBlockListResponseData({
+    String? userId,
+    String? userLogin,
+    String? displayName,
+}) = _UserBlockListResponseData;
 
-  UserBlockListResponseData({this.userId, this.userLogin, this.displayName});
-
-  UserBlockListResponseData.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
-    userLogin = json['user_login'];
-    displayName = json['display_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user_id'] = userId;
-    data['user_login'] = userLogin;
-    data['display_name'] = displayName;
-    data.removeWhere((key, value) => value == null);
-    return data;
-  }
+  factory UserBlockListResponseData.fromJson(Map<String, dynamic> json) =>
+      _$UserBlockListResponseDataFromJson(json);
 }

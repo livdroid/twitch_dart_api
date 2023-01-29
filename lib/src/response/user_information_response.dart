@@ -1,66 +1,34 @@
-class UserResponse {
-  final List<UserResponseData>? data;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  UserResponse({this.data});
+part 'user_information_response.g.dart';
 
-  factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
-      data: List<UserResponseData>.from(
-          json['data'].map((e) => UserResponseData.fromJson(e))));
+part 'user_information_response.freezed.dart';
+
+@freezed
+class UserResponse with _$UserResponse {
+  const factory UserResponse({ List<UserResponseData>? data}) = _UserResponse;
+
+  factory UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
 }
 
-class UserResponseData {
-  String? id;
-  String? login;
-  String? displayName;
-  String? type;
-  String? broadcasterType;
-  String? description;
-  String? profileImageUrl;
-  String? offlineImageUrl;
-  int? viewCount;
-  String? email;
-  String? createdAt;
+@freezed
+class UserResponseData with _$UserResponseData {
 
-  UserResponseData(
-      {this.id,
-      this.login,
-      this.displayName,
-      this.type,
-      this.broadcasterType,
-      this.description,
-      this.profileImageUrl,
-      this.offlineImageUrl,
-      this.viewCount,
-      this.email,
-      this.createdAt});
+  const factory UserResponseData({
+    String? id,
+    String? login,
+    String? displayName,
+    String? type,
+    String? broadcasterType,
+    String? description,
+    String? profileImageUrl,
+    String? offlineImageUrl,
+    int? viewCount,
+    String? email,
+    String? createdAt,
+}) = _UserResponseData;
 
-  UserResponseData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    login = json['login'];
-    displayName = json['display_name'];
-    type = json['type'];
-    broadcasterType = json['broadcaster_type'];
-    description = json['description'];
-    profileImageUrl = json['profile_image_url'];
-    offlineImageUrl = json['offline_image_url'];
-    viewCount = json['view_count'];
-    email = json['email'];
-    createdAt = json['created_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['login'] = this.login;
-    data['display_name'] = this.displayName;
-    data['type'] = this.type;
-    data['broadcaster_type'] = this.broadcasterType;
-    data['description'] = this.description;
-    data['profile_image_url'] = this.profileImageUrl;
-    data['offline_image_url'] = this.offlineImageUrl;
-    data['view_count'] = this.viewCount;
-    data['email'] = this.email;
-    data['created_at'] = this.createdAt;
-    return data;
-  }
+  factory UserResponseData.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseDataFromJson(json);
 }

@@ -2,12 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/twitch_client.dart';
 
-class UserInterfaceImpl implements UserInterface {
-  static const String _path = 'users/';
+class UserRepositoryImpl implements UserInterface {
+  static const String _path = 'users';
 
   final TwitchDataSource _twitchDataSource;
 
-  UserInterfaceImpl(this._twitchDataSource);
+  UserRepositoryImpl(this._twitchDataSource);
 
   @override
   Future<Either<Failure, UserResponse>> getUserInformation(
@@ -77,6 +77,8 @@ class UserInterfaceImpl implements UserInterface {
   Future<Either<Failure, bool>> unblockUser(
       {required BlockUserProps props}) async {
     try {
+      assert(props.targetUserId.isNotEmpty);
+
       await _twitchDataSource.delete(
           path: '${_path}blocks/', queryParams: props.toJson(), data: {});
       return const Right(true);

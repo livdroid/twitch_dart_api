@@ -1,45 +1,35 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 
-class UserFollowResponse {
-  final int total;
-  final List<UserFollowData> data;
-  final Pagination pagination;
+part 'user_follow_response.freezed.dart';
+part 'user_follow_response.g.dart';
 
-  UserFollowResponse({
-    required this.total,
-    required this.data,
-    required this.pagination,
-  });
+@freezed
+class UserFollowResponse with _$UserFollowResponse {
 
-  factory UserFollowResponse.fromJson(dynamic json) => UserFollowResponse(
-      total: json['total'],
-      data: List<UserFollowData>.from(
-          json['data'].map((e) => UserFollowData.fromJson(e))),
-      pagination: Pagination.fromJson(json['pagination']));
+  const factory UserFollowResponse({
+    int? total,
+    List<UserFollowData>? data,
+    Pagination? pagination,
+
+  }) = _UserFollowResponse;
+
+  factory UserFollowResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserFollowResponseFromJson(json);
 }
 
-class UserFollowData {
-  final String? fromId;
-  final String? fromLogin;
-  final String? fromName;
-  final String? toId;
-  final String? toName;
-  final String? followedAt;
+@freezed
+class UserFollowData with _$UserFollowData {
 
-  UserFollowData(
-      {required this.fromId,
-      required this.fromLogin,
-      required this.fromName,
-      required this.toId,
-      required this.toName,
-      required this.followedAt});
+  const factory UserFollowData({
+    String? fromId,
+    String? fromLogin,
+    String? fromName,
+    String? toId,
+    String? toName,
+    String? followedAt,
+}) = _UserFollowData;
 
-  factory UserFollowData.fromJson(Map<String, dynamic> json) => UserFollowData(
-        fromId: json['from_id'],
-        fromLogin: json['from_login'],
-        fromName: json['from_name'],
-        toId: json['to_id'],
-        toName: json['to_name'],
-        followedAt: json['followed_at'],
-      );
+  factory UserFollowData.fromJson(Map<String, dynamic> json) =>
+      _$UserFollowDataFromJson(json);
 }

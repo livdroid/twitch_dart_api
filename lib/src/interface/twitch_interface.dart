@@ -92,7 +92,7 @@ class TwitchInterface {
     chatInterface = ChatInterfaceImpl(_twitchApiDataSourceImpl);
     moderationInterface = ModerationInterfaceImpl(_twitchApiDataSourceImpl);
     eventSubInterface = EventSubInterfaceImpl(_twitchApiDataSourceImpl);
-    userInterface = UserInterfaceImpl(_twitchApiDataSourceImpl);
+    userInterface = UserRepositoryImpl(_twitchApiDataSourceImpl);
     videoRepository = VideoRepositoryImpl(_twitchApiDataSourceImpl);
     analyticsRepository = AnalyticsRepositoryImpl(_twitchApiDataSourceImpl);
     pollsRepository = PollsRepositoryImpl(_twitchApiDataSourceImpl);
