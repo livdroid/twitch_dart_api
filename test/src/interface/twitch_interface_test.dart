@@ -36,9 +36,6 @@ void main() {
   });
 
   group('init', () {
-    test('Throw assertion error if url is empty', () {
-      expect(() => twitchInterface.init(url: ''), throwsAssertionError);
-    });
 
     test('Return true if parsing was effective', () async {
       const url =

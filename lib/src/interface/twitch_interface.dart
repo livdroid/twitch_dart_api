@@ -106,9 +106,11 @@ class TwitchInterface {
   /// You can save the redirected url and use this method when user
   /// comes back to the app
   /// returns false if there was an issue parsing the URL
-  Future<bool> init({required String url}) async {
-    assert(url.isNotEmpty);
-    final userToken = _parseUrl(url: url);
+  Future<bool> init({String url = ''}) async {
+    String userToken = accessToken ?? '';
+    if(url.isNotEmpty) {
+      userToken = _parseUrl(url: url);
+    }
     if (userToken.isEmpty) return false;
     _setTokenAndClient(token: userToken);
     _initRepos();
@@ -116,7 +118,7 @@ class TwitchInterface {
   }
 
   /// Init all repos with your settings
-  Future<void> _initRepos() async {
+  void _initRepos() async {
     // id.twitch.tv interfaces
     bitsInterface = BitsInterfaceImpl(_twitchApiDataSourceImpl);
     channelInterface = ChannelInterfaceImpl(_twitchApiDataSourceImpl);

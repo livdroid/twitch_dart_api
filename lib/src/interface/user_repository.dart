@@ -42,7 +42,7 @@ class UserRepositoryImpl implements UserInterface {
 
     try {
       final response = await _twitchDataSource.get(
-          path: '${_path}follows/', queryParams: props.toJson());
+          path: '${_path}/follows/', queryParams: props.toJson());
       return Right(UserFollowResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -54,7 +54,7 @@ class UserRepositoryImpl implements UserInterface {
       {required UserBlockListProps props}) async {
     try {
       final response = await _twitchDataSource.get(
-          path: '${_path}blocks/', queryParams: props.toJson());
+          path: '${_path}/blocks/', queryParams: props.toJson());
       return Right(UserBlockListResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -66,7 +66,7 @@ class UserRepositoryImpl implements UserInterface {
       {required BlockUserProps props}) async {
     try {
       await _twitchDataSource
-          .put(path: '${_path}blocks/', queryParams: props.toJson(), data: {});
+          .put(path: '${_path}/blocks/', queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -80,7 +80,7 @@ class UserRepositoryImpl implements UserInterface {
       assert(props.targetUserId.isNotEmpty);
 
       await _twitchDataSource.delete(
-          path: '${_path}blocks/', queryParams: props.toJson(), data: {});
+          path: '${_path}/blocks/', queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
