@@ -80,4 +80,4 @@ they can audit your add and ask you to resolve the issue if you don't do it.
 More here : 
 https://dev.twitch.tv/docs/authentication/validate-tokens#who-must-validate-tokens
 
-Please call verifyToken() to do this request.
+Please call validateToken() to do this request.
