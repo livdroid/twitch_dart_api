@@ -105,6 +105,7 @@ class TwitchInterface {
   /// After this, user is considered logged in and repos can be called
   /// You can save the redirected url and use this method when user
   /// comes back to the app
+  /// returns false if there was an issue parsing the URL
   Future<bool> init({required String url}) async {
     assert(url.isNotEmpty);
     final userToken = _parseUrl(url: url);
