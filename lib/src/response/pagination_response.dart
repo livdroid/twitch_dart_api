@@ -6,7 +6,7 @@ part 'pagination_response.g.dart';
 
 @freezed
 class Pagination with _$Pagination {
-  const factory Pagination({required String cursor}) = _Pagination;
+  const factory Pagination({required String? cursor}) = _Pagination;
 
   factory Pagination.fromJson(Map<String, dynamic> json) =>
       _$PaginationFromJson(json);

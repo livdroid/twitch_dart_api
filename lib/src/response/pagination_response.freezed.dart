@@ -20,7 +20,7 @@ Pagination _$PaginationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Pagination {
-  String get cursor => throw _privateConstructorUsedError;
+  String? get cursor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $PaginationCopyWith<$Res> {
           Pagination value, $Res Function(Pagination) then) =
       _$PaginationCopyWithImpl<$Res, Pagination>;
   @useResult
-  $Res call({String cursor});
+  $Res call({String? cursor});
 }
 
 /// @nodoc
@@ -50,13 +50,13 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cursor = null,
+    Object? cursor = freezed,
   }) {
     return _then(_value.copyWith(
-      cursor: null == cursor
+      cursor: freezed == cursor
           ? _value.cursor
           : cursor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$_PaginationCopyWith<$Res>
       __$$_PaginationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String cursor});
+  $Res call({String? cursor});
 }
 
 /// @nodoc
@@ -83,13 +83,13 @@ class __$$_PaginationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cursor = null,
+    Object? cursor = freezed,
   }) {
     return _then(_$_Pagination(
-      cursor: null == cursor
+      cursor: freezed == cursor
           ? _value.cursor
           : cursor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -103,7 +103,7 @@ class _$_Pagination implements _Pagination {
       _$$_PaginationFromJson(json);
 
   @override
-  final String cursor;
+  final String? cursor;
 
   @override
   String toString() {
@@ -137,13 +137,13 @@ class _$_Pagination implements _Pagination {
 }
 
 abstract class _Pagination implements Pagination {
-  const factory _Pagination({required final String cursor}) = _$_Pagination;
+  const factory _Pagination({required final String? cursor}) = _$_Pagination;
 
   factory _Pagination.fromJson(Map<String, dynamic> json) =
       _$_Pagination.fromJson;
 
   @override
-  String get cursor;
+  String? get cursor;
   @override
   @JsonKey(ignore: true)
   _$$_PaginationCopyWith<_$_Pagination> get copyWith =>
