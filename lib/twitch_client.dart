@@ -35,6 +35,7 @@ export 'src/props/start_commercial_props.dart';
 export 'src/props/token_client_props.dart';
 export 'src/props/transport.dart';
 export 'src/props/update_user_props.dart';
+export 'src/props/ban_user_data_props.dart';
 export 'src/props/user_block_list_props.dart';
 export 'src/props/user_follow_props.dart';
 export 'src/props/users_props.dart';
