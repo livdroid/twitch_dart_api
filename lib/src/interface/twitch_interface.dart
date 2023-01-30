@@ -140,19 +140,17 @@ class TwitchInterface {
   /// [TokenStatus.error] the api sent an error back but it's not related to
   /// the token validity
   /// [TokenStatus.unknown] other exception without context
-  Future<TokenStatus> verifyToken() async {
+  Future<TokenStatus> validateToken() async {
     final verify = await tokenInterface?.verifyToken();
-    verify?.fold((l) {
+    return verify!.fold((l) {
       if (l.exception is UnauthorizedException) {
         return TokenStatus.invalid;
       }
       return TokenStatus.error;
     }, (r) {
       tokenResponse = r;
-
       return TokenStatus.valid;
     });
-    return TokenStatus.unknown;
   }
 
   /// Set up the [token] as Bearer token for the api calls
