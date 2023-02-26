@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
+import 'package:twitch_client/src/utils/string_utils.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'bits_repository_test.mocks.dart';
@@ -43,9 +46,8 @@ void main() {
   group('updateUserInformation', () {
     UserResponse responseLong =
         const UserResponse(data: [UserResponseData(description: '123')]);
-    UpdateUserProps updateUserPropsLong = const UpdateUserProps(
-        description:
-            '123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123');
+    UpdateUserProps updateUserPropsLong =  UpdateUserProps(
+        description:getRandom(301));
     UpdateUserProps updateUserProps = const UpdateUserProps(description: '123');
     UserResponse response =
         const UserResponse(data: [UserResponseData(description: '123')]);
