@@ -87,7 +87,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     try {
       final response = await _twitchDataSource
           .post(path: '$_path/moderators', queryParams: props.toJson(), data: {});
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }
@@ -102,7 +102,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     try {
       await _twitchDataSource
           .delete(path: '$_path/moderators', queryParams: props.toJson(), data: {});
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }

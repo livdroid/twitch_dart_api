@@ -4,8 +4,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/interface/analytics_repository.dart';
-import 'package:twitch_client/src/props/extension_analytics_props.dart';
-import 'package:twitch_client/src/props/game_analytics_props.dart';
 import 'package:twitch_client/src/response/extension_analytics_response.dart';
 import 'package:twitch_client/src/response/game_analytics_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
@@ -25,7 +23,7 @@ void main() {
     });
 
     final gameAnalyticsProps = GameAnalyticsProps();
-    final gameAnalyticsResponse = const GameAnalyticsResponse();
+    const gameAnalyticsResponse = GameAnalyticsResponse();
     test(
       'should return a GameAnalyticsResponse when the call to TwitchDataSource is successful',
       () async {
@@ -38,7 +36,7 @@ void main() {
         final result =
             await repository.getGameAnalytics(props: gameAnalyticsProps);
         // Assert
-        expect(result, Right(gameAnalyticsResponse));
+        expect(result, const Right(gameAnalyticsResponse));
         verify(mockTwitchDataSource.get(
             path: 'analytics/games', queryParams: gameAnalyticsProps.toJson()));
       },
@@ -65,7 +63,7 @@ void main() {
 
   group('getExtensionAnalytics', () {
     final tExtensionAnalyticsProps = ExtensionAnalyticsProps();
-    final tExtensionAnalyticsResponse = ExtensionAnalyticsResponse(
+    const tExtensionAnalyticsResponse = ExtensionAnalyticsResponse(
         data: [], pagination: Pagination(cursor: '1'));
     final jsonResponse = tExtensionAnalyticsResponse.toJson();
 
@@ -89,7 +87,7 @@ void main() {
         final result = await repository.getExtensionAnalytics(
             props: tExtensionAnalyticsProps);
         // Assert
-        expect(result, Right(tExtensionAnalyticsResponse));
+        expect(result, const Right(tExtensionAnalyticsResponse));
         verify(mockTwitchDataSource.get(
             path: 'analytics/extensions',
             queryParams: tExtensionAnalyticsProps.toJson()));

@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             broadcasterId: '59408155', moderatorId: '59408155'),
                         chatProps: const ChatModifyProps(slowMode: true));
                 data?.fold((l) => print(l.exception),
-                    (r) => print(r.data?.first?.slowMode));
+                    (r) => print(r.data?.first.slowMode));
               },
               child: const Text('Update chat settings')),
           TextButton(
@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 final data = await twitchInterface.eventSubInterface
                     ?.getEventSubSubscriptions(props: GetEventSubProps());
                 data?.fold((l) => print(l.exception),
-                    (r) => print(r.data?.first?.status ?? ''));
+                    (r) => print(r.data?.first.status ?? ''));
               }),
           TextButton(
               child: const Text('Disconnect to all eventsub subscriptions'),
@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 final data = await twitchInterface.eventSubInterface
                     ?.getEventSubSubscriptions(props: GetEventSubProps());
                 data?.fold((l) => print(l.exception),
-                    (r) => print(r.data?.first?.status ?? 'none'));
+                    (r) => print(r.data?.first.status ?? 'none'));
 
                 data?.asRight().data?.forEach((element) async {
                   await twitchInterface.eventSubInterface
@@ -265,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Delete video'),
               onPressed: () async {
                 final data = await twitchInterface.videoRepository
-                    ?.deleteVideo(props: VideoProps(id: '123'));
+                    ?.deleteVideo(props: const VideoProps(id: '123'));
                 data?.fold((l) => print(l.exception), (r) => print('ok'));
               }),
           TextButton(

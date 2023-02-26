@@ -20,63 +20,63 @@ void main() {
   final bitsInterface = BitsInterfaceImpl(mockedDataSource);
 
   group('getBitsLeaderBoard', () {
-    final props = BitsLeaderBoardProps();
-    const String _path = 'bits/';
+    const props = BitsLeaderBoardProps();
+    const String path = 'bits/';
     String apiResponse = assetReader('response_bitsleaderboard.json');
     final response = BitsLeaderboardResponse.fromJson(jsonDecode(apiResponse));
 
     test('On success', () async {
       when(mockedDataSource.get(
-              path: '$_path/leaderboard', queryParams: props.toJson()))
+              path: '$path/leaderboard', queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
 
       final result = await bitsInterface.getBitsLeaderBoard(props: props);
 
       verify(mockedDataSource.get(
-          path: '$_path/leaderboard', queryParams: props.toJson()));
+          path: '$path/leaderboard', queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
       when(mockedDataSource.get(
-              path: '$_path/leaderboard', queryParams: props.toJson()))
+              path: '$path/leaderboard', queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await bitsInterface.getBitsLeaderBoard(props: props);
 
       verify(mockedDataSource.get(
-          path: '$_path/leaderboard', queryParams: props.toJson()));
+          path: '$path/leaderboard', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });
 
   group('getCheermotes', () {
-    final props = CheermotesProps(broadcasterId: '123');
-    const String _path = 'bits/';
+    const props = CheermotesProps(broadcasterId: '123');
+    const String path = 'bits/';
     String apiResponse = assetReader('response_cheermotes.json');
     final response = CheermotesResponse.fromJson(jsonDecode(apiResponse));
 
     test('On success', () async {
       when(mockedDataSource.get(
-              path: '$_path/cheermotes', queryParams: props.toJson()))
+              path: '$path/cheermotes', queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
 
       final result = await bitsInterface.getCheermotes(props: props);
 
       verify(mockedDataSource.get(
-          path: '$_path/cheermotes', queryParams: props.toJson()));
+          path: '$path/cheermotes', queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
       when(mockedDataSource.get(
-              path: '$_path/cheermotes', queryParams: props.toJson()))
+              path: '$path/cheermotes', queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await bitsInterface.getCheermotes(props: props);
 
       verify(mockedDataSource.get(
-          path: '$_path/cheermotes', queryParams: props.toJson()));
+          path: '$path/cheermotes', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });

@@ -1,8 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/props/create_prediction_props.dart';
-import 'package:twitch_client/src/props/end_prediction_props.dart';
-import 'package:twitch_client/src/props/predictions_props.dart';
 import 'package:twitch_client/src/response/prediction_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 

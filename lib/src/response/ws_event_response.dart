@@ -6,19 +6,19 @@ class WSEventResponse {
 
   WSEventResponse.fromJson(Map<String, dynamic> json) {
     metadata = json['metadata'] != null
-        ? new Metadata.fromJson(json['metadata'])
+        ? Metadata.fromJson(json['metadata'])
         : null;
     payload =
-        json['payload'] != null ? new Payload.fromJson(json['payload']) : null;
+        json['payload'] != null ? Payload.fromJson(json['payload']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.metadata != null) {
-      data['metadata'] = this.metadata!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (metadata != null) {
+      data['metadata'] = metadata!.toJson();
     }
-    if (this.payload != null) {
-      data['payload'] = this.payload!.toJson();
+    if (payload != null) {
+      data['payload'] = payload!.toJson();
     }
     return data;
   }
@@ -38,10 +38,10 @@ class Metadata {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message_id'] = this.messageId;
-    data['message_type'] = this.messageType;
-    data['message_timestamp'] = this.messageTimestamp;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message_id'] = messageId;
+    data['message_type'] = messageType;
+    data['message_timestamp'] = messageTimestamp;
     return data;
   }
 }
@@ -53,13 +53,13 @@ class Payload {
 
   Payload.fromJson(Map<String, dynamic> json) {
     session =
-        json['session'] != null ? new Session.fromJson(json['session']) : null;
+        json['session'] != null ? Session.fromJson(json['session']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.session != null) {
-      data['session'] = this.session!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (session != null) {
+      data['session'] = session!.toJson();
     }
     return data;
   }
@@ -70,7 +70,7 @@ class Session {
   String? status;
   String? connectedAt;
   int? keepaliveTimeoutSeconds;
-  Null? reconnectUrl;
+  String? reconnectUrl;
 
   Session(
       {this.id,
@@ -88,12 +88,12 @@ class Session {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['status'] = this.status;
-    data['connected_at'] = this.connectedAt;
-    data['keepalive_timeout_seconds'] = this.keepaliveTimeoutSeconds;
-    data['reconnect_url'] = this.reconnectUrl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['status'] = status;
+    data['connected_at'] = connectedAt;
+    data['keepalive_timeout_seconds'] = keepaliveTimeoutSeconds;
+    data['reconnect_url'] = reconnectUrl;
     return data;
   }
 }

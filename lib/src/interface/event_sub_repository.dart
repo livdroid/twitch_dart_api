@@ -3,11 +3,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/error/failure.dart';
-import 'package:twitch_client/src/props/create_event_sub_props.dart';
-import 'package:twitch_client/src/props/get_event_subs_props.dart';
 import 'package:twitch_client/src/response/event_sub_response.dart';
-import 'package:twitch_client/src/response/ws_event_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -52,7 +48,7 @@ class EventSubInterfaceImpl implements EventSubInterface {
     try {
       await _twitchDataSource.delete(
           path: '$_path/subscriptions', queryParams: props.toJson(), data: {});
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }
@@ -80,7 +76,7 @@ class EventSubInterfaceImpl implements EventSubInterface {
                 condition: Condition(userId: userId),
                 transport: Transport(
                     method: 'websocket',
-                    sessionId: newEvent?.payload?.session?.id)));
+                    sessionId: newEvent.payload?.session?.id)));
       }
     });
     return stream;

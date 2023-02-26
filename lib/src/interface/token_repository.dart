@@ -17,7 +17,7 @@ class TokenInterfaceImpl implements TokenInterface {
     try {
       await _twitchDataSource
           .post(path: '$_path/revoke', data: props.toJson(), queryParams: {});
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }

@@ -10,7 +10,7 @@ import 'bits_repository_test.mocks.dart';
 void main() {
   final mockTwitchDataSource = MockTwitchDataSource();
   final repository = UserRepositoryImpl(mockTwitchDataSource);
-  const String _path = 'users';
+  const String path = 'users';
 
   group('getUserInformation', () {
     UsersProps props = const UsersProps(id: '123');
@@ -18,24 +18,24 @@ void main() {
         const UserResponse(data: [UserResponseData(description: '123')]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(path: _path, queryParams: props.toJson()))
+      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getUserInformation(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: _path, queryParams: props.toJson()));
+          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(path: _path, queryParams: props.toJson()))
+      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getUserInformation(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: _path, queryParams: props.toJson()));
+          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });
@@ -52,7 +52,7 @@ void main() {
 
     test('On success', () async {
       when(mockTwitchDataSource.put(
-          path: _path,
+          path: path,
           queryParams: updateUserProps.toJson(),
           data: {})).thenAnswer((realInvocation) async => response.toJson());
 
@@ -60,26 +60,26 @@ void main() {
           await repository.updateUserInformation(props: updateUserProps);
 
       verify(mockTwitchDataSource
-          .put(path: _path, queryParams: updateUserProps.toJson(), data: {}));
+          .put(path: path, queryParams: updateUserProps.toJson(), data: {}));
       expect(result.isRight(), true);
       expect(result.asRight().data?.first.description, '123');
     });
 
     test('On assert error', () async {
       when(mockTwitchDataSource.put(
-          path: _path,
+          path: path,
           queryParams: updateUserPropsLong.toJson(),
           data: {})).thenThrow(AssertionError('message'));
 
       expect(() => repository.updateUserInformation(props: updateUserPropsLong),
           throwsAssertionError);
       verifyNever(mockTwitchDataSource.put(
-          path: _path, queryParams: updateUserPropsLong.toJson(), data: {}));
+          path: path, queryParams: updateUserPropsLong.toJson(), data: {}));
     });
 
     test('On failure', () async {
       when(mockTwitchDataSource.put(
-          path: _path,
+          path: path,
           queryParams: updateUserProps.toJson(),
           data: {})).thenThrow(ForbiddenRequestException(message: 'message'));
 
@@ -87,7 +87,7 @@ void main() {
           await repository.updateUserInformation(props: updateUserProps);
 
       verify(mockTwitchDataSource
-          .put(path: _path, queryParams: updateUserProps.toJson(), data: {}));
+          .put(path: path, queryParams: updateUserProps.toJson(), data: {}));
       expect(result.isLeft(), true);
     });
   });
@@ -100,36 +100,36 @@ void main() {
 
     test('On success', () async {
       when(mockTwitchDataSource.get(
-              path: '${_path}/follows/', queryParams: props.toJson()))
+              path: '$path/follows/', queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getUserFollow(props: props);
 
       verify(mockTwitchDataSource.get(
-          path: '${_path}/follows/', queryParams: props.toJson()));
+          path: '$path/follows/', queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On assert error', () async {
       when(mockTwitchDataSource.get(
-              path: '${_path}/follows/', queryParams: emptyProps.toJson()))
+              path: '$path/follows/', queryParams: emptyProps.toJson()))
           .thenThrow(AssertionError('message'));
 
       expect(() => repository.getUserFollow(props: emptyProps),
           throwsAssertionError);
       verifyNever(mockTwitchDataSource.get(
-          path: '${_path}/follows/', queryParams: emptyProps.toJson()));
+          path: '$path/follows/', queryParams: emptyProps.toJson()));
     });
 
     test('On failure', () async {
       when(mockTwitchDataSource.get(
-              path: '${_path}/follows/', queryParams: props.toJson()))
+              path: '$path/follows/', queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getUserFollow(props: props);
 
       verify(mockTwitchDataSource.get(
-          path: '${_path}/follows/', queryParams: props.toJson()));
+          path: '$path/follows/', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });
@@ -140,25 +140,25 @@ void main() {
 
     test('On success', () async {
       when(mockTwitchDataSource.get(
-              path: '${_path}/blocks/', queryParams: props.toJson()))
+              path: '$path/blocks/', queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getBlockList(props: props);
 
       verify(mockTwitchDataSource.get(
-          path: '${_path}/blocks/', queryParams: props.toJson()));
+          path: '$path/blocks/', queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
       when(mockTwitchDataSource.get(
-              path: '${_path}/blocks/', queryParams: props.toJson()))
+              path: '$path/blocks/', queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getBlockList(props: props);
 
       verify(mockTwitchDataSource.get(
-          path: '${_path}/blocks/', queryParams: props.toJson()));
+          path: '$path/blocks/', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });
@@ -168,27 +168,27 @@ void main() {
 
     test('On success', () async {
       when(mockTwitchDataSource.put(
-          path: '${_path}/blocks/',
+          path: '$path/blocks/',
           queryParams: props.toJson(),
           data: {})).thenAnswer((realInvocation) async => {});
 
       final result = await repository.blockUser(props: props);
 
       verify(mockTwitchDataSource.put(
-          path: '${_path}/blocks/', queryParams: props.toJson(), data: {}));
+          path: '$path/blocks/', queryParams: props.toJson(), data: {}));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
       when(mockTwitchDataSource.put(
-          path: '${_path}/blocks/',
+          path: '$path/blocks/',
           queryParams: props.toJson(),
           data: {})).thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.blockUser(props: props);
 
       verify(mockTwitchDataSource
-          .put(path: '${_path}/blocks/', queryParams: props.toJson(), data: {}));
+          .put(path: '$path/blocks/', queryParams: props.toJson(), data: {}));
       expect(result.isLeft(), true);
     });
   });
@@ -199,36 +199,36 @@ void main() {
 
     test('On success', () async {
       when(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: props.toJson(), data: {}))
+          path: '$path/blocks/', queryParams: props.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       final result = await repository.unblockUser(props: props);
 
       verify(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: props.toJson(), data: {}));
+          path: '$path/blocks/', queryParams: props.toJson(), data: {}));
       expect(result.isRight(), true);
     });
 
     test('On assert error', () async {
       when(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: emptyProps.toJson(), data: {}))
+          path: '$path/blocks/', queryParams: emptyProps.toJson(), data: {}))
           .thenThrow(AssertionError('message'));
 
       expect(() => repository.unblockUser(props: emptyProps),
           throwsAssertionError);
       verifyNever(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: emptyProps.toJson(), data: {}));
+          path: '$path/blocks/', queryParams: emptyProps.toJson(), data: {}));
     });
 
     test('On failure', () async {
       when(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: props.toJson(), data: {}))
+          path: '$path/blocks/', queryParams: props.toJson(), data: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.unblockUser(props: props);
 
       verify(mockTwitchDataSource.delete(
-          path: '${_path}/blocks/', queryParams: props.toJson(), data: {}));
+          path: '$path/blocks/', queryParams: props.toJson(), data: {}));
       expect(result.isLeft(), true);
     });
   });
