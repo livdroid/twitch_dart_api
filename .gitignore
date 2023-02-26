@@ -32,3 +32,4 @@ build/
 coverage/lcov.info
 coverage
 .flutter-plugins
+.vscode
