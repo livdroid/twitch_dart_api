@@ -4,15 +4,17 @@ import 'package:twitch_client/src/response/extension_analytics_response.dart';
 import 'package:twitch_client/src/response/game_analytics_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
+
 class AnalyticsRepositoryImpl implements AnalyticsRepository {
   static const String _path = 'analytics';
 
   final TwitchDataSource _twitchDataSource;
 
-  AnalyticsRepositoryImpl(this._twitchDataSource);
+  AnalyticsRepositoryImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
-  Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics({required GameAnalyticsProps props}) async {
+  Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics(
+      {required GameAnalyticsProps props}) async {
     try {
       final response = await _twitchDataSource.get(
           path: '$_path/games', queryParams: props.toJson());
@@ -23,7 +25,8 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
   }
 
   @override
-  Future<Either<Failure, ExtensionAnalyticsResponse>> getExtensionAnalytics({required ExtensionAnalyticsProps props}) async {
+  Future<Either<Failure, ExtensionAnalyticsResponse>> getExtensionAnalytics(
+      {required ExtensionAnalyticsProps props}) async {
     try {
       final response = await _twitchDataSource.get(
           path: '$_path/extensions', queryParams: props.toJson());
@@ -32,10 +35,12 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
       return Left(Failure(e));
     }
   }
-
 }
 
 abstract class AnalyticsRepository {
-  Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics({required GameAnalyticsProps props});
-  Future<Either<Failure, ExtensionAnalyticsResponse>> getExtensionAnalytics({required ExtensionAnalyticsProps props});
+
+  Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics(
+      {required GameAnalyticsProps props});
+  Future<Either<Failure, ExtensionAnalyticsResponse>> getExtensionAnalytics(
+      {required ExtensionAnalyticsProps props});
 }

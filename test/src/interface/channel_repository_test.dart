@@ -16,7 +16,7 @@ import 'channel_repository_test.mocks.dart';
 void main() {
   const String path = 'channels';
   final mockedDataSource = MockTwitchDataSource();
-  final interface = ChannelInterfaceImpl(mockedDataSource);
+  final interface = ChannelInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getChannelInformation', () {
     const props = BroadcasterProps(broadcasterId: '12345');

@@ -15,11 +15,11 @@ import 'channel_repository_test.mocks.dart';
 void main() {
   group('getGameAnalytics', () {
     late MockTwitchDataSource mockTwitchDataSource;
-    late AnalyticsRepositoryImpl repository;
+    late AnalyticsRepository repository;
 
     setUp(() {
       mockTwitchDataSource = MockTwitchDataSource();
-      repository = AnalyticsRepositoryImpl(mockTwitchDataSource);
+      repository = AnalyticsRepositoryImpl('token', 'clientid', dataSource: mockTwitchDataSource);
     });
 
     final gameAnalyticsProps = GameAnalyticsProps();
@@ -27,15 +27,14 @@ void main() {
     test(
       'should return a GameAnalyticsResponse when the call to TwitchDataSource is successful',
       () async {
-        // Arrange
         when(mockTwitchDataSource.get(
                 path: 'analytics/games',
                 queryParams: gameAnalyticsProps.toJson()))
             .thenAnswer((_) async => gameAnalyticsResponse.toJson());
-        // Act
+
         final result =
             await repository.getGameAnalytics(props: gameAnalyticsProps);
-        // Assert
+
         expect(result, const Right(gameAnalyticsResponse));
         verify(mockTwitchDataSource.get(
             path: 'analytics/games', queryParams: gameAnalyticsProps.toJson()));
@@ -45,15 +44,14 @@ void main() {
     test(
       'should return a Failure when the call to TwitchDataSource throws an exception',
       () async {
-        // Arrange
         when(mockTwitchDataSource.get(
                 path: 'analytics/games',
                 queryParams: gameAnalyticsProps.toJson()))
             .thenThrow(Exception());
-        // Act
+
         final result =
             await repository.getGameAnalytics(props: gameAnalyticsProps);
-        // Assert
+
         expect(result.isLeft(), true);
         verify(mockTwitchDataSource.get(
             path: 'analytics/games', queryParams: gameAnalyticsProps.toJson()));
@@ -72,7 +70,7 @@ void main() {
 
     setUp(() {
       mockTwitchDataSource = MockTwitchDataSource();
-      repository = AnalyticsRepositoryImpl(mockTwitchDataSource);
+      repository = AnalyticsRepositoryImpl('token', 'clientid', dataSource: mockTwitchDataSource);
     });
 
     test(

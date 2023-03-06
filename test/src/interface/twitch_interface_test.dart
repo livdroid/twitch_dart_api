@@ -4,16 +4,27 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
+import 'package:twitch_client/src/interface/twitch_repositories.dart';
 import 'package:twitch_client/src/response/validate_token_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'twitch_interface_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<TokenInterface>()])
+@GenerateNiceMocks([MockSpec<TokenInterface>(), MockSpec<TwitchRepositories>()])
 void main() {
-  final TwitchInterface twitchInterface =
-      TwitchInterface(clientId: '1234', redirectionURL: '123');
-  MockTokenInterface mockTokenInterface = MockTokenInterface();
+
+  late MockTokenInterface mockTokenInterface;
+  late MockTwitchRepositories mockTwitchRepositories;
+  late TwitchInterface twitchInterface;
+
+  setUp(() {
+    mockTokenInterface = MockTokenInterface();
+    mockTwitchRepositories =
+    MockTwitchRepositories();
+    twitchInterface =
+    TwitchInterface(clientId: '1234', redirectionURL: '123');
+    twitchInterface.twitchRepositories = mockTwitchRepositories;
+  });
 
   group('getConnectionUrl', () {
     test('Return valid URI', () {
@@ -36,15 +47,14 @@ void main() {
   });
 
   group('init', () {
-
     test('Return true if parsing was effective', () async {
       const url =
           'http://localhost:8080/static.html#access_token=TOKEN&scope=analytics%3Aread%3Aextensions+analytics%3Aread%3Agames+bits%3Aread+channel%3Aedit%3Acommercial+channel%3Amanage%3Abroadcast+channel%3Aread%3Acharity+channel%3Amanage%3Aextensions+channel%3Amanage%3Amoderators+channel%3Amanage%3Apolls+channel%3Amanage%3Apredictions+channel%3Amanage%3Araids+channel%3Amanage%3Aredemptions+channel%3Amanage%3Aschedule+channel%3Amanage%3Avideos+channel%3Aread%3Aeditors+channel%3Aread%3Agoals+channel%3Aread%3Ahype_train+channel%3Aread%3Apolls+channel%3Aread%3Apredictions+channel%3Aread%3Aredemptions+channel%3Aread%3Astream_key+channel%3Aread%3Asubscriptions+channel%3Aread%3Avips+channel%3Amanage%3Avips+clips%3Aedit+moderation%3Aread+moderator%3Amanage%3Aannouncements+moderator%3Amanage%3Aautomod+moderator%3Aread%3Aautomod_settings+moderator%3Amanage%3Aautomod_settings+moderator%3Amanage%3Abanned_users+moderator%3Aread%3Ablocked_terms+moderator%3Amanage%3Ablocked_terms+moderator%3Amanage%3Achat_messages+moderator%3Aread%3Achat_settings+moderator%3Amanage%3Achat_settings+moderator%3Aread%3Achatters+user%3Aedit+user%3Amanage%3Ablocked_users+user%3Aread%3Ablocked_users+user%3Aread%3Abroadcast+user%3Amanage%3Achat_color+user%3Aread%3Aemail+user%3Aread%3Afollows+user%3Aread%3Asubscriptions+user%3Amanage%3Awhispers+channel%3Amoderate+chat%3Aedit+chat%3Aread+whispers%3Aread+whispers%3Aedit&token_type=bearer';
       final couldInit = await twitchInterface.init(url: url);
       expect(couldInit, true);
       expect(twitchInterface.accessToken, 'TOKEN');
-      expect(twitchInterface.bitsInterface != null, true);
-      expect(twitchInterface.tokenInterface != null, true);
+      expect(twitchInterface.bits != null, true);
+      expect(twitchInterface.token != null, true);
     });
 
     test('Return false if parsing was not effective', () async {
@@ -55,11 +65,10 @@ void main() {
   });
 
   group('verifyToken', () {
-    setUp(() async {
-      twitchInterface.tokenInterface = mockTokenInterface;
-    });
-
     test('Token is valid', () async {
+      when(mockTwitchRepositories.tokenRepository)
+          .thenReturn(mockTokenInterface);
+
       when(mockTokenInterface.verifyToken()).thenAnswer((_) async => Right(
           ValidateTokenResponse(
               clientId: 'clientId',
@@ -68,19 +77,29 @@ void main() {
               userId: 'userId',
               expiresIn: 1000)));
       final status = await twitchInterface.validateToken();
+
       expect(status, TokenStatus.valid);
     });
 
     test('Token validate request returned an error', () async {
-      when(mockTokenInterface.verifyToken()).thenAnswer((_) async => Left(
-          Failure(Exception())));
+      when(mockTwitchRepositories.tokenRepository)
+          .thenReturn(mockTokenInterface);
+
+      when(mockTokenInterface.verifyToken())
+          .thenAnswer((_) async => Left(Failure(Exception())));
+
       final status = await twitchInterface.validateToken();
       expect(status, TokenStatus.error);
     });
 
     test('Token validate request returned an unvalid token', () async {
-      when(mockTokenInterface.verifyToken()).thenAnswer((_) async => Left(
-          Failure(UnauthorizedException(message: 'Unvalid Token'))));
+
+      when(mockTwitchRepositories.tokenRepository)
+          .thenReturn(mockTokenInterface);
+
+      when(mockTokenInterface.verifyToken())
+          .thenAnswer((_) async => Left(Failure(UnauthorizedException(message: ''))));
+
       final status = await twitchInterface.validateToken();
       expect(status, TokenStatus.invalid);
     });

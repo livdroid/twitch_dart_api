@@ -10,8 +10,6 @@ import '../../json/asset_reader.dart';
 
 void main() {
   const String baseURL = UrlConstants.apiBaseUrl;
-  const String fakeClientId = '123';
-  const String fakeToken = '123';
 
   final dio = Dio(BaseOptions(
       baseUrl: baseURL, connectTimeout: 5, receiveTimeout: 5, sendTimeout: 5));
@@ -22,11 +20,7 @@ void main() {
   late TwitchApiDataSourceImpl datasource;
 
   setUp(() {
-    datasource = TwitchApiDataSourceImpl(dio: dio);
-    dio.options.headers = {
-      'Authorization': 'Bearer $fakeToken',
-      'Client-Id': fakeClientId
-    };
+    datasource = TwitchApiDataSourceImpl('token', 'clientId', dioClient: dio);
   });
 
   group('Twitch Data Source - GET', () {

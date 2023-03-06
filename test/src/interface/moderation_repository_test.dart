@@ -11,8 +11,8 @@ import 'moderation_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {
-  final mockTwitchDataSource = MockTwitchDataSource();
-  final repository = ModerationInterfaceImpl(mockTwitchDataSource);
+  final mockedDataSource = MockTwitchDataSource();
+  final repository = ModerationInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getBannedUsers', () {
     const String path = 'moderation/banned';
@@ -22,39 +22,39 @@ void main() {
         const BannedUsersResponse(data: [BannedUser(userId: '123', userName: '12', userLogin: '12', reason: '12', createdAt: '12')]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getBannedUsers(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<BannedUsersResponse>());
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getBannedUsers(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
               path: path, queryParams: empryProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getBannedUsers(props: empryProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.get(
+      verifyNever(mockedDataSource.get(
           path: path, queryParams: empryProps.toJson()));
     });
   });
@@ -65,38 +65,38 @@ void main() {
     ModerationProps empryProps = ModerationProps(broadcasterId: '', moderatorId: '', userId: '');
 
     test('On success', () async {
-      when(mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       final result = await repository.unbanUser(props: props);
 
       verify(
-          mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.unbanUser(props: props);
 
       verify(
-          mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.delete(
+      when(mockedDataSource.delete(
           path: path, queryParams: empryProps.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.unbanUser(props: empryProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.delete(
+      verifyNever(mockedDataSource.delete(
           path: path, queryParams: empryProps.toJson(), data: {}));
     });
   });
@@ -109,38 +109,38 @@ void main() {
     BanUserResponse response = const BanUserResponse(data: [BanUserResponseData(broadcasterId: '123')]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()))
+      when(mockedDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.banUser(props: props, queryProps: queryProps);
 
       verify(
-          mockTwitchDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()));
+          mockedDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()))
+      when(mockedDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.banUser(props: props, queryProps: queryProps);
 
       verify(
-          mockTwitchDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()));
+          mockedDataSource.post(path: path, queryParams: queryProps.toJson(), data: props.toJson()));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.delete(
+      when(mockedDataSource.delete(
           path: path, queryParams: emptyQueryProps.toJson(), data: props.toJson()))
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.banUser(props: props, queryProps: emptyQueryProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.post(path: path, queryParams: emptyQueryProps.toJson(), data: props.toJson()));
+      verifyNever(mockedDataSource.post(path: path, queryParams: emptyQueryProps.toJson(), data: props.toJson()));
     });
   });
 
@@ -151,39 +151,39 @@ void main() {
     ModeratorResponse response = const ModeratorResponse(data: [Moderator(userLogin: '123')]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getModerators(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<ModeratorResponse>());
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getModerators(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
           path: path, queryParams: empryProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getModerators(props: empryProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.get(
+      verifyNever(mockedDataSource.get(
           path: path, queryParams: empryProps.toJson()));
     });
   });
@@ -194,38 +194,38 @@ void main() {
     AddModeratorProps emptyprops = const AddModeratorProps(broadcasterId: '', userId: '');
 
     test('On success', () async {
-      when(mockTwitchDataSource.post(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.post(path: path, queryParams: props.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       final result = await repository.addModerator(props: props);
 
       verify(
-          mockTwitchDataSource.post(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.post(path: path, queryParams: props.toJson(), data: {}));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.post(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.post(path: path, queryParams: props.toJson(), data: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.addModerator(props: props);
 
       verify(
-          mockTwitchDataSource.post(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.post(path: path, queryParams: props.toJson(), data: {}));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.delete(
+      when(mockedDataSource.delete(
           path: path, queryParams: emptyprops.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.addModerator(props: emptyprops),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.post(path: path, queryParams: emptyprops.toJson(), data: {}));
+      verifyNever(mockedDataSource.post(path: path, queryParams: emptyprops.toJson(), data: {}));
     });
   });
 
@@ -235,38 +235,38 @@ void main() {
     RemoveModeratorProps empryProps = const RemoveModeratorProps(broadcasterId: '', userId: '');
 
     test('On success', () async {
-      when(mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       final result = await repository.removeModerator(props: props);
 
       verify(
-          mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
+      when(mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.removeModerator(props: props);
 
       verify(
-          mockTwitchDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
+          mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.delete(
+      when(mockedDataSource.delete(
           path: path, queryParams: empryProps.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.removeModerator(props: empryProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.delete(
+      verifyNever(mockedDataSource.delete(
           path: path, queryParams: empryProps.toJson(), data: {}));
     });
   });

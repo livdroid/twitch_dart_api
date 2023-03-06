@@ -11,8 +11,8 @@ import 'bits_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {
-  final mockTwitchDataSource = MockTwitchDataSource();
-  final repository = ChatInterfaceImpl(mockTwitchDataSource);
+  final mockedDataSource = MockTwitchDataSource();
+  final repository = ChatInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getChatters', () {
     const String path = 'chat/chatters';
@@ -26,36 +26,36 @@ void main() {
         total: 0);
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getChatters(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getChatters(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
               path: path, queryParams: emptyProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getChatters(props: emptyProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.get(
+      verifyNever(mockedDataSource.get(
           path: path, queryParams: emptyProps.toJson()));
     });
   });
@@ -70,38 +70,38 @@ void main() {
         const ChatSettingsResponse(data: [ChatSettingsData()]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
               path: path, queryParams: broadcasterProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getChatSettings(props: broadcasterProps);
 
-      verify(mockTwitchDataSource.get(
+      verify(mockedDataSource.get(
           path: path, queryParams: broadcasterProps.toJson()));
       expect(result.isRight(), true);
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
               path: path, queryParams: broadcasterProps.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getChatSettings(props: broadcasterProps);
 
-      verify(mockTwitchDataSource.get(
+      verify(mockedDataSource.get(
           path: path, queryParams: broadcasterProps.toJson()));
       expect(result.isLeft(), true);
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.get(
+      when(mockedDataSource.get(
               path: path, queryParams: emptyBroadcasterProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getChatSettings(props: emptyBroadcasterProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.get(
+      verifyNever(mockedDataSource.get(
           path: path, queryParams: emptyBroadcasterProps.toJson()));
     });
   });
@@ -117,7 +117,7 @@ void main() {
         const ChatSettingsResponse(data: [ChatSettingsData()]);
 
     test('On success', () async {
-      when(mockTwitchDataSource.patch(
+      when(mockedDataSource.patch(
               path: path,
               queryParams: props.toJson(),
               data: modifyProps.toJson()))
@@ -126,7 +126,7 @@ void main() {
       final result = await repository.updateChatSettings(
           props: props, chatProps: modifyProps);
 
-      verify(mockTwitchDataSource.patch(
+      verify(mockedDataSource.patch(
           path: path,
           queryParams: props.toJson(),
           data: modifyProps.toJson()));
@@ -135,7 +135,7 @@ void main() {
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.patch(
+      when(mockedDataSource.patch(
               path: path,
               queryParams: props.toJson(),
               data: modifyProps.toJson()))
@@ -144,7 +144,7 @@ void main() {
       final result = await repository.updateChatSettings(
           props: props, chatProps: modifyProps);
 
-      verify(mockTwitchDataSource.patch(
+      verify(mockedDataSource.patch(
           path: path,
           queryParams: props.toJson(),
           data: modifyProps.toJson()));
@@ -153,7 +153,7 @@ void main() {
     });
 
     test('On empty props', () async {
-      when(mockTwitchDataSource.patch(
+      when(mockedDataSource.patch(
               path: path,
               queryParams: emptyBroadcasterProps.toJson(),
               data: modifyProps.toJson()))
@@ -164,7 +164,7 @@ void main() {
               props: emptyBroadcasterProps, chatProps: modifyProps),
           throwsAssertionError);
 
-      verifyNever(mockTwitchDataSource.patch(
+      verifyNever(mockedDataSource.patch(
           path: path,
           queryParams: emptyBroadcasterProps.toJson(),
           data: modifyProps.toJson()));

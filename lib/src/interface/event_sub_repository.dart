@@ -3,16 +3,17 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/response/event_sub_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 import 'package:web_socket_channel/io.dart';
 
 class EventSubInterfaceImpl implements EventSubInterface {
-  static const String _path = 'eventsub/';
+  static const String _path = 'eventsub';
 
   final TwitchDataSource _twitchDataSource;
 
-  EventSubInterfaceImpl(this._twitchDataSource);
+  EventSubInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   final StreamController<WSEventResponse> _controller =
       StreamController<WSEventResponse>.broadcast();

@@ -9,8 +9,8 @@ import 'package:twitch_client/twitch_client.dart';
 import 'analytics_repository_test.mocks.dart';
 
 void main() {
-  final mockTwitchDataSource = MockTwitchDataSource();
-  final repository = PredictionsRepositoryImpl(mockTwitchDataSource);
+  final mockedDataSource = MockTwitchDataSource();
+  final repository = PredictionsRepositoryImpl('token', 'clientid', dataSource: mockedDataSource);
   PredictionResponse response = PredictionResponse();
   const String path = 'predictions';
 
@@ -18,25 +18,25 @@ void main() {
     PredictionsProps props = const PredictionsProps(broadcasterId: '123');
 
     test('On success', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getPredictions(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<PredictionResponse>());
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource.get(path: path, queryParams: props.toJson()))
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getPredictions(props: props);
 
       verify(
-          mockTwitchDataSource.get(path: path, queryParams: props.toJson()));
+          mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });
@@ -46,26 +46,26 @@ void main() {
         broadcasterId: '123', title: 'title', outcomes: [], predictionWindow: 1);
 
     test('On success', () async {
-      when(mockTwitchDataSource
+      when(mockedDataSource
           .post(path: path, data: props.toJson(), queryParams: {}))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.createPrediction(props: props);
 
-      verify(mockTwitchDataSource
+      verify(mockedDataSource
           .post(path: path, data: props.toJson(), queryParams: {}));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<PredictionResponse>());
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource
+      when(mockedDataSource
           .post(path: path, data: props.toJson(), queryParams: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.createPrediction(props: props);
 
-      verify(mockTwitchDataSource
+      verify(mockedDataSource
           .post(path: path, data: props.toJson(), queryParams: {}));
       expect(result.isLeft(), true);
     });
@@ -77,26 +77,26 @@ void main() {
     PollsResponse response = const PollsResponse();
 
     test('On success', () async {
-      when(mockTwitchDataSource
+      when(mockedDataSource
           .patch(path: path, data: props.toJson(), queryParams: {}))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.endPrediction(props: props);
 
-      verify(mockTwitchDataSource
+      verify(mockedDataSource
           .patch(path: path, data: props.toJson(), queryParams: {}));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<PredictionResponse>());
     });
 
     test('On failure', () async {
-      when(mockTwitchDataSource
+      when(mockedDataSource
           .patch(path: path, data: props.toJson(), queryParams: {}))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.endPrediction(props: props);
 
-      verify(mockTwitchDataSource
+      verify(mockedDataSource
           .patch(path: path, data: props.toJson(), queryParams: {}));
       expect(result.isLeft(), true);
     });

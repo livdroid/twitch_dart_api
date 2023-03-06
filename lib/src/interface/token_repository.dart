@@ -3,13 +3,14 @@ import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
 import 'package:twitch_client/src/props/token_client_props.dart';
 import 'package:twitch_client/src/response/validate_token_response.dart';
+import 'package:twitch_client/src/utils/url_constants.dart';
 
 class TokenInterfaceImpl implements TokenInterface {
-  static const String _path = 'oauth2/';
+  static const String _path = 'oauth2';
 
   final TwitchDataSource _twitchDataSource;
 
-  TokenInterfaceImpl(this._twitchDataSource);
+  TokenInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId, url: UrlConstants.idBaseUrl);
 
   @override
   Future<Either<Failure, bool>> revokeAccessToken(

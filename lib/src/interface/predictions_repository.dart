@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/response/prediction_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -8,7 +9,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
 
   final TwitchDataSource _twitchDataSource;
 
-  PredictionsRepositoryImpl(this._twitchDataSource);
+  PredictionsRepositoryImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, PredictionResponse>> getPredictions(

@@ -17,11 +17,11 @@ import 'bits_repository_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {
   final mockedDataSource = MockTwitchDataSource();
-  final bitsInterface = BitsInterfaceImpl(mockedDataSource);
+  final bitsInterface = BitsInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getBitsLeaderBoard', () {
     const props = BitsLeaderBoardProps();
-    const String path = 'bits/';
+    const String path = 'bits';
     String apiResponse = assetReader('response_bitsleaderboard.json');
     final response = BitsLeaderboardResponse.fromJson(jsonDecode(apiResponse));
 
@@ -52,7 +52,7 @@ void main() {
 
   group('getCheermotes', () {
     const props = CheermotesProps(broadcasterId: '123');
-    const String path = 'bits/';
+    const String path = 'bits';
     String apiResponse = assetReader('response_cheermotes.json');
     final response = CheermotesResponse.fromJson(jsonDecode(apiResponse));
 

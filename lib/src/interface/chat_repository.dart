@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/props/broadcaster_moderator_props.dart';
 import 'package:twitch_client/src/props/broadcaster_props.dart';
 import 'package:twitch_client/src/props/chat_modify_props.dart';
@@ -13,7 +14,7 @@ class ChatInterfaceImpl implements ChatInterface {
 
   final TwitchDataSource _twitchDataSource;
 
-  ChatInterfaceImpl(this._twitchDataSource);
+  ChatInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, ChattersResponse>> getChatters(

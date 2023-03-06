@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/props/bits_leaderboard_props.dart';
 import 'package:twitch_client/src/props/cheermotes_props.dart';
 import 'package:twitch_client/src/response/bits_leaderboard_response.dart';
 import 'package:twitch_client/src/response/cheermotes_response.dart';
 
 class BitsInterfaceImpl implements BitsInterface {
-  static const String _path = 'bits/';
+  static const String _path = 'bits';
 
   final TwitchDataSource _twitchDataSource;
 
-  BitsInterfaceImpl(this._twitchDataSource);
+  BitsInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, BitsLeaderboardResponse>> getBitsLeaderBoard(

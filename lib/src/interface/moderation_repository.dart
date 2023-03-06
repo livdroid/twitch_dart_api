@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/props/add_moderator_props.dart';
 import 'package:twitch_client/src/props/ban_user_props.dart';
 import 'package:twitch_client/src/props/broadcaster_moderator_props.dart';
@@ -16,7 +17,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
 
   final TwitchDataSource _twitchDataSource;
 
-  ModerationInterfaceImpl(this._twitchDataSource);
+  ModerationInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, BannedUsersResponse>> getBannedUsers(
@@ -85,8 +86,8 @@ class ModerationInterfaceImpl implements ModerationInterface {
     assert(props.userId != props.broadcasterId);
 
     try {
-      final response = await _twitchDataSource
-          .post(path: '$_path/moderators', queryParams: props.toJson(), data: {});
+      final response = await _twitchDataSource.post(
+          path: '$_path/moderators', queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -94,14 +95,15 @@ class ModerationInterfaceImpl implements ModerationInterface {
   }
 
   @override
-  Future<Either<Failure, bool>> removeModerator({required RemoveModeratorProps props}) async {
+  Future<Either<Failure, bool>> removeModerator(
+      {required RemoveModeratorProps props}) async {
     assert(props.broadcasterId.isNotEmpty);
     assert(props.userId.isNotEmpty);
     assert(props.userId != props.broadcasterId);
 
     try {
-      await _twitchDataSource
-          .delete(path: '$_path/moderators', queryParams: props.toJson(), data: {});
+      await _twitchDataSource.delete(
+          path: '$_path/moderators', queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));

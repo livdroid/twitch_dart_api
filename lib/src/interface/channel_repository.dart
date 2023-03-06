@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
+import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/response/start_commercial_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 class ChannelInterfaceImpl implements ChannelInterface {
   static const String _path = 'channels';
 
-  final TwitchDataSource _twitchDataSource;
+ final TwitchDataSource _twitchDataSource;
 
-  ChannelInterfaceImpl(this._twitchDataSource);
+  ChannelInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, ChannelInformationsResponse>> getChannelInformation(
