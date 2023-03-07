@@ -62,7 +62,6 @@ class EventSubInterfaceImpl implements EventSubInterface {
         Uri.parse('wss://eventsub-beta.wss.twitch.tv/ws'));
 
     channel.stream.listen((message) async {
-      print(message);
       final event = WSEventResponse.fromJson(jsonDecode(message));
       _controller.add(event);
     }).onData((data) async {
