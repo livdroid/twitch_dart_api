@@ -11,20 +11,17 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-# Be careful this package is a work in progress :)
+## This package is a work in progress and doesn't have everything implemented yet but it will be updated regularly, if you really need an endpoint implementation let me know :)
 
 <em>
-This project might encounter breaking changes while I still work on it, that's why is not yet been released on pub.dev
-It will be once all unit tests are done and the architecture is finished.
-
-Do not use event subs yet there's work to be done there still :)
+Do not use event subs yet there's work to be done there still
 </em>
 
 Twitch Client is a package that allows you to connect with the Twitch API and
 interact with data like Bits, Channels, Chats, Games, and Moderation ...
 Twitch API documentation: <https://dev.twitch.tv/docs/api>>
 
-## Features
+# Features
 
 ## Getting started
 
