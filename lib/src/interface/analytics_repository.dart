@@ -4,13 +4,15 @@ import 'package:twitch_client/src/response/extension_analytics_response.dart';
 import 'package:twitch_client/src/response/game_analytics_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
-
 class AnalyticsRepositoryImpl implements AnalyticsRepository {
   static const String _path = 'analytics';
 
   final TwitchDataSource _twitchDataSource;
 
-  AnalyticsRepositoryImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+  AnalyticsRepositoryImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource =
+            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics(
@@ -38,9 +40,9 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
 }
 
 abstract class AnalyticsRepository {
-
   Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics(
       {required GameAnalyticsProps props});
+
   Future<Either<Failure, ExtensionAnalyticsResponse>> getExtensionAnalytics(
       {required ExtensionAnalyticsProps props});
 }

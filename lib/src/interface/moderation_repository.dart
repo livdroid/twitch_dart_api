@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
-import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/props/add_moderator_props.dart';
 import 'package:twitch_client/src/props/ban_user_props.dart';
 import 'package:twitch_client/src/props/broadcaster_moderator_props.dart';
@@ -17,7 +16,10 @@ class ModerationInterfaceImpl implements ModerationInterface {
 
   final TwitchDataSource _twitchDataSource;
 
-  ModerationInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+  ModerationInterfaceImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource =
+            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, BannedUsersResponse>> getBannedUsers(

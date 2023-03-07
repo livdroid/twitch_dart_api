@@ -14,7 +14,13 @@ class ExtensionAnalyticsProps {
   final String? first;
   final String? after;
 
-  ExtensionAnalyticsProps({this.extensionId, this.type, this.startedAt, this.endedAt, this.first, this.after});
+  ExtensionAnalyticsProps(
+      {this.extensionId,
+      this.type,
+      this.startedAt,
+      this.endedAt,
+      this.first,
+      this.after});
 
   Map<String, dynamic> toJson() => _$ExtensionAnalyticsPropsToJson(this);
 }

@@ -6,12 +6,10 @@ part 'user_follow_response.g.dart';
 
 @freezed
 class UserFollowResponse with _$UserFollowResponse {
-
   const factory UserFollowResponse({
     int? total,
     List<UserFollowData>? data,
     Pagination? pagination,
-
   }) = _UserFollowResponse;
 
   factory UserFollowResponse.fromJson(Map<String, dynamic> json) =>
@@ -20,7 +18,6 @@ class UserFollowResponse with _$UserFollowResponse {
 
 @freezed
 class UserFollowData with _$UserFollowData {
-
   const factory UserFollowData({
     String? fromId,
     String? fromLogin,
@@ -28,7 +25,7 @@ class UserFollowData with _$UserFollowData {
     String? toId,
     String? toName,
     String? followedAt,
-}) = _UserFollowData;
+  }) = _UserFollowData;
 
   factory UserFollowData.fromJson(Map<String, dynamic> json) =>
       _$UserFollowDataFromJson(json);

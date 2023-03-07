@@ -11,5 +11,6 @@ class UserBlockListProps with _$UserBlockListProps {
     String? after,
   }) = _UserBlockListProps;
 
-  factory UserBlockListProps.fromJson(Map<String, dynamic> json) => _$UserBlockListPropsFromJson(json);
+  factory UserBlockListProps.fromJson(Map<String, dynamic> json) =>
+      _$UserBlockListPropsFromJson(json);
 }

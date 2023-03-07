@@ -8,11 +8,11 @@ part 'game_analytics_response_data.g.dart';
 @freezed
 class GameAnalyticsResponseData with _$GameAnalyticsResponseData {
   const factory GameAnalyticsResponseData(
-      String? gameId,
-      String? URL,
-      String? type,
-      DateRange? dateRange,
-      ) = _GameAnalyticsResponseData;
+    String? gameId,
+    String? URL,
+    String? type,
+    DateRange? dateRange,
+  ) = _GameAnalyticsResponseData;
 
   factory GameAnalyticsResponseData.fromJson(Map<String, dynamic> json) =>
       _$GameAnalyticsResponseDataFromJson(json);

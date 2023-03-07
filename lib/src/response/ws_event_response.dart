@@ -5,9 +5,8 @@ class WSEventResponse {
   WSEventResponse({this.metadata, this.payload});
 
   WSEventResponse.fromJson(Map<String, dynamic> json) {
-    metadata = json['metadata'] != null
-        ? Metadata.fromJson(json['metadata'])
-        : null;
+    metadata =
+        json['metadata'] != null ? Metadata.fromJson(json['metadata']) : null;
     payload =
         json['payload'] != null ? Payload.fromJson(json['payload']) : null;
   }

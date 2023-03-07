@@ -6,7 +6,6 @@ part 'video_props.g.dart';
 
 @freezed
 class VideoProps with _$VideoProps {
-
   const factory VideoProps({
     String? id,
     String? userId,

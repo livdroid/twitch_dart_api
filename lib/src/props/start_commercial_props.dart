@@ -10,5 +10,6 @@ class StartCommercialProps with _$StartCommercialProps {
     required int length,
   }) = _StartCommercialProps;
 
-  factory StartCommercialProps.fromJson(Map<String, dynamic> json) => _$StartCommercialPropsFromJson(json);
+  factory StartCommercialProps.fromJson(Map<String, dynamic> json) =>
+      _$StartCommercialPropsFromJson(json);
 }

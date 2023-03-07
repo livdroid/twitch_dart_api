@@ -10,7 +10,8 @@ class ModeratorResponse with _$ModeratorResponse {
     Pagination? pagination,
   }) = _ModeratorResponse;
 
-  factory ModeratorResponse.fromJson(Map<String, dynamic> json) => _$ModeratorResponseFromJson(json);
+  factory ModeratorResponse.fromJson(Map<String, dynamic> json) =>
+      _$ModeratorResponseFromJson(json);
 }
 
 @freezed
@@ -21,7 +22,8 @@ class Moderator with _$Moderator {
     String? userName,
   }) = _Moderator;
 
-  factory Moderator.fromJson(Map<String, dynamic> json) => _$ModeratorFromJson(json);
+  factory Moderator.fromJson(Map<String, dynamic> json) =>
+      _$ModeratorFromJson(json);
 }
 
 @freezed
@@ -30,5 +32,6 @@ class Pagination with _$Pagination {
     String? cursor,
   }) = _Pagination;
 
-  factory Pagination.fromJson(Map<String, dynamic> json) => _$PaginationFromJson(json);
+  factory Pagination.fromJson(Map<String, dynamic> json) =>
+      _$PaginationFromJson(json);
 }

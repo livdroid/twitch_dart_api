@@ -10,7 +10,11 @@ class TokenInterfaceImpl implements TokenInterface {
 
   final TwitchDataSource _twitchDataSource;
 
-  TokenInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId, url: UrlConstants.idBaseUrl);
+  TokenInterfaceImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource = dataSource ??
+            TwitchApiDataSourceImpl(token, clientId,
+                url: UrlConstants.idBaseUrl);
 
   @override
   Future<Either<Failure, bool>> revokeAccessToken(

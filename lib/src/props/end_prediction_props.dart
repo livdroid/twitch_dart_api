@@ -4,15 +4,18 @@ part 'end_prediction_props.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class EndPredictionProps {
-  @JsonKey(name : 'broadcaster_id')
+  @JsonKey(name: 'broadcaster_id')
   final String broadcasterId;
   final String id;
   final String status;
-  @JsonKey(name : 'winning_outcome_id')
+  @JsonKey(name: 'winning_outcome_id')
   final String? winningOutcomeId;
 
   EndPredictionProps(
-      {required this.broadcasterId, required this.id, required this.status, this.winningOutcomeId});
+      {required this.broadcasterId,
+      required this.id,
+      required this.status,
+      this.winningOutcomeId});
 
   Map<String, dynamic> toJson() => _$EndPredictionPropsToJson(this);
 
@@ -20,8 +23,4 @@ class EndPredictionProps {
       _$EndPredictionPropsFromJson(json);
 }
 
-enum EndPredictionStatus {
-  RESOLVED,
-  CANCELED,
-  LOCKED
-}
+enum EndPredictionStatus { RESOLVED, CANCELED, LOCKED }

@@ -4,7 +4,7 @@ part 'end_poll_props.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class EndPollProps {
-  @JsonKey(name:'broadcaster_id')
+  @JsonKey(name: 'broadcaster_id')
   final String broadcasterId;
   final String id;
   final String status;
@@ -18,7 +18,4 @@ class EndPollProps {
       _$EndPollPropsFromJson(json);
 }
 
-enum EndPollStatus {
-  TERMINATED,
-  ARCHIVED
-}
+enum EndPollStatus { TERMINATED, ARCHIVED }

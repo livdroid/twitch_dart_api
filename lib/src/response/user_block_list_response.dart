@@ -5,9 +5,8 @@ part 'user_block_list_response.g.dart';
 
 @freezed
 class UserBlockListResponse with _$UserBlockListResponse {
-  const factory UserBlockListResponse({
-    List<UserBlockListResponseData>? data
-}) = _UserBlockListResponse;
+  const factory UserBlockListResponse({List<UserBlockListResponseData>? data}) =
+      _UserBlockListResponse;
 
   factory UserBlockListResponse.fromJson(Map<String, dynamic> json) =>
       _$UserBlockListResponseFromJson(json);
@@ -19,7 +18,7 @@ class UserBlockListResponseData with _$UserBlockListResponseData {
     String? userId,
     String? userLogin,
     String? displayName,
-}) = _UserBlockListResponseData;
+  }) = _UserBlockListResponseData;
 
   factory UserBlockListResponseData.fromJson(Map<String, dynamic> json) =>
       _$UserBlockListResponseDataFromJson(json);

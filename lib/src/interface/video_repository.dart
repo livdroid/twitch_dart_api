@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 class VideoRepositoryImpl implements VideoRepository {
@@ -8,7 +7,10 @@ class VideoRepositoryImpl implements VideoRepository {
 
   final TwitchDataSource _twitchDataSource;
 
-  VideoRepositoryImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+  VideoRepositoryImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource =
+            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, VideoResponse>> getVideo(
@@ -23,8 +25,7 @@ class VideoRepositoryImpl implements VideoRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> deleteVideo(
-      {required VideoProps props}) async {
+  Future<Either<Failure, bool>> deleteVideo({required VideoProps props}) async {
     try {
       await _twitchDataSource
           .delete(path: _path, queryParams: props.toJson(), data: {});

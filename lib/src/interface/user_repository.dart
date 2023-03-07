@@ -7,7 +7,10 @@ class UserRepositoryImpl implements UserInterface {
 
   final TwitchDataSource _twitchDataSource;
 
- UserRepositoryImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+  UserRepositoryImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource =
+            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, UserResponse>> getUserInformation(

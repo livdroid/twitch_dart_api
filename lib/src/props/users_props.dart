@@ -11,5 +11,6 @@ class UsersProps with _$UsersProps {
     String? login,
   }) = _UsersProps;
 
-  factory UsersProps.fromJson(Map<String, dynamic> json) => _$UsersPropsFromJson(json);
+  factory UsersProps.fromJson(Map<String, dynamic> json) =>
+      _$UsersPropsFromJson(json);
 }

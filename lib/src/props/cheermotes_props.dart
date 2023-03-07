@@ -9,5 +9,6 @@ class CheermotesProps with _$CheermotesProps {
     required String broadcasterId,
   }) = _CheermotesProps;
 
-  factory CheermotesProps.fromJson(Map<String, dynamic> json) => _$CheermotesPropsFromJson(json);
+  factory CheermotesProps.fromJson(Map<String, dynamic> json) =>
+      _$CheermotesPropsFromJson(json);
 }

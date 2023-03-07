@@ -10,5 +10,6 @@ class TokenClientProps with _$TokenClientProps {
     required String clientId,
   }) = _TokenClientProps;
 
-  factory TokenClientProps.fromJson(Map<String, dynamic> json) => _$TokenClientPropsFromJson(json);
+  factory TokenClientProps.fromJson(Map<String, dynamic> json) =>
+      _$TokenClientPropsFromJson(json);
 }

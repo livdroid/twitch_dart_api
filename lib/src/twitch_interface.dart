@@ -50,7 +50,8 @@ class TwitchInterface {
 
   PollsRepository get polls => twitchRepositories.pollsRepository;
 
-  PredictionRepository get prediction => twitchRepositories.predictionRepository;
+  PredictionRepository get prediction =>
+      twitchRepositories.predictionRepository;
 
   EventSubInterface get event => twitchRepositories.eventRepository;
 

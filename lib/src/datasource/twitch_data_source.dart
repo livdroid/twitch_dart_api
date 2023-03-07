@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
-import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/utils/url_constants.dart';
 
 /// Interface between client and dio package
@@ -8,23 +7,21 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
   final Dio dio;
   final String url;
 
-  TwitchApiDataSourceImpl(String token, String clientId, {this.url = UrlConstants.apiBaseUrl, Dio? dioClient})
-      : dio = dioClient ?? Dio(
-          url == UrlConstants.apiBaseUrl
-              ? BaseOptions(
-                baseUrl: url,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer $token',
-                  'Client-Id': clientId,
-                })
-              : BaseOptions(
-                baseUrl: url,
-                headers: {
-                  'Authorization': 'Bearer $token',
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                }),
-        );
+  TwitchApiDataSourceImpl(String token, String clientId,
+      {this.url = UrlConstants.apiBaseUrl, Dio? dioClient})
+      : dio = dioClient ??
+            Dio(
+              url == UrlConstants.apiBaseUrl
+                  ? BaseOptions(baseUrl: url, headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer $token',
+                      'Client-Id': clientId,
+                    })
+                  : BaseOptions(baseUrl: url, headers: {
+                      'Authorization': 'Bearer $token',
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                    }),
+            );
 
   @override
   Future<dynamic> get(

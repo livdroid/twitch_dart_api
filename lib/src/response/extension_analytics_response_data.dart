@@ -8,11 +8,11 @@ part 'extension_analytics_response_data.g.dart';
 @freezed
 class ExtensionAnalyticsResponseData with _$ExtensionAnalyticsResponseData {
   const factory ExtensionAnalyticsResponseData(
-      String? extensionId,
-      String? URL,
-      String? type,
-      DateRange? dateRange,
-      ) = _ExtensionAnalyticsResponseData;
+    String? extensionId,
+    String? URL,
+    String? type,
+    DateRange? dateRange,
+  ) = _ExtensionAnalyticsResponseData;
 
   factory ExtensionAnalyticsResponseData.fromJson(Map<String, dynamic> json) =>
       _$ExtensionAnalyticsResponseDataFromJson(json);

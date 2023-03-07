@@ -12,5 +12,6 @@ abstract class ChattersProps with _$ChattersProps {
     String? after,
   }) = _ChattersProps;
 
-  factory ChattersProps.fromJson(Map<String, dynamic> json) => _$ChattersPropsFromJson(json);
+  factory ChattersProps.fromJson(Map<String, dynamic> json) =>
+      _$ChattersPropsFromJson(json);
 }

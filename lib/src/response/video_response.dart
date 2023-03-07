@@ -16,7 +16,6 @@ class VideoResponse with _$VideoResponse {
       _$VideoResponseFromJson(json);
 }
 
-
 @freezed
 class VideoResponseData with _$VideoResponseData {
   const factory VideoResponseData({
@@ -37,19 +36,18 @@ class VideoResponseData with _$VideoResponseData {
     String? type,
     String? duration,
     List<MutedSegments>? mutedSegments,
-}) = _VideoResponseData;
+  }) = _VideoResponseData;
 
   factory VideoResponseData.fromJson(Map<String, dynamic> json) =>
       _$VideoResponseDataFromJson(json);
 }
-
 
 @freezed
 class MutedSegments with _$MutedSegments {
   const factory MutedSegments({
     int? duration,
     int? offset,
-}) = _MutedSegments;
+  }) = _MutedSegments;
 
   factory MutedSegments.fromJson(Map<String, dynamic> json) =>
       _$MutedSegmentsFromJson(json);

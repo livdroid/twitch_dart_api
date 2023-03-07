@@ -1,4 +1,3 @@
-import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/analytics_repository.dart';
 import 'package:twitch_client/src/interface/bits_repository.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';

@@ -7,10 +7,9 @@ part 'channel_vips_response.g.dart';
 
 @freezed
 class ChannelVipsResponse with _$ChannelVipsResponse {
-
   const factory ChannelVipsResponse(
-      {final List<ChannelVipsResponseData>? data, final Pagination? pagination})
-      = _ChannelVipResponse;
+      {final List<ChannelVipsResponseData>? data,
+      final Pagination? pagination}) = _ChannelVipResponse;
 
   factory ChannelVipsResponse.fromJson(Map<String, dynamic> json) =>
       _$ChannelVipsResponseFromJson(json);
@@ -19,8 +18,9 @@ class ChannelVipsResponse with _$ChannelVipsResponse {
 @freezed
 class ChannelVipsResponseData with _$ChannelVipsResponseData {
   const factory ChannelVipsResponseData(
-      { final String? userId, final String? userName, final String? userLogin})
-      = _ChannelVipsResponseData;
+      {final String? userId,
+      final String? userName,
+      final String? userLogin}) = _ChannelVipsResponseData;
 
   factory ChannelVipsResponseData.fromJson(Map<String, dynamic> json) =>
       _$ChannelVipsResponseDataFromJson(json);

@@ -8,7 +8,7 @@ class AddModeratorProps with _$AddModeratorProps {
   const factory AddModeratorProps({
     required String broadcasterId,
     required String userId,
-}) = _AddModeratorProps;
+  }) = _AddModeratorProps;
 
   factory AddModeratorProps.fromJson(Map<String, dynamic> json) =>
       _$AddModeratorPropsFromJson(json);

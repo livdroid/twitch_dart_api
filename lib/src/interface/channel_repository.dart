@@ -1,15 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/response/start_commercial_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 class ChannelInterfaceImpl implements ChannelInterface {
   static const String _path = 'channels';
 
- final TwitchDataSource _twitchDataSource;
+  final TwitchDataSource _twitchDataSource;
 
-  ChannelInterfaceImpl(String token, String clientId, {TwitchDataSource? dataSource}) : _twitchDataSource = dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+  ChannelInterfaceImpl(String token, String clientId,
+      {TwitchDataSource? dataSource})
+      : _twitchDataSource =
+            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   @override
   Future<Either<Failure, ChannelInformationsResponse>> getChannelInformation(
@@ -28,7 +30,8 @@ class ChannelInterfaceImpl implements ChannelInterface {
   @override
   Future<Either<Failure, bool>> modifyChannelInformation(
       {required BroadcasterProps broadcasterProps,
-      required ModifyChannelInformationProp modifyChannelInformationProps}) async {
+      required ModifyChannelInformationProp
+          modifyChannelInformationProps}) async {
     assert(broadcasterProps.broadcasterId.isNotEmpty);
     try {
       await _twitchDataSource.patch(
