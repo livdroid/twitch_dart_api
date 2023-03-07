@@ -59,12 +59,6 @@ parse the URL to keep the access token and add it to the TwitchInterface, this i
 twitchInterface.init(url: 'url');
 ```
 
-If you want to print the requests for debugging purposes while you initialize the Twitch interface object :
-
-````dart
- showRequestLogs: true
- ````
-
 ## Additional information
 
 IMPORTANT: Verify token

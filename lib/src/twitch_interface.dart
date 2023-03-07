@@ -127,33 +127,6 @@ class TwitchInterface {
   void _setTokenAndClient({required String token}) {
     accessToken = token;
     twitchRepositories = TwitchRepositories(token: token, clientId: clientId);
-
-    /*
-    _twitchApiDataSourceImpl.dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-      'Client-Id': clientId
-    };
-
-    if (showRequestLogs) {
-      if (!_twitchApiDataSourceImpl.dio.interceptors
-          .contains(dioLoggerInterceptor)) {
-        _twitchApiDataSourceImpl.dio.interceptors.add(dioLoggerInterceptor);
-      }
-    }
-
-    _twitchIdDataSourceImpl.dio.options.headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    };
-
-    if (showRequestLogs) {
-      if (!_twitchIdDataSourceImpl.dio.interceptors
-          .contains(dioLoggerInterceptor)) {
-        _twitchIdDataSourceImpl.dio.interceptors.add(dioLoggerInterceptor);
-      }
-    }
-    */
   }
 
   /// Parse the url user was redirected to after loggin in to the
