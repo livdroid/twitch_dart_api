@@ -105,3 +105,99 @@ Please call validateToken() to do this request.
 - Unblock User
 - Get Videos
 - Delete Videos
+
+## To Implement
+
+- Get Extension Transactions
+- Create Custom Rewards
+- Delete Custom Reward
+- Get Custom Reward
+- Get Custom Reward
+- Redemption
+- Update Custom Reward
+- Update Redemption Status
+- Get Charity Campaign
+- Get Charity Campaign
+- Donations
+- Get Channel Emotes
+- Get Global Emotes
+- Get Emote Sets
+- Get Channel Chat Badges
+- Get Global Chat Badges
+- Send Chat Announcement
+- Send a Shoutout
+- Get User Chat Color
+- Update User Chat Color
+- Create Clip
+- Get Clips
+- Get Drops Entitlements
+- Update Drops Entitlements
+- Get Extension Configuration
+- Segment
+- Set Extension Configuration
+- Segment
+- Set Extension Required
+- Configuration
+- Send Extension PubSub
+- Message
+- Get Extension Live Channels
+- Get Extension Secrets
+- Create Extension Secret
+- Send Extension Chat
+- Message
+- Get Extensions
+- Get Released Extensions
+- Get Extension Bits Products
+- Update Extension Bits
+- Product
+- Create EventSub
+- Subscription
+- Delete EventSub
+- Subscription
+- Get EventSub Subscriptions
+- Get Top Games
+- Get Games
+- Get Creator Goals
+- Get Hype Train Events
+- Check AutoMod Status
+- Manage Held AutoMod
+- Messages
+- Get AutoMod Settings
+- Update AutoMod Settings
+- Get Banned Users
+- Get Blocked Terms
+- Add Blocked Term
+- Remove Blocked Term
+- Delete Chat Messages
+- Start a raid
+- Cancel a raid
+- Get Channel Stream
+- Schedule
+- Get Channel Calendar
+- Update Channel Stream
+- Schedule
+- Create Channel Stream
+- Schedule Segment
+- Update Channel Stream
+- Schedule Segment
+- Delete Channel Stream
+- Schedule Segment
+- Search Categories
+- Search Channels
+- Get Soundtrack Current
+- Track
+- Get Soundtrack Playlist
+- Get Soundtrack Playlists
+- Get Stream Key
+- Get Streams
+- Get Followed Streams
+- Create Stream Marker
+- Get Stream Markers
+- Get Broadcaster
+- Subscriptions
+- Check User Subscription
+- Get All Stream Tags
+- Get Stream Tags
+- Get Channel Teams
+- Get Teams
+- Send Whisper
