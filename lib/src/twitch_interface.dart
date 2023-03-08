@@ -1,6 +1,7 @@
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/analytics_repository.dart';
 import 'package:twitch_client/src/interface/bits_repository.dart';
+import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
@@ -27,7 +28,7 @@ class TwitchInterface {
   String? accessToken;
 
   /// User token data
-  late ValidateTokenResponse tokenResponse;
+  ValidateTokenResponse? tokenResponse;
 
   /// Access all requests
   late TwitchRepositories twitchRepositories;
@@ -54,6 +55,8 @@ class TwitchInterface {
       twitchRepositories.predictionRepository;
 
   EventSubInterface get event => twitchRepositories.eventRepository;
+
+  ChannelPointsRepository get channelPoints => twitchRepositories.channelPointsRepository;
 
   TwitchInterface(
       {required this.clientId,

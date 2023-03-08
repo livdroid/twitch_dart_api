@@ -105,3 +105,4 @@ Please call validateToken() to do this request.
 - Unblock User
 - Get Videos
 - Delete Videos
+- Create Custom Rewards

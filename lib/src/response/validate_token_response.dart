@@ -1,8 +1,8 @@
 class ValidateTokenResponse {
-  final String? clientId;
-  final String? login;
-  final List<String>? scopes;
-  final String? userId;
+  final String clientId;
+  final String login;
+  final List<String> scopes;
+  final String userId;
   final int? expiresIn;
 
   ValidateTokenResponse(

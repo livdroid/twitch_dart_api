@@ -1,5 +1,6 @@
 import 'package:twitch_client/src/interface/analytics_repository.dart';
 import 'package:twitch_client/src/interface/bits_repository.dart';
+import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
@@ -38,6 +39,8 @@ abstract class TwitchRepositories {
   PredictionRepository get predictionRepository;
 
   EventSubInterface get eventRepository;
+
+  ChannelPointsRepository get channelPointsRepository;
 }
 
 class _TwitchRepositoriesImpl implements TwitchRepositories {
@@ -52,7 +55,8 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
         tokenRepository = TokenInterfaceImpl(token, clientId),
         userRepository = UserRepositoryImpl(token, clientId),
         videoRepository = VideoRepositoryImpl(token, clientId),
-        eventRepository = EventSubInterfaceImpl(token, clientId);
+        eventRepository = EventSubInterfaceImpl(token, clientId),
+        channelPointsRepository = ChannelPointsRepositoryImpl(token, clientId);
 
   @override
   final AnalyticsRepository analyticsRepository;
@@ -89,4 +93,7 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
 
   @override
   TwitchRepositories get twitchRepositories => this;
+
+  @override
+  final ChannelPointsRepository channelPointsRepository;
 }
