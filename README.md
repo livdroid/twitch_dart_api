@@ -11,10 +11,12 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-## This package is a work in progress and doesn't have everything implemented yet but it will be updated regularly, if you really need an endpoint implementation let me know :)
+### This package is a work in progress and doesn't have everything implemented yet but it will be updated regularly.
 
 <em>
-Do not use event subs yet there's work to be done there still
+PS : Event subs are still a work in progress.
+
+PSS : This is my first library ever, any kind advice/criticism is very welcome :)
 </em>
 
 Twitch Client is a package that allows you to connect with the Twitch API and
@@ -65,3 +67,41 @@ they can audit your app and ask you to resolve the issue if you don't do it.
 More here: <https://dev.twitch.tv/docs/authentication/validate-tokens#who-must-validate-tokens>
 
 Please call validateToken() to do this request.
+
+## Available requests so far :
+
+- Start Commercial
+- Get Extension Analytics
+- Get Game Analytics
+- Get Bits Leaderboard
+- Get Cheermotes
+- Get Channel Information
+- Modify Channel Information
+- Get Channel Editors
+- Get Followed Channels
+- Get Channel Followers
+- Get Chatters
+- Get Chat Settings
+- Update Chat Settings
+- Ban User
+- Unban User
+- Get Moderators
+- Add Channel Moderator
+- Remove Channel Moderator
+- Get VIPs
+- Add Channel VIP
+- Remove Channel VIP
+- Get Polls
+- Create Poll
+- End Poll
+- Get Predictions
+- Create Prediction
+- End Prediction
+- Get Users
+- Update User
+- Get Users Follows
+- Get User Block List
+- Block User
+- Unblock User
+- Get Videos
+- Delete Videos
