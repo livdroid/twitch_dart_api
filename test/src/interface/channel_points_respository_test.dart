@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/props/create_custom_reward_props.dart';
+import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -13,7 +14,7 @@ void main() {
   final repository = ChannelPointsRepositoryImpl('token', 'clientid',
       dataSource: mockedDataSource);
 
-  group('getBannedUsers', () {
+  group('createCustomReward', () {
     const String path = 'channel_points/custom_rewards';
     CreateCustomRewardProps data =
         const CreateCustomRewardProps(cost: 1, title: 'title');
@@ -54,6 +55,60 @@ void main() {
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
+    });
+  });
+
+  group('DeleteCustomReward', () {
+    const String path = 'channel_points/custom_rewards';
+    DeleteCustomRewardProps props =
+    const DeleteCustomRewardProps(broadcasterId: '1', id: '1');
+    DeleteCustomRewardProps emptyProps =
+    const DeleteCustomRewardProps(broadcasterId: '', id: '');
+
+    test('On success', () async {
+      when(mockedDataSource.delete(
+          path: path, queryParams: props.toJson(), data: {}))
+          .thenAnswer((realInvocation) async => {});
+
+      final result =
+      await repository.deleteCustomReward(props: props);
+
+      verify(mockedDataSource.delete(
+        path: path,
+        queryParams: props.toJson(), data: {},
+      ));
+      expect(result.isRight(), true);
+      expect(result.asRight(), isA<bool>());
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.delete(
+          path: path, queryParams: props.toJson(), data: {}))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result =
+      await repository.deleteCustomReward(props: props);
+
+      verify(mockedDataSource.delete(
+        path: path,
+        queryParams: props.toJson(),
+        data: {},
+      ));
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<ForbiddenRequestException>());
+    });
+
+    test('On Empty Props', () async {
+      when(mockedDataSource.delete(
+          path: path, queryParams: emptyProps.toJson(), data: {}))
+          .thenAnswer((realInvocation) async => {});
+
+      expect(() => repository.deleteCustomReward(props: emptyProps),
+          throwsAssertionError);
+
+      verifyNever(mockedDataSource.delete(
+          path: path, queryParams: emptyProps.toJson(), data: {}));
     });
   });
 }

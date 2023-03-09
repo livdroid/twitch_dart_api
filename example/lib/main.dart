@@ -59,83 +59,83 @@ class _MyHomePageState extends State<MyHomePage> {
       TextButton(
           onPressed: () async {
             final data = await twitchInterface.bits
-                ?.getBitsLeaderBoard(props: const BitsLeaderBoardProps());
-            data?.fold((l) => print(l), (r) => print(r.data));
+                .getBitsLeaderBoard(props: const BitsLeaderBoardProps());
+            data.fold((l) => print(l), (r) => print(r.data));
           },
           child: const Text('Get bits leaderboard')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.bits?.getCheermotes(
+            final data = await twitchInterface.bits.getCheermotes(
                 props: const CheermotesProps(broadcasterId: ''));
-            data?.fold((l) => print(l), (r) => print(r.data));
+            data.fold((l) => print(l), (r) => print(r.data));
           },
           child: const Text('Get Cheermotes')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.channel?.getChannelInformation(
+            final data = await twitchInterface.channel.getChannelInformation(
                 props: const BroadcasterProps(broadcasterId: '141981764'));
-            data?.fold((l) => print(l.exception),
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data.first.broadcasterName));
           },
           child: const Text('Get Channel Info')),
       TextButton(
           onPressed: () async {
             final data = await twitchInterface.channel
-                ?.modifyChannelInformation(
+                .modifyChannelInformation(
                     broadcasterProps:
                         const BroadcasterProps(broadcasterId: '59408155'),
                     modifyChannelInformationProps: ModifyChannelInformationProp(
                         title: "Test", broadcasterLanguage: 'fr'));
-            data?.fold((l) => print(l.exception), (r) => print('Done'));
+            data.fold((l) => print(l.exception), (r) => print('Done'));
           },
           child: const Text('Modify Channel Info')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.channel?.getChannelEditors(
+            final data = await twitchInterface.channel.getChannelEditors(
                 broadcasterProps:
                     const BroadcasterProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print('OK'));
+            data.fold((l) => print(l.exception), (r) => print('OK'));
           },
           child: const Text('Get Channel editors')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.chat?.getChatters(
+            final data = await twitchInterface.chat.getChatters(
                 props: const ChattersProps(
                     broadcasterId: '59408155', moderatorId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print(r.data));
+            data.fold((l) => print(l.exception), (r) => print(r.data));
           },
           child: const Text('Get chatters')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.chat?.getChatSettings(
+            final data = await twitchInterface.chat.getChatSettings(
                 props: const BroadcasterProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception),
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.followerMode));
           },
           child: const Text('Get chat settings')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.chat?.updateChatSettings(
+            final data = await twitchInterface.chat.updateChatSettings(
                 props: const BroadcasterModeratorProps(
                     broadcasterId: '59408155', moderatorId: '59408155'),
                 chatProps: const ChatModifyProps(slowMode: true));
-            data?.fold((l) => print(l.exception),
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.slowMode));
           },
           child: const Text('Update chat settings')),
       TextButton(
           onPressed: () async {
-            final data = await twitchInterface.moderation?.getBannedUsers(
+            final data = await twitchInterface.moderation.getBannedUsers(
                 props: const BroadcasterProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print(r.data?.length));
+            data.fold((l) => print(l.exception), (r) => print(r.data?.length));
           },
           child: const Text('Get banned users')),
       TextButton(
           onPressed: () async {
-            final stream = await twitchInterface.event?.subscribeTo(
+            final stream = await twitchInterface.event.subscribeTo(
                 type: TwitchSubscriptionType.streamOnline, userId: '59408155');
 
-            stream?.listen((event) {
+            stream.listen((event) {
               //print(event.toJson());
             });
           },
@@ -144,31 +144,31 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text('Get eventsub subscriptions'),
           onPressed: () async {
             final data = await twitchInterface.event
-                ?.getEventSubSubscriptions(props: GetEventSubProps());
-            data?.fold((l) => print(l.exception),
+                .getEventSubSubscriptions(props: GetEventSubProps());
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.status ?? ''));
           }),
       TextButton(
           child: const Text('Disconnect to all eventsub subscriptions'),
           onPressed: () async {
             final data = await twitchInterface.event
-                ?.getEventSubSubscriptions(props: GetEventSubProps());
-            data?.fold((l) => print(l.exception),
+                .getEventSubSubscriptions(props: GetEventSubProps());
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.status ?? 'none'));
 
-            data?.asRight().data?.forEach((element) async {
-              await twitchInterface.event?.deleteEventSubSubscriptions(
+            data.asRight().data?.forEach((element) async {
+              await twitchInterface.event.deleteEventSubSubscriptions(
                   props: GetEventSubProps(id: element.id));
             });
           }),
       TextButton(
           child: const Text('Revoke token'),
           onPressed: () async {
-            final data = await twitchInterface.token?.revokeAccessToken(
+            final data = await twitchInterface.token.revokeAccessToken(
                 props: TokenClientProps(
                     token: twitchInterface.accessToken ?? '',
                     clientId: twitchInterface.clientId ?? ''));
-            data?.fold((l) => print(l.exception), (r) => print('true'));
+            data.fold((l) => print(l.exception), (r) => print('true'));
 
             setState(() {
               isConnected = false;
@@ -177,103 +177,103 @@ class _MyHomePageState extends State<MyHomePage> {
       TextButton(
           child: const Text('Validate token'),
           onPressed: () async {
-            final data = await twitchInterface.token?.verifyToken();
-            data?.fold((l) => print(l.exception), (r) => print(r.expiresIn));
+            final data = await twitchInterface.token.verifyToken();
+            data.fold((l) => print(l.exception), (r) => print(r.expiresIn));
           }),
       TextButton(
           child: const Text('Start commercial'),
           onPressed: () async {
-            final data = await twitchInterface.channel?.startCommercial(
+            final data = await twitchInterface.channel.startCommercial(
                 startCommercialProps: const StartCommercialProps(
                     broadcasterId: '59408155', length: 60));
 
-            data?.fold((l) => print(l.exception), (r) => print(r));
+            data.fold((l) => print(l.exception), (r) => print(r));
           }),
       TextButton(
           child: const Text('get vips'),
           onPressed: () async {
-            final data = await twitchInterface.channel?.getVIPs(
+            final data = await twitchInterface.channel.getVIPs(
                 props: const BroadcasterProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception),
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.userName));
           }),
       TextButton(
           child: const Text('add vip'),
           onPressed: () async {
-            final data = await twitchInterface.channel?.addVip(
+            final data = await twitchInterface.channel.addVip(
                 props: const AddVipProps(
                     broadcasterId: '59408155', userId: '36584091'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('remove vip'),
           onPressed: () async {
-            final data = await twitchInterface.channel?.removeVip(
+            final data = await twitchInterface.channel.removeVip(
                 props: const RemoveVipProps(
                     broadcasterId: '59408155', userId: '36584091'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('get blocked user list'),
           onPressed: () async {
-            final data = await twitchInterface.user?.getBlockList(
+            final data = await twitchInterface.user.getBlockList(
                 props: const UserBlockListProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print(r.data?.length));
+            data.fold((l) => print(l.exception), (r) => print(r.data?.length));
           }),
       TextButton(
           child: const Text('Block user'),
           onPressed: () async {
-            final data = await twitchInterface.user?.blockUser(
+            final data = await twitchInterface.user.blockUser(
                 props: const BlockUserProps(targetUserId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('unblock user'),
           onPressed: () async {
-            final data = await twitchInterface.user?.unblockUser(
+            final data = await twitchInterface.user.unblockUser(
                 props: const BlockUserProps(targetUserId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Get video'),
           onPressed: () async {
             final data = await twitchInterface.video
-                ?.getVideo(props: const VideoProps(gameId: '23442'));
-            data?.fold((l) => print(l.exception),
+                .getVideo(props: const VideoProps(gameId: '23442'));
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.description));
           }),
       TextButton(
           child: const Text('Delete video'),
           onPressed: () async {
             final data = await twitchInterface.video
-                ?.deleteVideo(props: const VideoProps(id: '123'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+                .deleteVideo(props: const VideoProps(id: '123'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Analytics game'),
           onPressed: () async {
             final data = await twitchInterface.analytics
-                ?.getGameAnalytics(props: GameAnalyticsProps(gameId: "1244"));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+                .getGameAnalytics(props: GameAnalyticsProps(gameId: "1244"));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Analytics extension'),
           onPressed: () async {
             final data = await twitchInterface.analytics
-                ?.getExtensionAnalytics(props: ExtensionAnalyticsProps());
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+                .getExtensionAnalytics(props: ExtensionAnalyticsProps());
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Get polls'),
           onPressed: () async {
             final data = await twitchInterface.polls
-                ?.getPolls(props: PollsProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+                .getPolls(props: PollsProps(broadcasterId: '59408155'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Create polls'),
           onPressed: () async {
-            final data = await twitchInterface.polls?.createPoll(
+            final data = await twitchInterface.polls.createPoll(
                 props: CreatePollProps(
                     broadcasterId: '59408155',
                     title: "Le petit dej c'est mieux ...",
@@ -284,31 +284,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     channelPointsPerVote: 1,
                     channelPointsVotingEnabled: true,
                     duration: 60));
-            data?.fold((l) => print(l.exception),
+            data.fold((l) => print(l.exception),
                 (r) => print(r.data?.first.id ?? 'nothing'));
           }),
       TextButton(
           child: const Text('Stop poll'),
           onPressed: () async {
-            final data = await twitchInterface.polls?.endPoll(
+            final data = await twitchInterface.polls.endPoll(
                 props: EndPollProps(
               broadcasterId: '59408155',
               id: "8d386bd6-dca7-4b28-9561-62c9c76246c9",
               status: EndPollStatus.TERMINATED.name,
             ));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Get predictions'),
           onPressed: () async {
-            final data = await twitchInterface.prediction?.getPredictions(
+            final data = await twitchInterface.prediction.getPredictions(
                 props: const PredictionsProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => print('ok'));
+            data.fold((l) => print(l.exception), (r) => print('ok'));
           }),
       TextButton(
           child: const Text('Create prediction'),
           onPressed: () async {
-            final data = await twitchInterface.prediction?.createPrediction(
+            final data = await twitchInterface.prediction.createPrediction(
                 props: CreatePredictionsProps(
               broadcasterId: '59408155',
               title: 'Test de prediction',
@@ -322,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
       TextButton(
           child: const Text('End prediction'),
           onPressed: () async {
-            final data = await twitchInterface.prediction?.endPrediction(
+            final data = await twitchInterface.prediction.endPrediction(
                 props: EndPredictionProps(
                     broadcasterId: '59408155',
                     id: 'af3612d2-2676-4f3a-adca-538e05f74e7f',
@@ -331,20 +331,20 @@ class _MyHomePageState extends State<MyHomePage> {
       TextButton(
           child: const Text('Get moderators'),
           onPressed: () async {
-            final data = await twitchInterface.moderation?.getModerators(
+            final data = await twitchInterface.moderation.getModerators(
                 props: const BroadcasterProps(broadcasterId: '59408155'));
           }),
       TextButton(
           child: const Text('Add moderators'),
           onPressed: () async {
-            final data = await twitchInterface.moderation?.addModerator(
+            final data = await twitchInterface.moderation.addModerator(
                 props: const AddModeratorProps(
                     broadcasterId: '59408155', userId: '59408155'));
           }),
       TextButton(
           child: const Text('Remove moderators'),
           onPressed: () async {
-            final data = await twitchInterface.moderation?.removeModerator(
+            final data = await twitchInterface.moderation.removeModerator(
                 props: const RemoveModeratorProps(
                     broadcasterId: '59408155', userId: '59408155'));
           }),
@@ -352,10 +352,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text('Create Custom Reward'),
           onPressed: () async {
             final data = await twitchInterface.channelPoints
-                ?.createCustomReward(
-                    dataProps: CreateCustomRewardProps(title: 'title', cost: 1),
+                .createCustomReward(
+                    dataProps:
+                        CreateCustomRewardProps(title: 'title1', cost: 1),
                     props: BroadcasterProps(broadcasterId: '59408155'));
-            data?.fold((l) => print(l.exception), (r) => r.data?.first.broadcasterName);
+            data.fold(
+                (l) => print(l.exception), (r) => print(r.data?.first.id));
+          }),
+      TextButton(
+          child: const Text('Delete Custom Reward'),
+          onPressed: () async {
+            final data = await twitchInterface.channelPoints
+                .deleteCustomReward(
+                    props: DeleteCustomRewardProps(
+                        broadcasterId: '59408155',
+                        id: '7023c72e-a10e-41b6-b155-e8e2d514058c'));
+            data.fold((l) => print(l.exception), (r) => print('OK'));
           })
     ]));
   }

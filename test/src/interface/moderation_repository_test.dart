@@ -232,7 +232,7 @@ void main() {
   group('removeModerator', () {
     const String path = 'moderation/moderators';
     RemoveModeratorProps props = const RemoveModeratorProps(broadcasterId: '123', userId: '1222');
-    RemoveModeratorProps empryProps = const RemoveModeratorProps(broadcasterId: '', userId: '');
+    RemoveModeratorProps emptyProps = const RemoveModeratorProps(broadcasterId: '', userId: '');
 
     test('On success', () async {
       when(mockedDataSource.delete(path: path, queryParams: props.toJson(), data: {}))
@@ -260,14 +260,14 @@ void main() {
 
     test('On empty props', () async {
       when(mockedDataSource.delete(
-          path: path, queryParams: empryProps.toJson(), data: {}))
+          path: path, queryParams: emptyProps.toJson(), data: {}))
           .thenAnswer((realInvocation) async => {});
 
-      expect(() => repository.removeModerator(props: empryProps),
+      expect(() => repository.removeModerator(props: emptyProps),
           throwsAssertionError);
 
       verifyNever(mockedDataSource.delete(
-          path: path, queryParams: empryProps.toJson(), data: {}));
+          path: path, queryParams: emptyProps.toJson(), data: {}));
     });
   });
 }
