@@ -34,6 +34,7 @@ export 'src/props/remove_vip_props.dart';
 export 'src/props/start_commercial_props.dart';
 export 'src/props/token_client_props.dart';
 export 'src/props/get_custom_rewards_props.dart';
+export 'src/props/get_custom_reward_redemption_props.dart';
 export 'src/props/transport.dart';
 export 'src/props/create_custom_reward_props.dart';
 export 'src/props/delete_custom_reward_props.dart';

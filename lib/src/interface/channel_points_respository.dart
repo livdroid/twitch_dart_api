@@ -2,9 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/props/create_custom_reward_props.dart';
 import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
+import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
 import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
-import 'package:twitch_client/src/response/custom_reward_response.dart';
+import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -49,7 +50,8 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
   }
 
   @override
-  Future<Either<Failure, GetCustomRewardsResponse>> getCustomRewards({required GetCustomRewardsProps props}) async {
+  Future<Either<Failure, GetCustomRewardsResponse>> getCustomRewards(
+      {required GetCustomRewardsProps props}) async {
     assert(props.broadcasterId.isNotEmpty);
 
     try {
@@ -61,6 +63,23 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, GetCustomRewardRedemptionResponse>>
+      getCustomRewardRedemptions(
+          {required GetCustomRewardRedemptionProps props}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.rewardId.isNotEmpty);
+    assert(props.id == null && props.status != null);
+
+    try {
+      final response = await _twitchDataSource.get(
+          path: '$_path/custom_rewards/redemptions',
+          queryParams: props.toJson());
+      return Right(GetCustomRewardRedemptionResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
 }
 
 abstract class ChannelPointsRepository {
@@ -73,4 +92,8 @@ abstract class ChannelPointsRepository {
 
   Future<Either<Failure, GetCustomRewardsResponse>> getCustomRewards(
       {required GetCustomRewardsProps props});
+
+  Future<Either<Failure, GetCustomRewardRedemptionResponse>>
+      getCustomRewardRedemptions(
+          {required GetCustomRewardRedemptionProps props});
 }

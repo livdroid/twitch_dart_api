@@ -354,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
             final data = await twitchInterface.channelPoints
                 .createCustomReward(
                     dataProps:
-                        CreateCustomRewardProps(title: 'title1', cost: 1),
+                        CreateCustomRewardProps(title: 'title reward', cost: 1),
                     props: BroadcasterProps(broadcasterId: '59408155'));
             data.fold(
                 (l) => print(l.exception), (r) => print(r.data?.first.id));
@@ -377,6 +377,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     props: GetCustomRewardsProps(
                         broadcasterId: '59408155'));
                 data.fold((l) => print(l.exception), (r) => print('OK'));
+              }),
+          TextButton(
+              child: const Text('Get Custom Reward Redemption'),
+              onPressed: () async {
+                final data = await twitchInterface.channelPoints
+                    .getCustomRewardRedemptions(
+                    props: GetCustomRewardRedemptionProps(
+                        broadcasterId: '59408155', rewardId: 'dc5bfc54-9f6f-47c2-b2e9-893b1e2ae929', status:'CANCELED'));
+                data.fold((l) => print(l.exception), (r) => print(r.data?.first.broadcasterId));
               })
     ]));
   }

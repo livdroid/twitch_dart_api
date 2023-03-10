@@ -4,8 +4,10 @@ import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/props/create_custom_reward_props.dart';
 import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
+import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
 import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
+import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -164,6 +166,70 @@ void main() {
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
+    });
+  });
+
+  group('GetCustomRewardRedemption', () {
+    const String path = 'channel_points/custom_rewards/redemptions';
+    GetCustomRewardRedemptionProps props =
+    const GetCustomRewardRedemptionProps(broadcasterId: '1', rewardId: '1', status: 'CANCELED');
+    GetCustomRewardRedemptionProps propsError =
+    const GetCustomRewardRedemptionProps(broadcasterId: '1', rewardId: '1', status: 'CANCELED', id: '123');
+    GetCustomRewardRedemptionProps emptyProps =
+    const GetCustomRewardRedemptionProps(broadcasterId: '', rewardId: '');
+    GetCustomRewardRedemptionResponse response =
+    const GetCustomRewardRedemptionResponse(data: [GetCustomRewardRedemptionResponseData(broadcasterId: '123')]);
+
+    test('On success', () async {
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
+          .thenAnswer((realInvocation) async => response.toJson());
+
+      final result = await repository.getCustomRewardRedemptions(props: props);
+
+      verify(mockedDataSource.get(
+        path: path,
+        queryParams: props.toJson(),
+      ));
+
+      expect(result.isRight(), true);
+      expect(result.asRight(), isA<GetCustomRewardRedemptionResponse>());
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await repository.getCustomRewardRedemptions(props: props);
+
+      verify(mockedDataSource.get(
+        path: path,
+        queryParams: props.toJson(),
+      ));
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<ForbiddenRequestException>());
+    });
+
+    test('On Empty Props', () async {
+      when(mockedDataSource.get(path: path, queryParams: props.toJson()))
+          .thenAnswer((realInvocation) async => {});
+
+      expect(() => repository.getCustomRewardRedemptions(props: emptyProps),
+          throwsAssertionError);
+
+      verifyNever(
+          mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
+    });
+
+    test('On Error Props', () async {
+      when(mockedDataSource.get(path: path, queryParams: propsError.toJson()))
+          .thenAnswer((realInvocation) async => {});
+
+      expect(() => repository.getCustomRewardRedemptions(props: propsError),
+          throwsAssertionError);
+
+      verifyNever(
+          mockedDataSource.get(path: path, queryParams: propsError.toJson()));
     });
   });
 }
