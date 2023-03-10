@@ -386,6 +386,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     props: GetCustomRewardRedemptionProps(
                         broadcasterId: '59408155', rewardId: 'dc5bfc54-9f6f-47c2-b2e9-893b1e2ae929', status:'CANCELED'));
                 data.fold((l) => print(l.exception), (r) => print(r.data?.first.broadcasterId));
+              }),
+          TextButton(
+              child: const Text('Update Custom Reward'),
+              onPressed: () async {
+                final data = await twitchInterface.channelPoints
+                    .updateCustomReward(props: UpdateCustomRewardProps(), queryProps: BroadcasterAndIdProps(broadcasterId: '59408155', id: 'dc5bfc54-9f6f-47c2-b2e9-893b1e2ae929'));
+                data.fold((l) => print(l.exception), (r) => print(r.data?.first.broadcasterId));
               })
     ]));
   }

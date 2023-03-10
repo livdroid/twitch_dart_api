@@ -21,7 +21,8 @@ CreateCustomRewardResponse _$CreateCustomRewardResponseFromJson(
 
 /// @nodoc
 mixin _$CreateCustomRewardResponse {
-  List<GetCustomRewardsData>? get data => throw _privateConstructorUsedError;
+  List<GetCustomRewardsDataResponse>? get data =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $CreateCustomRewardResponseCopyWith<$Res> {
       _$CreateCustomRewardResponseCopyWithImpl<$Res,
           CreateCustomRewardResponse>;
   @useResult
-  $Res call({List<GetCustomRewardsData>? data});
+  $Res call({List<GetCustomRewardsDataResponse>? data});
 }
 
 /// @nodoc
@@ -59,7 +60,7 @@ class _$CreateCustomRewardResponseCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<GetCustomRewardsData>?,
+              as List<GetCustomRewardsDataResponse>?,
     ) as $Val);
   }
 }
@@ -73,7 +74,7 @@ abstract class _$$_CreateCustomRewardResponseCopyWith<$Res>
       __$$_CreateCustomRewardResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<GetCustomRewardsData>? data});
+  $Res call({List<GetCustomRewardsDataResponse>? data});
 }
 
 /// @nodoc
@@ -95,7 +96,7 @@ class __$$_CreateCustomRewardResponseCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<GetCustomRewardsData>?,
+              as List<GetCustomRewardsDataResponse>?,
     ));
   }
 }
@@ -103,15 +104,16 @@ class __$$_CreateCustomRewardResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CreateCustomRewardResponse implements _CreateCustomRewardResponse {
-  const _$_CreateCustomRewardResponse({final List<GetCustomRewardsData>? data})
+  const _$_CreateCustomRewardResponse(
+      {final List<GetCustomRewardsDataResponse>? data})
       : _data = data;
 
   factory _$_CreateCustomRewardResponse.fromJson(Map<String, dynamic> json) =>
       _$$_CreateCustomRewardResponseFromJson(json);
 
-  final List<GetCustomRewardsData>? _data;
+  final List<GetCustomRewardsDataResponse>? _data;
   @override
-  List<GetCustomRewardsData>? get data {
+  List<GetCustomRewardsDataResponse>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -155,13 +157,14 @@ class _$_CreateCustomRewardResponse implements _CreateCustomRewardResponse {
 abstract class _CreateCustomRewardResponse
     implements CreateCustomRewardResponse {
   const factory _CreateCustomRewardResponse(
-      {final List<GetCustomRewardsData>? data}) = _$_CreateCustomRewardResponse;
+          {final List<GetCustomRewardsDataResponse>? data}) =
+      _$_CreateCustomRewardResponse;
 
   factory _CreateCustomRewardResponse.fromJson(Map<String, dynamic> json) =
       _$_CreateCustomRewardResponse.fromJson;
 
   @override
-  List<GetCustomRewardsData>? get data;
+  List<GetCustomRewardsDataResponse>? get data;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCustomRewardResponseCopyWith<_$_CreateCustomRewardResponse>

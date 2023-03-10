@@ -10,7 +10,8 @@ _$_GetCustomRewardsResponse _$$_GetCustomRewardsResponseFromJson(
         Map<String, dynamic> json) =>
     _$_GetCustomRewardsResponse(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => GetCustomRewardsData.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              GetCustomRewardsDataResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -28,13 +29,15 @@ Map<String, dynamic> _$$_GetCustomRewardsResponseToJson(
   return val;
 }
 
-_$_GetCustomRewardsData _$$_GetCustomRewardsDataFromJson(
+_$_GetCustomRewardsDataResponse _$$_GetCustomRewardsDataResponseFromJson(
         Map<String, dynamic> json) =>
-    _$_GetCustomRewardsData(
+    _$_GetCustomRewardsDataResponse(
       broadcasterName: json['broadcaster_name'] as String?,
       broadcasterId: json['broadcaster_id'] as String?,
       id: json['id'] as String?,
-      image: json['image'],
+      image: json['image'] == null
+          ? null
+          : DefaultImage.fromJson(json['image'] as Map<String, dynamic>),
       backgroundColor: json['background_color'] as String?,
       isEnabled: json['is_enabled'] as bool?,
       cost: json['cost'] as int?,
@@ -63,12 +66,12 @@ _$_GetCustomRewardsData _$$_GetCustomRewardsDataFromJson(
       shouldRedemptionsSkipRequestQueue:
           json['should_redemptions_skip_request_queue'] as bool?,
       redemptionsRedeemedCurrentStream:
-          json['redemptions_redeemed_current_stream'],
-      cooldownExpiresAt: json['cooldown_expires_at'],
+          json['redemptions_redeemed_current_stream'] as int?,
+      cooldownExpiresAt: json['cooldown_expires_at'] as String?,
     );
 
-Map<String, dynamic> _$$_GetCustomRewardsDataToJson(
-    _$_GetCustomRewardsData instance) {
+Map<String, dynamic> _$$_GetCustomRewardsDataResponseToJson(
+    _$_GetCustomRewardsDataResponse instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -80,7 +83,7 @@ Map<String, dynamic> _$$_GetCustomRewardsDataToJson(
   writeNotNull('broadcaster_name', instance.broadcasterName);
   writeNotNull('broadcaster_id', instance.broadcasterId);
   writeNotNull('id', instance.id);
-  writeNotNull('image', instance.image);
+  writeNotNull('image', instance.image?.toJson());
   writeNotNull('background_color', instance.backgroundColor);
   writeNotNull('is_enabled', instance.isEnabled);
   writeNotNull('cost', instance.cost);

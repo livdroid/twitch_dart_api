@@ -9,7 +9,7 @@ part 'create_custom_reward_response.g.dart';
 @freezed
 class CreateCustomRewardResponse with _$CreateCustomRewardResponse {
   const factory CreateCustomRewardResponse({
-    List<GetCustomRewardsData>? data,
+    List<GetCustomRewardsDataResponse>? data,
   }) = _CreateCustomRewardResponse;
 
   factory CreateCustomRewardResponse.fromJson(Map<String, dynamic> json) => _$CreateCustomRewardResponseFromJson(json);

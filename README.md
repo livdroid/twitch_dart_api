@@ -109,3 +109,4 @@ Please call validateToken() to do this request.
 - Delete Custom Rewards
 - Get Custom Rewards
 - Get Custom Reward Redemptions
+- Update Custom Reward

@@ -21,7 +21,8 @@ GetCustomRewardsResponse _$GetCustomRewardsResponseFromJson(
 
 /// @nodoc
 mixin _$GetCustomRewardsResponse {
-  List<GetCustomRewardsData>? get data => throw _privateConstructorUsedError;
+  List<GetCustomRewardsDataResponse>? get data =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $GetCustomRewardsResponseCopyWith<$Res> {
           $Res Function(GetCustomRewardsResponse) then) =
       _$GetCustomRewardsResponseCopyWithImpl<$Res, GetCustomRewardsResponse>;
   @useResult
-  $Res call({List<GetCustomRewardsData>? data});
+  $Res call({List<GetCustomRewardsDataResponse>? data});
 }
 
 /// @nodoc
@@ -58,7 +59,7 @@ class _$GetCustomRewardsResponseCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<GetCustomRewardsData>?,
+              as List<GetCustomRewardsDataResponse>?,
     ) as $Val);
   }
 }
@@ -72,7 +73,7 @@ abstract class _$$_GetCustomRewardsResponseCopyWith<$Res>
       __$$_GetCustomRewardsResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<GetCustomRewardsData>? data});
+  $Res call({List<GetCustomRewardsDataResponse>? data});
 }
 
 /// @nodoc
@@ -93,7 +94,7 @@ class __$$_GetCustomRewardsResponseCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<GetCustomRewardsData>?,
+              as List<GetCustomRewardsDataResponse>?,
     ));
   }
 }
@@ -101,15 +102,16 @@ class __$$_GetCustomRewardsResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GetCustomRewardsResponse implements _GetCustomRewardsResponse {
-  const _$_GetCustomRewardsResponse({final List<GetCustomRewardsData>? data})
+  const _$_GetCustomRewardsResponse(
+      {final List<GetCustomRewardsDataResponse>? data})
       : _data = data;
 
   factory _$_GetCustomRewardsResponse.fromJson(Map<String, dynamic> json) =>
       _$$_GetCustomRewardsResponseFromJson(json);
 
-  final List<GetCustomRewardsData>? _data;
+  final List<GetCustomRewardsDataResponse>? _data;
   @override
-  List<GetCustomRewardsData>? get data {
+  List<GetCustomRewardsDataResponse>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -152,29 +154,31 @@ class _$_GetCustomRewardsResponse implements _GetCustomRewardsResponse {
 
 abstract class _GetCustomRewardsResponse implements GetCustomRewardsResponse {
   const factory _GetCustomRewardsResponse(
-      {final List<GetCustomRewardsData>? data}) = _$_GetCustomRewardsResponse;
+          {final List<GetCustomRewardsDataResponse>? data}) =
+      _$_GetCustomRewardsResponse;
 
   factory _GetCustomRewardsResponse.fromJson(Map<String, dynamic> json) =
       _$_GetCustomRewardsResponse.fromJson;
 
   @override
-  List<GetCustomRewardsData>? get data;
+  List<GetCustomRewardsDataResponse>? get data;
   @override
   @JsonKey(ignore: true)
   _$$_GetCustomRewardsResponseCopyWith<_$_GetCustomRewardsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-GetCustomRewardsData _$GetCustomRewardsDataFromJson(Map<String, dynamic> json) {
-  return _GetCustomRewardsData.fromJson(json);
+GetCustomRewardsDataResponse _$GetCustomRewardsDataResponseFromJson(
+    Map<String, dynamic> json) {
+  return _GetCustomRewardsDataResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GetCustomRewardsData {
+mixin _$GetCustomRewardsDataResponse {
   String? get broadcasterName => throw _privateConstructorUsedError;
   String? get broadcasterId => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
-  dynamic? get image => throw _privateConstructorUsedError;
+  DefaultImage? get image => throw _privateConstructorUsedError;
   String? get backgroundColor => throw _privateConstructorUsedError;
   bool? get isEnabled => throw _privateConstructorUsedError;
   int? get cost => throw _privateConstructorUsedError;
@@ -192,27 +196,29 @@ mixin _$GetCustomRewardsData {
   DefaultImage? get defaultImage => throw _privateConstructorUsedError;
   bool? get shouldRedemptionsSkipRequestQueue =>
       throw _privateConstructorUsedError;
-  dynamic? get redemptionsRedeemedCurrentStream =>
+  int? get redemptionsRedeemedCurrentStream =>
       throw _privateConstructorUsedError;
-  dynamic? get cooldownExpiresAt => throw _privateConstructorUsedError;
+  String? get cooldownExpiresAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetCustomRewardsDataCopyWith<GetCustomRewardsData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GetCustomRewardsDataResponseCopyWith<GetCustomRewardsDataResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetCustomRewardsDataCopyWith<$Res> {
-  factory $GetCustomRewardsDataCopyWith(GetCustomRewardsData value,
-          $Res Function(GetCustomRewardsData) then) =
-      _$GetCustomRewardsDataCopyWithImpl<$Res, GetCustomRewardsData>;
+abstract class $GetCustomRewardsDataResponseCopyWith<$Res> {
+  factory $GetCustomRewardsDataResponseCopyWith(
+          GetCustomRewardsDataResponse value,
+          $Res Function(GetCustomRewardsDataResponse) then) =
+      _$GetCustomRewardsDataResponseCopyWithImpl<$Res,
+          GetCustomRewardsDataResponse>;
   @useResult
   $Res call(
       {String? broadcasterName,
       String? broadcasterId,
       String? id,
-      dynamic? image,
+      DefaultImage? image,
       String? backgroundColor,
       bool? isEnabled,
       int? cost,
@@ -226,9 +232,10 @@ abstract class $GetCustomRewardsDataCopyWith<$Res> {
       bool? isInStock,
       DefaultImage? defaultImage,
       bool? shouldRedemptionsSkipRequestQueue,
-      dynamic? redemptionsRedeemedCurrentStream,
-      dynamic? cooldownExpiresAt});
+      int? redemptionsRedeemedCurrentStream,
+      String? cooldownExpiresAt});
 
+  $DefaultImageCopyWith<$Res>? get image;
   $MaxPerStreamSettingCopyWith<$Res>? get maxPerStreamSetting;
   $MaxPerUserPerStreamSettingCopyWith<$Res>? get maxPerUserPerStreamSetting;
   $GlobalCooldownSettingCopyWith<$Res>? get globalCooldownSetting;
@@ -236,10 +243,10 @@ abstract class $GetCustomRewardsDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GetCustomRewardsDataCopyWithImpl<$Res,
-        $Val extends GetCustomRewardsData>
-    implements $GetCustomRewardsDataCopyWith<$Res> {
-  _$GetCustomRewardsDataCopyWithImpl(this._value, this._then);
+class _$GetCustomRewardsDataResponseCopyWithImpl<$Res,
+        $Val extends GetCustomRewardsDataResponse>
+    implements $GetCustomRewardsDataResponseCopyWith<$Res> {
+  _$GetCustomRewardsDataResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -285,7 +292,7 @@ class _$GetCustomRewardsDataCopyWithImpl<$Res,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as DefaultImage?,
       backgroundColor: freezed == backgroundColor
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
@@ -343,12 +350,24 @@ class _$GetCustomRewardsDataCopyWithImpl<$Res,
               redemptionsRedeemedCurrentStream
           ? _value.redemptionsRedeemedCurrentStream
           : redemptionsRedeemedCurrentStream // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as int?,
       cooldownExpiresAt: freezed == cooldownExpiresAt
           ? _value.cooldownExpiresAt
           : cooldownExpiresAt // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DefaultImageCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $DefaultImageCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 
   @override
@@ -404,18 +423,19 @@ class _$GetCustomRewardsDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GetCustomRewardsDataCopyWith<$Res>
-    implements $GetCustomRewardsDataCopyWith<$Res> {
-  factory _$$_GetCustomRewardsDataCopyWith(_$_GetCustomRewardsData value,
-          $Res Function(_$_GetCustomRewardsData) then) =
-      __$$_GetCustomRewardsDataCopyWithImpl<$Res>;
+abstract class _$$_GetCustomRewardsDataResponseCopyWith<$Res>
+    implements $GetCustomRewardsDataResponseCopyWith<$Res> {
+  factory _$$_GetCustomRewardsDataResponseCopyWith(
+          _$_GetCustomRewardsDataResponse value,
+          $Res Function(_$_GetCustomRewardsDataResponse) then) =
+      __$$_GetCustomRewardsDataResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? broadcasterName,
       String? broadcasterId,
       String? id,
-      dynamic? image,
+      DefaultImage? image,
       String? backgroundColor,
       bool? isEnabled,
       int? cost,
@@ -429,9 +449,11 @@ abstract class _$$_GetCustomRewardsDataCopyWith<$Res>
       bool? isInStock,
       DefaultImage? defaultImage,
       bool? shouldRedemptionsSkipRequestQueue,
-      dynamic? redemptionsRedeemedCurrentStream,
-      dynamic? cooldownExpiresAt});
+      int? redemptionsRedeemedCurrentStream,
+      String? cooldownExpiresAt});
 
+  @override
+  $DefaultImageCopyWith<$Res>? get image;
   @override
   $MaxPerStreamSettingCopyWith<$Res>? get maxPerStreamSetting;
   @override
@@ -443,11 +465,13 @@ abstract class _$$_GetCustomRewardsDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GetCustomRewardsDataCopyWithImpl<$Res>
-    extends _$GetCustomRewardsDataCopyWithImpl<$Res, _$_GetCustomRewardsData>
-    implements _$$_GetCustomRewardsDataCopyWith<$Res> {
-  __$$_GetCustomRewardsDataCopyWithImpl(_$_GetCustomRewardsData _value,
-      $Res Function(_$_GetCustomRewardsData) _then)
+class __$$_GetCustomRewardsDataResponseCopyWithImpl<$Res>
+    extends _$GetCustomRewardsDataResponseCopyWithImpl<$Res,
+        _$_GetCustomRewardsDataResponse>
+    implements _$$_GetCustomRewardsDataResponseCopyWith<$Res> {
+  __$$_GetCustomRewardsDataResponseCopyWithImpl(
+      _$_GetCustomRewardsDataResponse _value,
+      $Res Function(_$_GetCustomRewardsDataResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -473,7 +497,7 @@ class __$$_GetCustomRewardsDataCopyWithImpl<$Res>
     Object? redemptionsRedeemedCurrentStream = freezed,
     Object? cooldownExpiresAt = freezed,
   }) {
-    return _then(_$_GetCustomRewardsData(
+    return _then(_$_GetCustomRewardsDataResponse(
       broadcasterName: freezed == broadcasterName
           ? _value.broadcasterName
           : broadcasterName // ignore: cast_nullable_to_non_nullable
@@ -489,7 +513,7 @@ class __$$_GetCustomRewardsDataCopyWithImpl<$Res>
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as DefaultImage?,
       backgroundColor: freezed == backgroundColor
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
@@ -547,19 +571,19 @@ class __$$_GetCustomRewardsDataCopyWithImpl<$Res>
               redemptionsRedeemedCurrentStream
           ? _value.redemptionsRedeemedCurrentStream
           : redemptionsRedeemedCurrentStream // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as int?,
       cooldownExpiresAt: freezed == cooldownExpiresAt
           ? _value.cooldownExpiresAt
           : cooldownExpiresAt // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_GetCustomRewardsData implements _GetCustomRewardsData {
-  const _$_GetCustomRewardsData(
+class _$_GetCustomRewardsDataResponse implements _GetCustomRewardsDataResponse {
+  const _$_GetCustomRewardsDataResponse(
       {this.broadcasterName,
       this.broadcasterId,
       this.id,
@@ -580,8 +604,8 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
       this.redemptionsRedeemedCurrentStream,
       this.cooldownExpiresAt});
 
-  factory _$_GetCustomRewardsData.fromJson(Map<String, dynamic> json) =>
-      _$$_GetCustomRewardsDataFromJson(json);
+  factory _$_GetCustomRewardsDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_GetCustomRewardsDataResponseFromJson(json);
 
   @override
   final String? broadcasterName;
@@ -590,7 +614,7 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
   @override
   final String? id;
   @override
-  final dynamic? image;
+  final DefaultImage? image;
   @override
   final String? backgroundColor;
   @override
@@ -618,26 +642,26 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
   @override
   final bool? shouldRedemptionsSkipRequestQueue;
   @override
-  final dynamic? redemptionsRedeemedCurrentStream;
+  final int? redemptionsRedeemedCurrentStream;
   @override
-  final dynamic? cooldownExpiresAt;
+  final String? cooldownExpiresAt;
 
   @override
   String toString() {
-    return 'GetCustomRewardsData(broadcasterName: $broadcasterName, broadcasterId: $broadcasterId, id: $id, image: $image, backgroundColor: $backgroundColor, isEnabled: $isEnabled, cost: $cost, title: $title, prompt: $prompt, isUserInputRequired: $isUserInputRequired, maxPerStreamSetting: $maxPerStreamSetting, maxPerUserPerStreamSetting: $maxPerUserPerStreamSetting, globalCooldownSetting: $globalCooldownSetting, isPaused: $isPaused, isInStock: $isInStock, defaultImage: $defaultImage, shouldRedemptionsSkipRequestQueue: $shouldRedemptionsSkipRequestQueue, redemptionsRedeemedCurrentStream: $redemptionsRedeemedCurrentStream, cooldownExpiresAt: $cooldownExpiresAt)';
+    return 'GetCustomRewardsDataResponse(broadcasterName: $broadcasterName, broadcasterId: $broadcasterId, id: $id, image: $image, backgroundColor: $backgroundColor, isEnabled: $isEnabled, cost: $cost, title: $title, prompt: $prompt, isUserInputRequired: $isUserInputRequired, maxPerStreamSetting: $maxPerStreamSetting, maxPerUserPerStreamSetting: $maxPerUserPerStreamSetting, globalCooldownSetting: $globalCooldownSetting, isPaused: $isPaused, isInStock: $isInStock, defaultImage: $defaultImage, shouldRedemptionsSkipRequestQueue: $shouldRedemptionsSkipRequestQueue, redemptionsRedeemedCurrentStream: $redemptionsRedeemedCurrentStream, cooldownExpiresAt: $cooldownExpiresAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetCustomRewardsData &&
+            other is _$_GetCustomRewardsDataResponse &&
             (identical(other.broadcasterName, broadcasterName) ||
                 other.broadcasterName == broadcasterName) &&
             (identical(other.broadcasterId, broadcasterId) ||
                 other.broadcasterId == broadcasterId) &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.backgroundColor, backgroundColor) ||
                 other.backgroundColor == backgroundColor) &&
             (identical(other.isEnabled, isEnabled) ||
@@ -665,11 +689,12 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
                     shouldRedemptionsSkipRequestQueue) ||
                 other.shouldRedemptionsSkipRequestQueue ==
                     shouldRedemptionsSkipRequestQueue) &&
-            const DeepCollectionEquality().equals(
-                other.redemptionsRedeemedCurrentStream,
-                redemptionsRedeemedCurrentStream) &&
-            const DeepCollectionEquality()
-                .equals(other.cooldownExpiresAt, cooldownExpiresAt));
+            (identical(other.redemptionsRedeemedCurrentStream,
+                    redemptionsRedeemedCurrentStream) ||
+                other.redemptionsRedeemedCurrentStream ==
+                    redemptionsRedeemedCurrentStream) &&
+            (identical(other.cooldownExpiresAt, cooldownExpiresAt) ||
+                other.cooldownExpiresAt == cooldownExpiresAt));
   }
 
   @JsonKey(ignore: true)
@@ -679,7 +704,7 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
         broadcasterName,
         broadcasterId,
         id,
-        const DeepCollectionEquality().hash(image),
+        image,
         backgroundColor,
         isEnabled,
         cost,
@@ -693,31 +718,32 @@ class _$_GetCustomRewardsData implements _GetCustomRewardsData {
         isInStock,
         defaultImage,
         shouldRedemptionsSkipRequestQueue,
-        const DeepCollectionEquality().hash(redemptionsRedeemedCurrentStream),
-        const DeepCollectionEquality().hash(cooldownExpiresAt)
+        redemptionsRedeemedCurrentStream,
+        cooldownExpiresAt
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetCustomRewardsDataCopyWith<_$_GetCustomRewardsData> get copyWith =>
-      __$$_GetCustomRewardsDataCopyWithImpl<_$_GetCustomRewardsData>(
-          this, _$identity);
+  _$$_GetCustomRewardsDataResponseCopyWith<_$_GetCustomRewardsDataResponse>
+      get copyWith => __$$_GetCustomRewardsDataResponseCopyWithImpl<
+          _$_GetCustomRewardsDataResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetCustomRewardsDataToJson(
+    return _$$_GetCustomRewardsDataResponseToJson(
       this,
     );
   }
 }
 
-abstract class _GetCustomRewardsData implements GetCustomRewardsData {
-  const factory _GetCustomRewardsData(
+abstract class _GetCustomRewardsDataResponse
+    implements GetCustomRewardsDataResponse {
+  const factory _GetCustomRewardsDataResponse(
       {final String? broadcasterName,
       final String? broadcasterId,
       final String? id,
-      final dynamic? image,
+      final DefaultImage? image,
       final String? backgroundColor,
       final bool? isEnabled,
       final int? cost,
@@ -731,11 +757,11 @@ abstract class _GetCustomRewardsData implements GetCustomRewardsData {
       final bool? isInStock,
       final DefaultImage? defaultImage,
       final bool? shouldRedemptionsSkipRequestQueue,
-      final dynamic? redemptionsRedeemedCurrentStream,
-      final dynamic? cooldownExpiresAt}) = _$_GetCustomRewardsData;
+      final int? redemptionsRedeemedCurrentStream,
+      final String? cooldownExpiresAt}) = _$_GetCustomRewardsDataResponse;
 
-  factory _GetCustomRewardsData.fromJson(Map<String, dynamic> json) =
-      _$_GetCustomRewardsData.fromJson;
+  factory _GetCustomRewardsDataResponse.fromJson(Map<String, dynamic> json) =
+      _$_GetCustomRewardsDataResponse.fromJson;
 
   @override
   String? get broadcasterName;
@@ -744,7 +770,7 @@ abstract class _GetCustomRewardsData implements GetCustomRewardsData {
   @override
   String? get id;
   @override
-  dynamic? get image;
+  DefaultImage? get image;
   @override
   String? get backgroundColor;
   @override
@@ -772,11 +798,11 @@ abstract class _GetCustomRewardsData implements GetCustomRewardsData {
   @override
   bool? get shouldRedemptionsSkipRequestQueue;
   @override
-  dynamic? get redemptionsRedeemedCurrentStream;
+  int? get redemptionsRedeemedCurrentStream;
   @override
-  dynamic? get cooldownExpiresAt;
+  String? get cooldownExpiresAt;
   @override
   @JsonKey(ignore: true)
-  _$$_GetCustomRewardsDataCopyWith<_$_GetCustomRewardsData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_GetCustomRewardsDataResponseCopyWith<_$_GetCustomRewardsDataResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -7,19 +7,19 @@ part 'get_custom_rewards_response.g.dart';
 @freezed
 class GetCustomRewardsResponse with _$GetCustomRewardsResponse {
   const factory GetCustomRewardsResponse({
-    List<GetCustomRewardsData>? data,
+    List<GetCustomRewardsDataResponse>? data,
   }) = _GetCustomRewardsResponse;
 
   factory GetCustomRewardsResponse.fromJson(Map<String, dynamic> json) => _$GetCustomRewardsResponseFromJson(json);
 }
 
 @freezed
-class GetCustomRewardsData with _$GetCustomRewardsData {
-  const factory GetCustomRewardsData({
+class GetCustomRewardsDataResponse with _$GetCustomRewardsDataResponse {
+  const factory GetCustomRewardsDataResponse({
     String? broadcasterName,
     String? broadcasterId,
     String? id,
-    dynamic? image,
+    DefaultImage? image,
     String? backgroundColor,
     bool? isEnabled,
     int? cost,
@@ -33,9 +33,9 @@ class GetCustomRewardsData with _$GetCustomRewardsData {
     bool? isInStock,
     DefaultImage? defaultImage,
     bool? shouldRedemptionsSkipRequestQueue,
-    dynamic? redemptionsRedeemedCurrentStream,
-    dynamic? cooldownExpiresAt,
-  }) = _GetCustomRewardsData;
+    int? redemptionsRedeemedCurrentStream,
+    String? cooldownExpiresAt,
+  }) = _GetCustomRewardsDataResponse;
 
-  factory GetCustomRewardsData.fromJson(Map<String, dynamic> json) => _$GetCustomRewardsDataFromJson(json);
+  factory GetCustomRewardsDataResponse.fromJson(Map<String, dynamic> json) => _$GetCustomRewardsDataResponseFromJson(json);
 }

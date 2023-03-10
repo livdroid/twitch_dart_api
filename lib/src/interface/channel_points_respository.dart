@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
+import 'package:twitch_client/src/props/broadcaster_id_props.dart';
 import 'package:twitch_client/src/props/create_custom_reward_props.dart';
 import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
 import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
 import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
+import 'package:twitch_client/src/props/update_custom_reward_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
@@ -80,6 +82,24 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
       return Left(Failure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, GetCustomRewardsResponse>> updateCustomReward(
+      {required BroadcasterAndIdProps queryProps,
+      required UpdateCustomRewardProps props}) async {
+    assert(queryProps.broadcasterId.isNotEmpty);
+    assert(queryProps.id.isNotEmpty);
+
+    try {
+      final response = await _twitchDataSource.patch(
+          path: '$_path/custom_rewards',
+          data: props.toJson(),
+          queryParams: queryProps.toJson());
+      return Right(GetCustomRewardsResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
 }
 
 abstract class ChannelPointsRepository {
@@ -96,4 +116,8 @@ abstract class ChannelPointsRepository {
   Future<Either<Failure, GetCustomRewardRedemptionResponse>>
       getCustomRewardRedemptions(
           {required GetCustomRewardRedemptionProps props});
+
+  Future<Either<Failure, GetCustomRewardsResponse>> updateCustomReward(
+      {required BroadcasterAndIdProps queryProps,
+        required UpdateCustomRewardProps props});
 }

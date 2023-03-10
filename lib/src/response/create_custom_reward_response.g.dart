@@ -10,7 +10,8 @@ _$_CreateCustomRewardResponse _$$_CreateCustomRewardResponseFromJson(
         Map<String, dynamic> json) =>
     _$_CreateCustomRewardResponse(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => GetCustomRewardsData.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              GetCustomRewardsDataResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

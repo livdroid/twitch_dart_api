@@ -2,10 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
+import 'package:twitch_client/src/props/broadcaster_id_props.dart';
 import 'package:twitch_client/src/props/create_custom_reward_props.dart';
 import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
 import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
 import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
+import 'package:twitch_client/src/props/update_custom_reward_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
@@ -23,7 +25,7 @@ void main() {
     CreateCustomRewardProps data =
         const CreateCustomRewardProps(cost: 1, title: 'title');
     CreateCustomRewardResponse response = const CreateCustomRewardResponse(
-        data: [GetCustomRewardsData(broadcasterId: '123')]);
+        data: [GetCustomRewardsDataResponse(broadcasterId: '123')]);
     BroadcasterProps props = BroadcasterProps(broadcasterId: '1234');
 
     test('On success', () async {
@@ -124,8 +126,8 @@ void main() {
         const GetCustomRewardsProps(broadcasterId: '1');
     GetCustomRewardsProps emptyProps =
         const GetCustomRewardsProps(broadcasterId: '');
-    GetCustomRewardsResponse response =
-      const GetCustomRewardsResponse(data: [GetCustomRewardsData(broadcasterId: '123')]);
+    GetCustomRewardsResponse response = const GetCustomRewardsResponse(
+        data: [GetCustomRewardsDataResponse(broadcasterId: '123')]);
 
     test('On success', () async {
       when(mockedDataSource.get(path: path, queryParams: props.toJson()))
@@ -171,14 +173,17 @@ void main() {
 
   group('GetCustomRewardRedemption', () {
     const String path = 'channel_points/custom_rewards/redemptions';
-    GetCustomRewardRedemptionProps props =
-    const GetCustomRewardRedemptionProps(broadcasterId: '1', rewardId: '1', status: 'CANCELED');
+    GetCustomRewardRedemptionProps props = const GetCustomRewardRedemptionProps(
+        broadcasterId: '1', rewardId: '1', status: 'CANCELED');
     GetCustomRewardRedemptionProps propsError =
-    const GetCustomRewardRedemptionProps(broadcasterId: '1', rewardId: '1', status: 'CANCELED', id: '123');
+        const GetCustomRewardRedemptionProps(
+            broadcasterId: '1', rewardId: '1', status: 'CANCELED', id: '123');
     GetCustomRewardRedemptionProps emptyProps =
-    const GetCustomRewardRedemptionProps(broadcasterId: '', rewardId: '');
+        const GetCustomRewardRedemptionProps(broadcasterId: '', rewardId: '');
     GetCustomRewardRedemptionResponse response =
-    const GetCustomRewardRedemptionResponse(data: [GetCustomRewardRedemptionResponseData(broadcasterId: '123')]);
+        const GetCustomRewardRedemptionResponse(data: [
+      GetCustomRewardRedemptionResponseData(broadcasterId: '123')
+    ]);
 
     test('On success', () async {
       when(mockedDataSource.get(path: path, queryParams: props.toJson()))
@@ -230,6 +235,71 @@ void main() {
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: propsError.toJson()));
+    });
+  });
+
+  group('UpdateCustomReward', () {
+    const String path = 'channel_points/custom_rewards';
+    UpdateCustomRewardProps props = const UpdateCustomRewardProps(title: '1');
+    BroadcasterAndIdProps queryProps =
+        const BroadcasterAndIdProps(broadcasterId: '1', id: '1');
+    BroadcasterAndIdProps emptyQueryProps =
+        const BroadcasterAndIdProps(broadcasterId: '', id: '');
+    GetCustomRewardsResponse response = const GetCustomRewardsResponse(
+        data: [GetCustomRewardsDataResponse(broadcasterId: '123')]);
+
+    test('On success', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: queryProps.toJson()))
+          .thenAnswer((realInvocation) async => response.toJson());
+
+      final result = await repository.updateCustomReward(
+          props: props, queryProps: queryProps);
+
+      verify(mockedDataSource.patch(
+        path: path,
+        queryParams: queryProps.toJson(), data: props.toJson(),
+      ));
+
+      expect(result.isRight(), true);
+      expect(result.asRight(), isA<GetCustomRewardsResponse>());
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: queryProps.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await repository.updateCustomReward(
+          props: props, queryProps: queryProps);
+
+      verify(mockedDataSource.patch(
+        path: path,
+        queryParams: queryProps.toJson(), data: props.toJson(),
+      ));
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<ForbiddenRequestException>());
+    });
+
+    test('On Empty Props', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: emptyQueryProps.toJson()))
+          .thenAnswer((realInvocation) async => {});
+
+      expect(
+          () => repository.updateCustomReward(
+              props: props, queryProps: emptyQueryProps),
+          throwsAssertionError);
+
+      verifyNever(mockedDataSource
+          .patch(path: path, queryParams: emptyQueryProps.toJson(), data: {}));
     });
   });
 }
