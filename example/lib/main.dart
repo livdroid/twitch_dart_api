@@ -368,7 +368,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         broadcasterId: '59408155',
                         id: '7023c72e-a10e-41b6-b155-e8e2d514058c'));
             data.fold((l) => print(l.exception), (r) => print('OK'));
-          })
+          }),
+          TextButton(
+              child: const Text('Get Custom Reward'),
+              onPressed: () async {
+                final data = await twitchInterface.channelPoints
+                    .getCustomRewards(
+                    props: GetCustomRewardsProps(
+                        broadcasterId: '59408155'));
+                data.fold((l) => print(l.exception), (r) => print('OK'));
+              })
     ]));
   }
 }

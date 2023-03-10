@@ -1,44 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
+import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
+
 part 'create_custom_reward_response.freezed.dart';
 part 'create_custom_reward_response.g.dart';
 
 @freezed
 class CreateCustomRewardResponse with _$CreateCustomRewardResponse {
   const factory CreateCustomRewardResponse({
-    List<Datum>? data,
+    List<GetCustomRewardsData>? data,
   }) = _CreateCustomRewardResponse;
 
   factory CreateCustomRewardResponse.fromJson(Map<String, dynamic> json) => _$CreateCustomRewardResponseFromJson(json);
-}
-
-@freezed
-class Datum with _$Datum {
-  const factory Datum({
-    String? broadcasterName,
-    String? broadcasterLogin,
-    String? broadcasterId,
-    String? id,
-    dynamic? image,
-    String? backgroundColor,
-    bool? isEnabled,
-    int? cost,
-    String? title,
-    String? prompt,
-    bool? isUserInputRequired,
-    MaxPerStreamSetting? maxPerStreamSetting,
-    MaxPerUserPerStreamSetting? maxPerUserPerStreamSetting,
-    GlobalCooldownSetting? globalCooldownSetting,
-    bool? isPaused,
-    bool? isInStock,
-    DefaultImage? defaultImage,
-    bool? shouldRedemptionsSkipRequestQueue,
-    dynamic? redemptionsRedeemedCurrentStream,
-    dynamic? cooldownExpiresAt,
-  }) = _Datum;
-
-  factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
 }
 
 @freezed

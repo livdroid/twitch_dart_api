@@ -4,10 +4,6 @@ import 'dart:convert';
 part 'custom_reward_response.freezed.dart';
 part 'custom_reward_response.g.dart';
 
-CustomRewardResponse customRewardResponseFromJson(String str) => CustomRewardResponse.fromJson(json.decode(str));
-
-String customRewardResponseToJson(CustomRewardResponse data) => json.encode(data.toJson());
-
 @freezed
 class CustomRewardResponse with _$CustomRewardResponse {
   const factory CustomRewardResponse({

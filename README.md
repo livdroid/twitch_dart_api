@@ -107,3 +107,4 @@ Please call validateToken() to do this request.
 - Delete Videos
 - Create Custom Rewards
 - Delete Custom Rewards
+- Get Custom Rewards
