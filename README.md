@@ -110,3 +110,4 @@ Please call validateToken() to do this request.
 - Get Custom Rewards
 - Get Custom Reward Redemptions
 - Update Custom Reward
+- Update Custom Reward Redemption

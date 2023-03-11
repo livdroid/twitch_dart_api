@@ -11,6 +11,7 @@ import 'package:twitch_client/src/props/update_custom_reward_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
+import 'package:twitch_client/src/response/update_custom_reward_redemption_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'moderation_repository_test.mocks.dart';
@@ -260,7 +261,8 @@ void main() {
 
       verify(mockedDataSource.patch(
         path: path,
-        queryParams: queryProps.toJson(), data: props.toJson(),
+        queryParams: queryProps.toJson(),
+        data: props.toJson(),
       ));
 
       expect(result.isRight(), true);
@@ -279,7 +281,8 @@ void main() {
 
       verify(mockedDataSource.patch(
         path: path,
-        queryParams: queryProps.toJson(), data: props.toJson(),
+        queryParams: queryProps.toJson(),
+        data: props.toJson(),
       ));
 
       expect(result.isLeft(), true);
@@ -295,6 +298,76 @@ void main() {
 
       expect(
           () => repository.updateCustomReward(
+              props: props, queryProps: emptyQueryProps),
+          throwsAssertionError);
+
+      verifyNever(mockedDataSource
+          .patch(path: path, queryParams: emptyQueryProps.toJson(), data: {}));
+    });
+  });
+
+  group('UpdateCustomRewardRedemption', () {
+    const String path = 'channel_points/custom_rewards/redemptions';
+    UpdateCustomRewardRedemptionStatusProps props = const UpdateCustomRewardRedemptionStatusProps(status: 'CANCELED');
+    UpdateCustomRewardRedemptionProps queryProps =
+        const UpdateCustomRewardRedemptionProps(
+            broadcasterId: '1', id: '1', rewardId: '1');
+    UpdateCustomRewardRedemptionProps emptyQueryProps =
+        const UpdateCustomRewardRedemptionProps(
+            broadcasterId: '', id: '', rewardId: '');
+    UpdateCustomRewardRedemptionResponse response =
+        const UpdateCustomRewardRedemptionResponse(
+            data: [UpdateCustomRewardRedemption()]);
+
+    test('On success', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: queryProps.toJson()))
+          .thenAnswer((realInvocation) async => response.toJson());
+
+      final result = await repository.updateCustomRewardRedemption(
+          props: props, queryProps: queryProps);
+
+      verify(mockedDataSource.patch(
+        path: path,
+        queryParams: queryProps.toJson(),
+        data: props.toJson(),
+      ));
+
+      expect(result.isRight(), true);
+      expect(result.asRight(), isA<UpdateCustomRewardRedemptionResponse>());
+    });
+
+    test('On failure', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: queryProps.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
+
+      final result = await repository.updateCustomRewardRedemption(
+          props: props, queryProps: queryProps);
+
+      verify(mockedDataSource.patch(
+        path: path,
+        queryParams: queryProps.toJson(),
+        data: props.toJson(),
+      ));
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<ForbiddenRequestException>());
+    });
+
+    test('On Empty Props', () async {
+      when(mockedDataSource.patch(
+              path: path,
+              data: props.toJson(),
+              queryParams: emptyQueryProps.toJson()))
+          .thenAnswer((realInvocation) async => {});
+
+      expect(
+          () => repository.updateCustomRewardRedemption(
               props: props, queryProps: emptyQueryProps),
           throwsAssertionError);
 
