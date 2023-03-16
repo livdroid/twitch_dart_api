@@ -8,8 +8,6 @@ import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/bits_repository.dart';
 import 'package:twitch_client/src/props/bits_leaderboard_props.dart';
 import 'package:twitch_client/src/props/cheermotes_props.dart';
-import 'package:twitch_client/src/response/bits_leaderboard_response.dart';
-import 'package:twitch_client/src/response/cheermotes_response.dart';
 
 import '../../json/asset_reader.dart';
 import 'bits_repository_test.mocks.dart';
@@ -23,7 +21,6 @@ void main() {
     const props = BitsLeaderBoardProps();
     const String path = 'bits';
     String apiResponse = assetReader('response_bitsleaderboard.json');
-    final response = BitsLeaderboardResponse.fromJson(jsonDecode(apiResponse));
 
     test('On success', () async {
       when(mockedDataSource.get(
@@ -54,7 +51,6 @@ void main() {
     const props = CheermotesProps(broadcasterId: '123');
     const String path = 'bits';
     String apiResponse = assetReader('response_cheermotes.json');
-    final response = CheermotesResponse.fromJson(jsonDecode(apiResponse));
 
     test('On success', () async {
       when(mockedDataSource.get(

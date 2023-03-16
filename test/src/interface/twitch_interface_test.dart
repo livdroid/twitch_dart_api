@@ -53,8 +53,6 @@ void main() {
       final couldInit = await twitchInterface.init(url: url);
       expect(couldInit, true);
       expect(twitchInterface.accessToken, 'TOKEN');
-      expect(twitchInterface.bits != null, true);
-      expect(twitchInterface.token != null, true);
     });
 
     test('Return false if parsing was not effective', () async {

@@ -1,19 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/props/broadcaster_id_props.dart';
-import 'package:twitch_client/src/props/create_custom_reward_props.dart';
-import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
-import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
-import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
-import 'package:twitch_client/src/props/update_custom_reward_props.dart';
-import 'package:twitch_client/src/props/update_custom_reward_redemption_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
 import 'package:twitch_client/src/response/update_custom_reward_redemption_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
-import '../props/update_custom_reward_redemption_status_props.dart';
 
 class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
   static const String _path = 'channel_points';
@@ -49,7 +41,7 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
     try {
       await _twitchDataSource.delete(
           path: '$_path/custom_rewards', data: {}, queryParams: props.toJson());
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }

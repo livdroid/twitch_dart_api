@@ -88,7 +88,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     assert(props.userId != props.broadcasterId);
 
     try {
-      final response = await _twitchDataSource.post(
+      await _twitchDataSource.post(
           path: '$_path/moderators', queryParams: props.toJson(), data: {});
       return const Right(true);
     } on Exception catch (e) {

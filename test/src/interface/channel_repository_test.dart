@@ -287,8 +287,6 @@ void main() {
   group('addVips', () {
     const AddVipProps emptyProps = AddVipProps(broadcasterId: '', userId: '');
     const AddVipProps props = AddVipProps(broadcasterId: '123', userId: '123');
-    const RemoveVipProps removeVipProps =
-        RemoveVipProps(broadcasterId: '123', userId: '123');
 
     test('On success', () async {
       when(mockedDataSource.post(

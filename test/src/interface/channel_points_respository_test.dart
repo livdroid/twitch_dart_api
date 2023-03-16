@@ -2,12 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
-import 'package:twitch_client/src/props/broadcaster_id_props.dart';
-import 'package:twitch_client/src/props/create_custom_reward_props.dart';
-import 'package:twitch_client/src/props/delete_custom_reward_props.dart';
-import 'package:twitch_client/src/props/get_custom_reward_redemption_props.dart';
-import 'package:twitch_client/src/props/get_custom_rewards_props.dart';
-import 'package:twitch_client/src/props/update_custom_reward_props.dart';
 import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
@@ -27,7 +21,7 @@ void main() {
         const CreateCustomRewardProps(cost: 1, title: 'title');
     CreateCustomRewardResponse response = const CreateCustomRewardResponse(
         data: [GetCustomRewardsDataResponse(broadcasterId: '123')]);
-    BroadcasterProps props = BroadcasterProps(broadcasterId: '1234');
+    BroadcasterProps props = const BroadcasterProps(broadcasterId: '1234');
 
     test('On success', () async {
       when(mockedDataSource.post(

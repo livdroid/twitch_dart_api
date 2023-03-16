@@ -23,6 +23,7 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
                     }),
             );
 
+  // All get requests
   @override
   Future<dynamic> get(
       {required String path, required Map<String, dynamic> queryParams}) async {
@@ -38,6 +39,7 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
+  // All posts requests
   @override
   Future<dynamic> post(
       {required String path,
@@ -57,6 +59,7 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
+  // All delete requests
   @override
   Future<dynamic> delete(
       {required String path,
@@ -76,6 +79,7 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
+  // All patch requests
   @override
   Future<dynamic> patch(
       {required String path,
@@ -94,6 +98,7 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
+  // All put requests
   @override
   Future put(
       {required String path,
@@ -112,6 +117,8 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
+  // Return exceptions
+  // Based on twitch api documentation
   void _responseHandler(DioError error) {
     final message = error.response?.data?['message'] ?? 'Unknown error';
     if (error.response?.statusCode == 403) {

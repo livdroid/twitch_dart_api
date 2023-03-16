@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:twitch_client/twitch_client.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,19 +8,23 @@ final twitchInterface = TwitchInterface(
     clientId: const String.fromEnvironment('ID'));
 
 void main() {
-  runApp(ExampleApp());
+  runApp(const ExampleApp());
 }
 
 class ExampleApp extends StatelessWidget {
+  const ExampleApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +41,14 @@ class Home extends StatelessWidget {
           TextButton(
               onPressed: () async {
                 // Call init with the url retrieved after redirection
-                final isInit = twitchInterface.init(
+               await twitchInterface.init(
                     url: const String.fromEnvironment('URL'));
               },
               child: const Text('Parse Url and init library')),
           TextButton(
               onPressed: () async {
-                final data = await twitchInterface.bits
-                    .getBitsLeaderBoard(props: const BitsLeaderBoardProps(count: 50));
+                final data = await twitchInterface.bits.getBitsLeaderBoard(
+                    props: const BitsLeaderBoardProps(count: 50));
                 data.fold(
                     (l) => print(l),
                     (r) => showDialog(
@@ -53,15 +56,16 @@ class Home extends StatelessWidget {
                         builder: (context) {
                           return AlertDialog(
                               content: SizedBox(
-                                height:MediaQuery.of(context).size.height/2,
-                                width:MediaQuery.of(context).size.width/2,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                    itemBuilder: (context, index) {
-                                      return Text(r.data?[index].userName ?? 'no name');
-                                    },
-                                    itemCount: r.total),
-                              ));
+                            height: MediaQuery.of(context).size.height / 2,
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Text(
+                                      r.data?[index].userName ?? 'no name');
+                                },
+                                itemCount: r.total),
+                          ));
                         }));
               },
               child: const Text('Get bits leaderboard')),

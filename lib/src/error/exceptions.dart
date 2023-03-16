@@ -31,10 +31,6 @@ class ForbiddenRequestException extends TwitchClientException {
   ForbiddenRequestException({required super.message});
 }
 
-class NullDataException extends TwitchClientException {
-  NullDataException({required super.message});
-}
-
 /// Bad arguments value in a prop object
 class BadValueException implements Exception {}
 

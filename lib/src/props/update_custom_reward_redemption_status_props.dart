@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'update_custom_reward_redemption_status_props.freezed.dart';
 part 'update_custom_reward_redemption_status_props.g.dart';
