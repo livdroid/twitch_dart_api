@@ -1,7 +1,8 @@
 name: twitch_client
 description: A package to interact with the Twitch API
 version: 0.0.1
-homepage:
+homepage: https://github.com/livdroid/twitch_dart_api
+repository: https://github.com/livdroid/twitch_dart_api
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
