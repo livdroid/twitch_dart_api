@@ -111,3 +111,5 @@ Please call validateToken() to do this request.
 - Get Custom Reward Redemptions
 - Update Custom Reward
 - Update Custom Reward Redemption
+- Get Streams 
+- Get Followed Streams
