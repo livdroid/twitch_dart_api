@@ -8,6 +8,7 @@ import 'package:twitch_client/src/interface/event_sub_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
+import 'package:twitch_client/src/interface/stream_repository.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/interface/twitch_repositories.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
@@ -57,6 +58,8 @@ class TwitchInterface {
   EventSubInterface get event => twitchRepositories.eventRepository;
 
   ChannelPointsRepository get channelPoints => twitchRepositories.channelPointsRepository;
+
+  StreamsRepository get streamsRepository => twitchRepositories.streamsRepository;
 
   TwitchInterface(
       {required this.clientId,

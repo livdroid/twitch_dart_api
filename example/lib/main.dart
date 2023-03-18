@@ -47,13 +47,13 @@ class Home extends StatelessWidget {
               child: const Text('Parse Url and init library')),
           TextButton(
               onPressed: () async {
-                final data = await twitchInterface.bits.getBitsLeaderBoard(
-                    props: const BitsLeaderBoardProps(count: 50));
+                final data = await twitchInterface.streamsRepository.getStreams(props: GetStreamsProps(userLogin: 'hasanabi'));
                 data.fold(
-                    (l) => print(l),
+                    (l) => print(l.exception),
                     (r) => showDialog(
                         context: context,
                         builder: (context) {
+                          print(r.data?.map((e) => print(e.toJson())));
                           return AlertDialog(
                               content: SizedBox(
                             height: MediaQuery.of(context).size.height / 2,
@@ -62,9 +62,9 @@ class Home extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
                                   return Text(
-                                      r.data?[index].userName ?? 'no name');
+                                      r.data?[index].toString() ?? 'no name');
                                 },
-                                itemCount: r.total),
+                                itemCount: r.data?.length ?? 0),
                           ));
                         }));
               },
