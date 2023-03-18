@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Add Get Streams, Get Followed Streams , Get Stream Key
+
 ## 0.0.2
 
 * Add better description
