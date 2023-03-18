@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 
 part 'moderator_response.freezed.dart';
 part 'moderator_response.g.dart';
@@ -24,14 +25,4 @@ class Moderator with _$Moderator {
 
   factory Moderator.fromJson(Map<String, dynamic> json) =>
       _$ModeratorFromJson(json);
-}
-
-@freezed
-class Pagination with _$Pagination {
-  const factory Pagination({
-    String? cursor,
-  }) = _Pagination;
-
-  factory Pagination.fromJson(Map<String, dynamic> json) =>
-      _$PaginationFromJson(json);
 }

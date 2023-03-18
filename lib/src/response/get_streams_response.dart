@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 
 part 'get_streams_response.freezed.dart';
 part 'get_streams_response.g.dart';
@@ -35,13 +36,4 @@ class GetStreamsResponseData with _$GetStreamsResponseData {
   }) = _GetStreamsResponseData;
 
   factory GetStreamsResponseData.fromJson(Map<String, dynamic> json) => _$GetStreamsResponseDataFromJson(json);
-}
-
-@freezed
-class Pagination with _$Pagination {
-  const factory Pagination({
-    String? cursor,
-  }) = _Pagination;
-
-  factory Pagination.fromJson(Map<String, dynamic> json) => _$PaginationFromJson(json);
 }

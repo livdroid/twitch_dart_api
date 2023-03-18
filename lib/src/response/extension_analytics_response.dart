@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twitch_client/src/response/extension_analytics_response_data.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 
 part 'extension_analytics_response.freezed.dart';
 

@@ -57,6 +57,8 @@ export 'src/response/channel_editors_response.dart';
 export 'src/response/channel_info_response.dart';
 export 'src/response/channel_vips_response.dart';
 export 'src/response/chat_settings_response.dart';
+export 'src/response/stream_key_response.dart';
+export 'src/response/get_streams_response.dart';
 export 'src/response/chatters_data_response.dart';
 export 'src/response/chatters_response.dart';
 export 'src/response/cheermotes_response.dart';

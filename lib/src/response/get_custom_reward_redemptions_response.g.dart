@@ -100,21 +100,3 @@ Map<String, dynamic> _$$_RewardToJson(_$_Reward instance) {
   writeNotNull('cost', instance.cost);
   return val;
 }
-
-_$_Pagination _$$_PaginationFromJson(Map<String, dynamic> json) =>
-    _$_Pagination(
-      cursor: json['cursor'] as String?,
-    );
-
-Map<String, dynamic> _$$_PaginationToJson(_$_Pagination instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('cursor', instance.cursor);
-  return val;
-}

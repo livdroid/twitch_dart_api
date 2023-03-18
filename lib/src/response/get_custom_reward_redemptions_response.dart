@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 
 part 'get_custom_reward_redemptions_response.freezed.dart';
 part 'get_custom_reward_redemptions_response.g.dart';
@@ -42,13 +43,4 @@ class Reward with _$Reward {
   }) = _Reward;
 
   factory Reward.fromJson(Map<String, dynamic> json) => _$RewardFromJson(json);
-}
-
-@freezed
-class Pagination with _$Pagination {
-  const factory Pagination({
-    String? cursor,
-  }) = _Pagination;
-
-  factory Pagination.fromJson(Map<String, dynamic> json) => _$PaginationFromJson(json);
 }

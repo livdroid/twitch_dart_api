@@ -7,6 +7,7 @@ import 'package:twitch_client/src/interface/analytics_repository.dart';
 import 'package:twitch_client/src/response/extension_analytics_response.dart';
 import 'package:twitch_client/src/response/game_analytics_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
+import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'channel_repository_test.mocks.dart';
