@@ -47,13 +47,12 @@ class Home extends StatelessWidget {
               child: const Text('Parse Url and init library')),
           TextButton(
               onPressed: () async {
-                final data = await twitchInterface.streamsRepository.getStreams(props: GetStreamsProps(userLogin: 'hasanabi'));
+                final data = await twitchInterface.streamsRepository.getFollowedStreams(props: GetFollowedStreamsProps(userId: '59408155'));
                 data.fold(
                     (l) => print(l.exception),
                     (r) => showDialog(
                         context: context,
                         builder: (context) {
-                          print(r.data?.map((e) => print(e.toJson())));
                           return AlertDialog(
                               content: SizedBox(
                             height: MediaQuery.of(context).size.height / 2,

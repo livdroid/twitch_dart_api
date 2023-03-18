@@ -3,11 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i16;
+import 'dart:async' as _i17;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:twitch_client/src/error/failure.dart' as _i17;
+import 'package:twitch_client/src/error/failure.dart' as _i18;
 import 'package:twitch_client/src/interface/analytics_repository.dart' as _i11;
 import 'package:twitch_client/src/interface/bits_repository.dart' as _i4;
 import 'package:twitch_client/src/interface/channel_points_respository.dart'
@@ -19,13 +19,14 @@ import 'package:twitch_client/src/interface/moderation_repository.dart' as _i7;
 import 'package:twitch_client/src/interface/polls_repository.dart' as _i12;
 import 'package:twitch_client/src/interface/predictions_repository.dart'
     as _i13;
+import 'package:twitch_client/src/interface/stream_repository.dart' as _i16;
 import 'package:twitch_client/src/interface/token_repository.dart' as _i8;
 import 'package:twitch_client/src/interface/twitch_repositories.dart' as _i3;
 import 'package:twitch_client/src/interface/user_repository.dart' as _i9;
 import 'package:twitch_client/src/interface/video_repository.dart' as _i10;
-import 'package:twitch_client/src/props/token_client_props.dart' as _i18;
+import 'package:twitch_client/src/props/token_client_props.dart' as _i19;
 import 'package:twitch_client/src/response/validate_token_response.dart'
-    as _i19;
+    as _i20;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -188,21 +189,32 @@ class _FakeChannelPointsRepository_13 extends _i1.SmartFake
         );
 }
 
+class _FakeStreamsRepository_14 extends _i1.SmartFake
+    implements _i16.StreamsRepository {
+  _FakeStreamsRepository_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [TokenInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
   @override
-  _i16.Future<_i2.Either<_i17.Failure, bool>> revokeAccessToken(
-          {required _i18.TokenClientProps? props}) =>
+  _i17.Future<_i2.Either<_i18.Failure, bool>> revokeAccessToken(
+          {required _i19.TokenClientProps? props}) =>
       (super.noSuchMethod(
         Invocation.method(
           #revokeAccessToken,
           [],
           {#props: props},
         ),
-        returnValue: _i16.Future<_i2.Either<_i17.Failure, bool>>.value(
-            _FakeEither_0<_i17.Failure, bool>(
+        returnValue: _i17.Future<_i2.Either<_i18.Failure, bool>>.value(
+            _FakeEither_0<_i18.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -211,8 +223,8 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
           ),
         )),
         returnValueForMissingStub:
-            _i16.Future<_i2.Either<_i17.Failure, bool>>.value(
-                _FakeEither_0<_i17.Failure, bool>(
+            _i17.Future<_i2.Either<_i18.Failure, bool>>.value(
+                _FakeEither_0<_i18.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -220,34 +232,34 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
             {#props: props},
           ),
         )),
-      ) as _i16.Future<_i2.Either<_i17.Failure, bool>>);
+      ) as _i17.Future<_i2.Either<_i18.Failure, bool>>);
   @override
-  _i16.Future<_i2.Either<_i17.Failure, _i19.ValidateTokenResponse>>
+  _i17.Future<_i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>
       verifyToken() => (super.noSuchMethod(
             Invocation.method(
               #verifyToken,
               [],
             ),
-            returnValue: _i16.Future<
-                    _i2.Either<_i17.Failure, _i19.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i17.Failure, _i19.ValidateTokenResponse>(
+            returnValue: _i17.Future<
+                    _i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i18.Failure, _i20.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-            returnValueForMissingStub: _i16.Future<
-                    _i2.Either<_i17.Failure, _i19.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i17.Failure, _i19.ValidateTokenResponse>(
+            returnValueForMissingStub: _i17.Future<
+                    _i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i18.Failure, _i20.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-          ) as _i16
-              .Future<_i2.Either<_i17.Failure, _i19.ValidateTokenResponse>>);
+          ) as _i17
+              .Future<_i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>);
 }
 
 /// A class which mocks [TwitchRepositories].
@@ -412,4 +424,16 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#channelPointsRepository),
         ),
       ) as _i15.ChannelPointsRepository);
+  @override
+  _i16.StreamsRepository get streamsRepository => (super.noSuchMethod(
+        Invocation.getter(#streamsRepository),
+        returnValue: _FakeStreamsRepository_14(
+          this,
+          Invocation.getter(#streamsRepository),
+        ),
+        returnValueForMissingStub: _FakeStreamsRepository_14(
+          this,
+          Invocation.getter(#streamsRepository),
+        ),
+      ) as _i16.StreamsRepository);
 }
