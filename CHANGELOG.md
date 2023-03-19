@@ -1,3 +1,9 @@
+## 0.0.4
+
+* Update dependencies
+* Add documentation
+* Fix static analysis
+
 ## 0.0.3
 
 * Add Get Streams, Get Followed Streams , Get Stream Key
