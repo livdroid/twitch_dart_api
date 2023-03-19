@@ -13,6 +13,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Get a channel information
   @override
   Future<Either<Failure, ChannelInformationsResponse>> getChannelInformation(
       {required BroadcasterProps props}) async {
@@ -27,6 +28,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Update title, game or langage
   @override
   Future<Either<Failure, bool>> modifyChannelInformation(
       {required BroadcasterProps broadcasterProps,
@@ -44,6 +46,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Retrieve a channel's editors
   @override
   Future<Either<Failure, ChannelEditorsResponse>> getChannelEditors(
       {required BroadcasterProps broadcasterProps}) async {
@@ -58,6 +61,8 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Start a commercial
+  /// Must be live to work
   @override
   Future<Either<Failure, StartCommercialResponse>> startCommercial(
       {required StartCommercialProps startCommercialProps}) async {
@@ -74,6 +79,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Retrieve all vips users from a channel
   @override
   Future<Either<Failure, ChannelVipsResponse>> getVIPs(
       {required BroadcasterProps props}) async {
@@ -88,6 +94,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Add a Vip user to a channel
   @override
   Future<Either<Failure, bool>> addVip({required AddVipProps props}) async {
     assert(props.broadcasterId.isNotEmpty);
@@ -102,6 +109,7 @@ class ChannelInterfaceImpl implements ChannelInterface {
     }
   }
 
+  /// Remove Vip user from a channel
   @override
   Future<Either<Failure, bool>> removeVip(
       {required RemoveVipProps props}) async {

@@ -16,6 +16,7 @@ class TokenInterfaceImpl implements TokenInterface {
             TwitchApiDataSourceImpl(token, clientId,
                 url: UrlConstants.idBaseUrl);
 
+  /// Revoke a token, user will need to reconnect again to use the app
   @override
   Future<Either<Failure, bool>> revokeAccessToken(
       {required TokenClientProps props}) async {
@@ -28,6 +29,8 @@ class TokenInterfaceImpl implements TokenInterface {
     }
   }
 
+  /// Verify the token validity, must be done at least once an hour according to
+  /// twitch official documentation
   @override
   Future<Either<Failure, ValidateTokenResponse>> verifyToken() async {
     try {

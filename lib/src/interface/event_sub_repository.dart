@@ -72,7 +72,7 @@ class EventSubInterfaceImpl implements EventSubInterface {
       _controller.add(newEvent);
 
       if (newEvent.payload?.session?.id?.isNotEmpty ?? false) {
-        final response = await createEventSubSubscription(
+        await createEventSubSubscription(
             props: CreateEventSubProps(
                 type: type,
                 version: '1',

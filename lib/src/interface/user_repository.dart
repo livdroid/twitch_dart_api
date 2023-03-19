@@ -12,6 +12,7 @@ class UserRepositoryImpl implements UserInterface {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Get a user informations
   @override
   Future<Either<Failure, UserResponse>> getUserInformation(
       {required UsersProps props}) async {
@@ -24,6 +25,7 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
+  /// Update a user informations, only concerns the channel description
   @override
   Future<Either<Failure, UserResponse>> updateUserInformation(
       {required UpdateUserProps props}) async {
@@ -38,6 +40,7 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
+  /// Get followers from a user
   @override
   Future<Either<Failure, UserFollowResponse>> getUserFollow(
       {required UserFollowProps props}) async {
@@ -52,6 +55,7 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
+  /// Get the blocked users from a user
   @override
   Future<Either<Failure, UserBlockListResponse>> getBlockList(
       {required UserBlockListProps props}) async {
@@ -64,6 +68,7 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
+  /// Add a user to the blocked users
   @override
   Future<Either<Failure, bool>> blockUser(
       {required BlockUserProps props}) async {
@@ -76,6 +81,7 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
+  /// Remove a user from the block users
   @override
   Future<Either<Failure, bool>> unblockUser(
       {required BlockUserProps props}) async {

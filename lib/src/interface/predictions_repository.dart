@@ -13,6 +13,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Retrieve all predictions
   @override
   Future<Either<Failure, PredictionResponse>> getPredictions(
       {required PredictionsProps props}) async {
@@ -25,6 +26,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
     }
   }
 
+  /// Create a nex prediction
   @override
   Future<Either<Failure, PredictionResponse>> createPrediction(
       {required CreatePredictionsProps props}) async {
@@ -37,6 +39,7 @@ class PredictionsRepositoryImpl implements PredictionRepository {
     }
   }
 
+  /// End a selected prediction
   @override
   Future<Either<Failure, PredictionResponse>> endPrediction(
       {required EndPredictionProps props}) async {

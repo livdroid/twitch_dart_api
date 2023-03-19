@@ -17,6 +17,7 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Create a custom reward
   @override
   Future<Either<Failure, CreateCustomRewardResponse>> createCustomReward(
       {required CreateCustomRewardProps dataProps,
@@ -32,6 +33,7 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
     }
   }
 
+  /// Remove a custom reward from an ID
   @override
   Future<Either<Failure, bool>> deleteCustomReward(
       {required DeleteCustomRewardProps props}) async {
@@ -47,6 +49,7 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
     }
   }
 
+  /// Retrieve all custom rewards or a specific one
   @override
   Future<Either<Failure, GetCustomRewardsResponse>> getCustomRewards(
       {required GetCustomRewardsProps props}) async {

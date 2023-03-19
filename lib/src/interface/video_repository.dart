@@ -12,6 +12,7 @@ class VideoRepositoryImpl implements VideoRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Retrieve a video
   @override
   Future<Either<Failure, VideoResponse>> getVideo(
       {required VideoProps props}) async {
@@ -24,6 +25,7 @@ class VideoRepositoryImpl implements VideoRepository {
     }
   }
 
+  /// Remove a video
   @override
   Future<Either<Failure, bool>> deleteVideo({required VideoProps props}) async {
     try {

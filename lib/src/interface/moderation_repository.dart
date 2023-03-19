@@ -21,6 +21,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Retrieve a list of users banned from a channel
   @override
   Future<Either<Failure, BannedUsersResponse>> getBannedUsers(
       {required BroadcasterProps props}) async {
@@ -34,6 +35,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     }
   }
 
+  /// Unban a user from a channel
   @override
   Future<Either<Failure, bool>> unbanUser(
       {required ModerationProps props}) async {
@@ -50,6 +52,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     }
   }
 
+  /// Ban a user from a channel
   @override
   Future<Either<Failure, BanUserResponse>> banUser(
       {required BanUserProps props,
@@ -67,6 +70,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     }
   }
 
+  /// Retrieve moderators from a channel
   @override
   Future<Either<Failure, ModeratorResponse>> getModerators(
       {required BroadcasterProps props}) async {
@@ -80,6 +84,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     }
   }
 
+  /// Give moderator status to a user
   @override
   Future<Either<Failure, bool>> addModerator(
       {required AddModeratorProps props}) async {
@@ -96,6 +101,7 @@ class ModerationInterfaceImpl implements ModerationInterface {
     }
   }
 
+  /// Remove the moderator status of a channel to a user
   @override
   Future<Either<Failure, bool>> removeModerator(
       {required RemoveModeratorProps props}) async {

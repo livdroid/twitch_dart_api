@@ -16,6 +16,7 @@ class BitsInterfaceImpl implements BitsInterface {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Get top bits giver for a channel
   @override
   Future<Either<Failure, BitsLeaderboardResponse>> getBitsLeaderBoard(
       {required BitsLeaderBoardProps props}) async {
@@ -28,6 +29,7 @@ class BitsInterfaceImpl implements BitsInterface {
     }
   }
 
+  /// Get cheermotes from a channel
   @override
   Future<Either<Failure, CheermotesResponse>> getCheermotes(
       {required CheermotesProps props}) async {

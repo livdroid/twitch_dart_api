@@ -13,6 +13,7 @@ class PollsRepositoryImpl implements PollsRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Get all polls from a channel
   @override
   Future<Either<Failure, PollsResponse>> getPolls(
       {required PollsProps props}) async {
@@ -25,6 +26,7 @@ class PollsRepositoryImpl implements PollsRepository {
     }
   }
 
+  /// Create a new poll for a channel
   @override
   Future<Either<Failure, PollsResponse>> createPoll(
       {required CreatePollProps props}) async {
@@ -37,6 +39,7 @@ class PollsRepositoryImpl implements PollsRepository {
     }
   }
 
+  /// End a poll currently live
   @override
   Future<Either<Failure, PollsResponse>> endPoll(
       {required EndPollProps props}) async {

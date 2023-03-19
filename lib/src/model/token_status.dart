@@ -1,10 +1,10 @@
 enum TokenStatus {
-  // token is valid, can connect
+  /// token is valid, can connect
   valid,
-  // Token invalid, need to show the auth page again
+  /// Token invalid, need to show the auth page again
   invalid,
-  // an error returned but not related to token validity
+  /// an error returned but not related to token validity
   error,
-  // other case
+  /// other case
   unknown
 }

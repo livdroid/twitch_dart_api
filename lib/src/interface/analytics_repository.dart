@@ -14,6 +14,7 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Get analytics about a specific game
   @override
   Future<Either<Failure, GameAnalyticsResponse>> getGameAnalytics(
       {required GameAnalyticsProps props}) async {

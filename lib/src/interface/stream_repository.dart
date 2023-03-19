@@ -1,9 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/props/get_followed_streams_props.dart';
-import 'package:twitch_client/src/props/get_streams_props.dart';
-import 'package:twitch_client/src/response/get_streams_response.dart';
-import 'package:twitch_client/src/response/stream_key_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 class StreamsRepositoryImpl implements StreamsRepository {
@@ -16,6 +12,7 @@ class StreamsRepositoryImpl implements StreamsRepository {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
+  /// Retrieve all streams with or without parameters
   @override
   Future<Either<Failure, GetStreamsResponse>> getStreams(
       {required GetStreamsProps props}) async {
@@ -28,6 +25,7 @@ class StreamsRepositoryImpl implements StreamsRepository {
     }
   }
 
+  /// Retrieve all streams that you follow
   @override
   Future<Either<Failure, GetStreamsResponse>> getFollowedStreams(
       {required GetFollowedStreamsProps props}) async {
@@ -42,8 +40,10 @@ class StreamsRepositoryImpl implements StreamsRepository {
     }
   }
 
+  /// Retrieve a stream key for a streaming software
   @override
-  Future<Either<Failure, StreamKeyResponse>> getStreamKey({required BroadcasterProps props}) async {
+  Future<Either<Failure, StreamKeyResponse>> getStreamKey(
+      {required BroadcasterProps props}) async {
     assert(props.broadcasterId.isNotEmpty);
 
     try {
