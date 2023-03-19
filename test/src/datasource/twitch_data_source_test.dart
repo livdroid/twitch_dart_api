@@ -12,7 +12,7 @@ void main() {
   const String baseURL = UrlConstants.apiBaseUrl;
 
   final dio = Dio(BaseOptions(
-      baseUrl: baseURL, connectTimeout: 5, receiveTimeout: 5, sendTimeout: 5));
+      baseUrl: baseURL));
 
   final dioAdapter = DioAdapter(dio: dio);
   dio.httpClientAdapter = dioAdapter;
