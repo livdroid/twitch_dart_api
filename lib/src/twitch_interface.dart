@@ -121,15 +121,6 @@ class TwitchInterface {
     });
   }
 
-  /// Set up the [token] as Bearer token for the api calls
-  bool setAccessToken(String token) {
-    assert(token.isNotEmpty);
-    if (token.isEmpty) return false;
-    accessToken = token;
-    _setTokenAndClient(token: token);
-    return true;
-  }
-
   /// Initiate client to prepare repos
   void _setTokenAndClient({required String token}) {
     accessToken = token;
