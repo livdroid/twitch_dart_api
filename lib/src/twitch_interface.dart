@@ -31,6 +31,8 @@ class TwitchInterface {
   /// User token data
   ValidateTokenResponse? tokenResponse;
 
+  String get userId => tokenResponse?.userId ?? '';
+
   /// Access all requests
   late TwitchRepositories twitchRepositories;
 
