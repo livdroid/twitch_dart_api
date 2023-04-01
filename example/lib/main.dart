@@ -3,6 +3,7 @@ import 'package:twitch_client/twitch_client.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Add you own redirection URL and ClientId
+/// Here I use --dart-define=REDIRECTION=<URL> and else as a run argument
 final twitchInterface = TwitchInterface(
     redirectionURL: const String.fromEnvironment('REDIRECTION'),
     clientId: const String.fromEnvironment('ID'));
