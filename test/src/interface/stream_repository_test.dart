@@ -8,6 +8,7 @@ import 'package:twitch_client/twitch_client.dart';
 import 'analytics_repository_test.mocks.dart';
 
 void main() {
+
   final mockedDataSource = MockTwitchDataSource();
   final repository =
       StreamsRepositoryImpl('token', 'clientid', dataSource: mockedDataSource);

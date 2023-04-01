@@ -57,6 +57,7 @@ export 'src/props/add_blocked_terms_props.dart';
 export 'src/props/remove_blocked_terms_props.dart';
 export 'src/props/users_props.dart';
 export 'src/props/video_props.dart';
+export 'src/props/get_broadcaster_subscription_props.dart';
 export 'src/response/ban_user_response.dart';
 export 'src/response/banned_user_response.dart';
 export 'src/response/banned_users_response.dart';

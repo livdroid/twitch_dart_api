@@ -32,7 +32,9 @@ class ForbiddenRequestException extends TwitchClientException {
 }
 
 /// Bad arguments value in a prop object
-class BadValueException implements Exception {}
+class BadValueException extends TwitchClientException {
+  BadValueException({required super.message});
+}
 
 abstract class TwitchClientException implements Exception {
   final String message;

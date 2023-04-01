@@ -102,4 +102,21 @@ void main() {
       expect(status, TokenStatus.invalid);
     });
   });
+
+  group('parseUrl', () {
+    test('returns access token if it exists in URL fragment', () {
+      const url = 'https://example.com/#access_token=abc123&expires_in=3600';
+      expect(twitchInterface.parseUrl(url: url), 'abc123');
+    });
+
+    test('returns empty string if access token is not in URL fragment', () {
+      const url = 'https://example.com/#expires_in=3600';
+      expect(twitchInterface.parseUrl(url: url), '');
+    });
+
+    test('returns empty string if URL fragment is empty', () {
+      const url = 'https://example.com/#';
+      expect(twitchInterface.parseUrl(url: url), '');
+    });
+  });
 }

@@ -3,11 +3,13 @@ import 'package:twitch_client/src/interface/bits_repository.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
+import 'package:twitch_client/src/interface/clip_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
 import 'package:twitch_client/src/interface/stream_repository.dart';
+import 'package:twitch_client/src/interface/subscription_repository.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
 import 'package:twitch_client/src/interface/video_repository.dart';
@@ -44,6 +46,10 @@ abstract class TwitchRepositories {
   ChannelPointsRepository get channelPointsRepository;
 
   StreamsRepository get streamsRepository;
+
+  ClipRepository get clipRepository;
+
+  SubscriptionRepository get subscriptionRepository;
 }
 
 class _TwitchRepositoriesImpl implements TwitchRepositories {
@@ -60,7 +66,9 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
         videoRepository = VideoRepositoryImpl(token, clientId),
         eventRepository = EventSubInterfaceImpl(token, clientId),
         channelPointsRepository = ChannelPointsRepositoryImpl(token, clientId),
-        streamsRepository = StreamsRepositoryImpl(token, clientId);
+        streamsRepository = StreamsRepositoryImpl(token, clientId),
+        clipRepository = ClipRepositoryImpl(token, clientId),
+        subscriptionRepository = SubscriptionRepositoryImpl(token, clientId);
 
   @override
   final AnalyticsRepository analyticsRepository;
@@ -103,4 +111,10 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
 
   @override
   final StreamsRepository streamsRepository;
+
+  @override
+  final ClipRepository clipRepository;
+
+  @override
+  final SubscriptionRepository subscriptionRepository;
 }
