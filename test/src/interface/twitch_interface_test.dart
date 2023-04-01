@@ -12,17 +12,14 @@ import 'twitch_interface_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TokenInterface>(), MockSpec<TwitchRepositories>()])
 void main() {
-
   late MockTokenInterface mockTokenInterface;
   late MockTwitchRepositories mockTwitchRepositories;
   late TwitchInterface twitchInterface;
 
   setUp(() {
     mockTokenInterface = MockTokenInterface();
-    mockTwitchRepositories =
-    MockTwitchRepositories();
-    twitchInterface =
-    TwitchInterface(clientId: '1234', redirectionURL: '123');
+    mockTwitchRepositories = MockTwitchRepositories();
+    twitchInterface = TwitchInterface(clientId: '1234', redirectionURL: '123');
     twitchInterface.twitchRepositories = mockTwitchRepositories;
   });
 
@@ -60,6 +57,11 @@ void main() {
       final couldInit = await twitchInterface.init(url: badUrl);
       expect(couldInit, false);
     });
+
+    test('Returns false when url is empty', () async {
+      final result = await twitchInterface.init();
+      expect(result, false);
+    });
   });
 
   group('verifyToken', () {
@@ -91,12 +93,11 @@ void main() {
     });
 
     test('Token validate request returned an unvalid token', () async {
-
       when(mockTwitchRepositories.tokenRepository)
           .thenReturn(mockTokenInterface);
 
-      when(mockTokenInterface.verifyToken())
-          .thenAnswer((_) async => Left(Failure(UnauthorizedException(message: ''))));
+      when(mockTokenInterface.verifyToken()).thenAnswer(
+          (_) async => Left(Failure(UnauthorizedException(message: ''))));
 
       final status = await twitchInterface.validateToken();
       expect(status, TokenStatus.invalid);
