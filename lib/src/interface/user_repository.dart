@@ -40,7 +40,12 @@ class UserRepositoryImpl implements UserInterface {
     }
   }
 
-  /// Get followers from a user
+  /*
+  * This method uses a deprecated Twitch API endpoint that
+  * will be decommissioned on August 3, 2023.
+  * Access to this endpoint is limited to client IDs that have
+  * called the endpoint on or before February 17, 2023.
+  */
   @override
   Future<Either<Failure, UserFollowResponse>> getUserFollow(
       {required UserFollowProps props}) async {
