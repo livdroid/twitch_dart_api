@@ -128,9 +128,8 @@ class ModerationInterfaceImpl implements ModerationInterface {
       {required AddBlockedTermsProps termsProps,
       required BroadcasterModeratorProps props}) async {
     assert(props.broadcasterId.isNotEmpty);
-    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
     assert(termsProps.text.isNotEmpty);
-    assert(termsProps.text.length > 2);
     assert(termsProps.text.length >= 2);
     assert(termsProps.text.length <= 500);
 
