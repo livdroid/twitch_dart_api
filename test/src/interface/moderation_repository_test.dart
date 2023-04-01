@@ -4,9 +4,6 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
-import 'package:twitch_client/src/props/add_blocked_terms_props.dart';
-import 'package:twitch_client/src/props/get_blocked_terms_props.dart';
-import 'package:twitch_client/src/props/remove_blocked_terms_props.dart';
 import 'package:twitch_client/src/response/add_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/get_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
@@ -367,7 +364,6 @@ void main() {
   group('addBlockedTerms', () {
     const String path = 'moderation/blocked_terms';
     AddBlockedTermsProps propsAdd = const AddBlockedTermsProps(text: '123');
-    AddBlockedTermsProps emptyPropsAdd = const AddBlockedTermsProps(text: '');
 
     BroadcasterModeratorProps props = const BroadcasterModeratorProps(
         broadcasterId: '123', moderatorId: '123');

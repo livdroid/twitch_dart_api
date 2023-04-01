@@ -3,7 +3,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
-import 'package:twitch_client/src/props/chat_annoucement_props.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/src/utils/string_utils.dart';

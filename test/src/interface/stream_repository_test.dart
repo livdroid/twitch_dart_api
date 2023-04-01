@@ -2,9 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/stream_repository.dart';
-import 'package:twitch_client/src/props/get_followed_streams_props.dart';
-import 'package:twitch_client/src/props/get_streams_props.dart';
-import 'package:twitch_client/src/response/get_streams_response.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -44,32 +41,39 @@ void main() {
   });
 
   group('getStreams', () {
-    GetFollowedStreamsProps props = GetFollowedStreamsProps(userId: '123');
-    GetFollowedStreamsProps emptyProps = GetFollowedStreamsProps(userId: '');
+    GetFollowedStreamsProps props =
+        const GetFollowedStreamsProps(userId: '123');
+    GetFollowedStreamsProps emptyProps =
+        const GetFollowedStreamsProps(userId: '');
 
     test('On success', () async {
-      when(mockedDataSource.get(path: '$path/followed', queryParams: props.toJson()))
+      when(mockedDataSource.get(
+              path: '$path/followed', queryParams: props.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       final result = await repository.getFollowedStreams(props: props);
 
-      verify(mockedDataSource.get(path: '$path/followed', queryParams: props.toJson()));
+      verify(mockedDataSource.get(
+          path: '$path/followed', queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<GetStreamsResponse>());
     });
 
     test('On failure', () async {
-      when(mockedDataSource.get(path: '$path/followed', queryParams: props.toJson()))
+      when(mockedDataSource.get(
+              path: '$path/followed', queryParams: props.toJson()))
           .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result = await repository.getFollowedStreams(props: props);
 
-      verify(mockedDataSource.get(path: '$path/followed', queryParams: props.toJson()));
+      verify(mockedDataSource.get(
+          path: '$path/followed', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
 
     test('On empty props return failure', () async {
-      when(mockedDataSource.get(path: '$path/followed', queryParams: emptyProps.toJson()))
+      when(mockedDataSource.get(
+              path: '$path/followed', queryParams: emptyProps.toJson()))
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getFollowedStreams(props: emptyProps),
@@ -81,16 +85,18 @@ void main() {
   });
 
   group('getStreamKey', () {
-    BroadcasterProps props = BroadcasterProps(broadcasterId: '123');
-    BroadcasterProps emptyProps = BroadcasterProps(broadcasterId: '');
+    BroadcasterProps props = const BroadcasterProps(broadcasterId: '123');
+    BroadcasterProps emptyProps = const BroadcasterProps(broadcasterId: '');
 
     test('On success', () async {
       when(mockedDataSource.get(path: '$path/key', queryParams: props.toJson()))
-          .thenAnswer((realInvocation) async => StreamKeyResponse(data:[ StreamKeyResponseData(streamKey: '123')]).toJson());
+          .thenAnswer((realInvocation) async => const StreamKeyResponse(
+              data: [StreamKeyResponseData(streamKey: '123')]).toJson());
 
       final result = await repository.getStreamKey(props: props);
 
-      verify(mockedDataSource.get(path: '$path/key', queryParams: props.toJson()));
+      verify(
+          mockedDataSource.get(path: '$path/key', queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<StreamKeyResponse>());
     });
@@ -101,12 +107,14 @@ void main() {
 
       final result = await repository.getStreamKey(props: props);
 
-      verify(mockedDataSource.get(path: '$path/key', queryParams: props.toJson()));
+      verify(
+          mockedDataSource.get(path: '$path/key', queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
 
     test('On empty props return failure', () async {
-      when(mockedDataSource.get(path: '$path/key', queryParams: emptyProps.toJson()))
+      when(mockedDataSource.get(
+              path: '$path/key', queryParams: emptyProps.toJson()))
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.getStreamKey(props: emptyProps),
