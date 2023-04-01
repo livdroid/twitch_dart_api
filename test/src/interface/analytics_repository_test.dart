@@ -6,7 +6,6 @@ import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/interface/analytics_repository.dart';
 import 'package:twitch_client/src/response/extension_analytics_response.dart';
 import 'package:twitch_client/src/response/game_analytics_response.dart';
-import 'package:twitch_client/src/response/moderator_response.dart';
 import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
@@ -20,7 +19,8 @@ void main() {
 
     setUp(() {
       mockTwitchDataSource = MockTwitchDataSource();
-      repository = AnalyticsRepositoryImpl('token', 'clientid', dataSource: mockTwitchDataSource);
+      repository = AnalyticsRepositoryImpl('token', 'clientid',
+          dataSource: mockTwitchDataSource);
     });
 
     final gameAnalyticsProps = GameAnalyticsProps();
@@ -71,7 +71,8 @@ void main() {
 
     setUp(() {
       mockTwitchDataSource = MockTwitchDataSource();
-      repository = AnalyticsRepositoryImpl('token', 'clientid', dataSource: mockTwitchDataSource);
+      repository = AnalyticsRepositoryImpl('token', 'clientid',
+          dataSource: mockTwitchDataSource);
     });
 
     test(

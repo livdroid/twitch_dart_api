@@ -3,6 +3,7 @@ import 'package:twitch_client/twitch_client.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Add you own redirection URL and ClientId
+/// Here I use --dart-define=REDIRECTION=<URL> and else as a run argument
 final twitchInterface = TwitchInterface(
     redirectionURL: const String.fromEnvironment('REDIRECTION'),
     clientId: const String.fromEnvironment('ID'));
@@ -41,33 +42,37 @@ class Home extends StatelessWidget {
           TextButton(
               onPressed: () async {
                 // Call init with the url retrieved after redirection
-               await twitchInterface.init(
+                await twitchInterface.init(
                     url: const String.fromEnvironment('URL'));
               },
               child: const Text('Parse Url and init library')),
           TextButton(
-              onPressed: () async {
-                final data = await twitchInterface.streamsRepository.getFollowedStreams(props: GetFollowedStreamsProps(userId: '59408155'));
-                data.fold(
-                    (l) => print(l.exception),
-                    (r) => showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                              content: SizedBox(
-                            height: MediaQuery.of(context).size.height / 2,
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return Text(
-                                      r.data?[index].toString() ?? 'no name');
-                                },
-                                itemCount: r.data?.length ?? 0),
-                          ));
-                        }));
-              },
-              child: const Text('Get bits leaderboard')),
+            child: const Text('getFollowedStreams'),
+            onPressed: () async {
+              final data = await twitchInterface.streamsRepository
+                  .getFollowedStreams(
+                      props: GetFollowedStreamsProps(
+                          userId: twitchInterface.tokenResponse?.userId ?? ''));
+              data.fold(
+                  (l) => print(l.exception),
+                  (r) => showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                            content: SizedBox(
+                          height: MediaQuery.of(context).size.height / 2,
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Text(
+                                    r.data?[index].toString() ?? 'no name');
+                              },
+                              itemCount: r.data?.length ?? 0),
+                        ));
+                      }));
+            },
+          )
         ],
       ),
     );

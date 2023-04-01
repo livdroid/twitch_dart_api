@@ -31,6 +31,8 @@ class TwitchInterface {
   /// User token data
   ValidateTokenResponse? tokenResponse;
 
+  String get userId => tokenResponse?.userId ?? '';
+
   /// Access all requests
   late TwitchRepositories twitchRepositories;
 
@@ -119,15 +121,6 @@ class TwitchInterface {
       tokenResponse = r;
       return TokenStatus.valid;
     });
-  }
-
-  /// Set up the [token] as Bearer token for the api calls
-  bool setAccessToken(String token) {
-    assert(token.isNotEmpty);
-    if (token.isEmpty) return false;
-    accessToken = token;
-    _setTokenAndClient(token: token);
-    return true;
   }
 
   /// Initiate client to prepare repos

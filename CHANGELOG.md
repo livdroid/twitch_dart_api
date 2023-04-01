@@ -1,3 +1,12 @@
+## 0.0.5
+
+* Add Send Chat Announcement
+* Add Add Blocked Terms
+* Add Get Blocked Terms
+* Add Remove Blocked Terms
+* Add getter for userId
+* Update example
+
 ## 0.0.4
 
 * Update dependencies

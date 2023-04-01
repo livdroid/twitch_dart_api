@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
+import 'package:twitch_client/src/props/chat_annoucement_props.dart';
 import 'package:twitch_client/src/props/broadcaster_moderator_props.dart';
 import 'package:twitch_client/src/props/broadcaster_props.dart';
 import 'package:twitch_client/src/props/chat_modify_props.dart';
@@ -63,6 +64,25 @@ class ChatInterfaceImpl implements ChatInterface {
       return Left(Failure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> sendChatAnnouncement(
+      {required BroadcasterModeratorProps props,
+      required ChatAnnouncementProps chatProps}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
+    assert(chatProps.message.length < 501);
+
+    try {
+      final response = await _twitchDataSource.post(
+          path: '$_path/announcements',
+          queryParams: props.toJson(),
+          data: chatProps.toJson());
+      return Right(true);
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
 }
 
 abstract class ChatInterface {
@@ -75,4 +95,8 @@ abstract class ChatInterface {
   Future<Either<Failure, ChatSettingsResponse>> updateChatSettings(
       {required BroadcasterModeratorProps props,
       required ChatModifyProps chatProps});
+
+  Future<Either<Failure, bool>> sendChatAnnouncement(
+      {required BroadcasterModeratorProps props,
+      required ChatAnnouncementProps chatProps});
 }

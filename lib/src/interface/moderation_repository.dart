@@ -1,14 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/failure.dart';
+import 'package:twitch_client/src/props/add_blocked_terms_props.dart';
 import 'package:twitch_client/src/props/add_moderator_props.dart';
 import 'package:twitch_client/src/props/ban_user_props.dart';
 import 'package:twitch_client/src/props/broadcaster_moderator_props.dart';
 import 'package:twitch_client/src/props/broadcaster_props.dart';
+import 'package:twitch_client/src/props/get_blocked_terms_props.dart';
 import 'package:twitch_client/src/props/moderation_props.dart';
+import 'package:twitch_client/src/props/remove_blocked_terms_props.dart';
 import 'package:twitch_client/src/props/remove_moderator_props.dart';
+import 'package:twitch_client/src/response/add_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/ban_user_response.dart';
 import 'package:twitch_client/src/response/banned_users_response.dart';
+import 'package:twitch_client/src/response/get_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
 
 class ModerationInterfaceImpl implements ModerationInterface {
@@ -117,6 +122,56 @@ class ModerationInterfaceImpl implements ModerationInterface {
       return Left(Failure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, AddBlockedTermsResponse>> addBlockedTerms(
+      {required AddBlockedTermsProps termsProps,
+      required BroadcasterModeratorProps props}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.broadcasterId.isNotEmpty);
+    assert(termsProps.text.isNotEmpty);
+    assert(termsProps.text.length > 2);
+    assert(termsProps.text.length >= 2);
+    assert(termsProps.text.length <= 500);
+
+    try {
+      final response = await _twitchDataSource.post(
+          path: '$_path/blocked_terms', queryParams: props.toJson(), data: termsProps.toJson());
+      return Right(AddBlockedTermsResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetBlockedTermsResponse>> getBlockedTerms(
+      {required GetBlockedTermsProps props}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
+    try {
+      final response = await _twitchDataSource.get(
+          path: '$_path/blocked_terms', queryParams: props.toJson());
+      return Right(GetBlockedTermsResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> removeBlockedTerms(
+      {required RemoveBlockedTermsProps props}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
+    assert(props.id.isNotEmpty);
+
+    try {
+      await _twitchDataSource.delete(
+          path: '$_path/blocked_terms', queryParams: props.toJson(), data: {});
+      return const Right(true);
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
 }
 
 abstract class ModerationInterface {
@@ -137,4 +192,14 @@ abstract class ModerationInterface {
 
   Future<Either<Failure, bool>> removeModerator(
       {required RemoveModeratorProps props});
+
+  Future<Either<Failure, GetBlockedTermsResponse>> getBlockedTerms(
+      {required GetBlockedTermsProps props});
+
+  Future<Either<Failure, AddBlockedTermsResponse>> addBlockedTerms(
+      {required AddBlockedTermsProps termsProps,
+      required BroadcasterModeratorProps props});
+
+  Future<Either<Failure, bool>> removeBlockedTerms(
+      {required RemoveBlockedTermsProps props});
 }
