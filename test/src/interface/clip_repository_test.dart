@@ -87,29 +87,5 @@ void main() {
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<Exception>());
     });
-
-    test('should throw AssertionError if broadcasterId is empty', () async {
-      final invalidProps =
-          GetClipsProps(broadcasterId: "", gameId: "456", id: "789");
-
-      expect(() => repository.getClips(props: invalidProps),
-          throwsA(isA<AssertionError>()));
-    });
-
-    test('should throw AssertionError if gameId is empty', () async {
-      final invalidProps =
-          GetClipsProps(broadcasterId: "123", gameId: "", id: "789");
-
-      expect(() => repository.getClips(props: invalidProps),
-          throwsA(isA<AssertionError>()));
-    });
-
-    test('should throw AssertionError if id is empty', () async {
-      final invalidProps =
-          GetClipsProps(broadcasterId: "123", gameId: "456", id: "");
-
-      expect(() => repository.getClips(props: invalidProps),
-          throwsA(isA<AssertionError>()));
-    });
   });
 }

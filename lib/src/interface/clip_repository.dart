@@ -31,10 +31,6 @@ class ClipRepositoryImpl implements ClipRepository {
   @override
   Future<Either<Failure, GetClipsResponse>> getClips(
       {required GetClipsProps props}) async {
-    assert(props.broadcasterId.isNotEmpty);
-    assert(props.gameId.isNotEmpty);
-    assert(props.id.isNotEmpty);
-
     try {
       final response =
           await _twitchDataSource.get(path: _path, queryParams: props.toJson());

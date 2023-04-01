@@ -20,9 +20,9 @@ GetClipsProps _$GetClipsPropsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GetClipsProps {
-  String get broadcasterId => throw _privateConstructorUsedError;
-  String get gameId => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
+  String? get broadcasterId => throw _privateConstructorUsedError;
+  String? get gameId => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get startedAt => throw _privateConstructorUsedError;
   String? get endedAt => throw _privateConstructorUsedError;
   int? get first => throw _privateConstructorUsedError;
@@ -42,9 +42,9 @@ abstract class $GetClipsPropsCopyWith<$Res> {
       _$GetClipsPropsCopyWithImpl<$Res, GetClipsProps>;
   @useResult
   $Res call(
-      {String broadcasterId,
-      String gameId,
-      String id,
+      {String? broadcasterId,
+      String? gameId,
+      String? id,
       String? startedAt,
       String? endedAt,
       int? first,
@@ -65,9 +65,9 @@ class _$GetClipsPropsCopyWithImpl<$Res, $Val extends GetClipsProps>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? broadcasterId = null,
-    Object? gameId = null,
-    Object? id = null,
+    Object? broadcasterId = freezed,
+    Object? gameId = freezed,
+    Object? id = freezed,
     Object? startedAt = freezed,
     Object? endedAt = freezed,
     Object? first = freezed,
@@ -75,18 +75,18 @@ class _$GetClipsPropsCopyWithImpl<$Res, $Val extends GetClipsProps>
     Object? after = freezed,
   }) {
     return _then(_value.copyWith(
-      broadcasterId: null == broadcasterId
+      broadcasterId: freezed == broadcasterId
           ? _value.broadcasterId
           : broadcasterId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameId: null == gameId
+              as String?,
+      gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       startedAt: freezed == startedAt
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
@@ -120,9 +120,9 @@ abstract class _$$_GetClipsPropsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String broadcasterId,
-      String gameId,
-      String id,
+      {String? broadcasterId,
+      String? gameId,
+      String? id,
       String? startedAt,
       String? endedAt,
       int? first,
@@ -141,9 +141,9 @@ class __$$_GetClipsPropsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? broadcasterId = null,
-    Object? gameId = null,
-    Object? id = null,
+    Object? broadcasterId = freezed,
+    Object? gameId = freezed,
+    Object? id = freezed,
     Object? startedAt = freezed,
     Object? endedAt = freezed,
     Object? first = freezed,
@@ -151,18 +151,18 @@ class __$$_GetClipsPropsCopyWithImpl<$Res>
     Object? after = freezed,
   }) {
     return _then(_$_GetClipsProps(
-      broadcasterId: null == broadcasterId
+      broadcasterId: freezed == broadcasterId
           ? _value.broadcasterId
           : broadcasterId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameId: null == gameId
+              as String?,
+      gameId: freezed == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       startedAt: freezed == startedAt
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
@@ -191,9 +191,9 @@ class __$$_GetClipsPropsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_GetClipsProps implements _GetClipsProps {
   _$_GetClipsProps(
-      {required this.broadcasterId,
-      required this.gameId,
-      required this.id,
+      {this.broadcasterId,
+      this.gameId,
+      this.id,
       this.startedAt,
       this.endedAt,
       this.first,
@@ -204,11 +204,11 @@ class _$_GetClipsProps implements _GetClipsProps {
       _$$_GetClipsPropsFromJson(json);
 
   @override
-  final String broadcasterId;
+  final String? broadcasterId;
   @override
-  final String gameId;
+  final String? gameId;
   @override
-  final String id;
+  final String? id;
   @override
   final String? startedAt;
   @override
@@ -263,9 +263,9 @@ class _$_GetClipsProps implements _GetClipsProps {
 
 abstract class _GetClipsProps implements GetClipsProps {
   factory _GetClipsProps(
-      {required final String broadcasterId,
-      required final String gameId,
-      required final String id,
+      {final String? broadcasterId,
+      final String? gameId,
+      final String? id,
       final String? startedAt,
       final String? endedAt,
       final int? first,
@@ -276,11 +276,11 @@ abstract class _GetClipsProps implements GetClipsProps {
       _$_GetClipsProps.fromJson;
 
   @override
-  String get broadcasterId;
+  String? get broadcasterId;
   @override
-  String get gameId;
+  String? get gameId;
   @override
-  String get id;
+  String? get id;
   @override
   String? get startedAt;
   @override
