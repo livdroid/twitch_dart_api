@@ -1,32 +1,17 @@
-class ValidateTokenResponse {
-  final String clientId;
-  final String login;
-  final List<String> scopes;
-  final String userId;
-  final int? expiresIn;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ValidateTokenResponse(
-      {required this.clientId,
-      required this.login,
-      required this.scopes,
-      required this.userId,
-      required this.expiresIn});
+part 'validate_token_response.freezed.dart';
+part 'validate_token_response.g.dart';
 
-  factory ValidateTokenResponse.fromJson(Map<String, dynamic> json) =>
-      ValidateTokenResponse(
-          clientId: json['client_id'],
-          login: json['login'],
-          scopes: json['scopes'].cast<String>(),
-          userId: json['user_id'],
-          expiresIn: json['expires_in']);
+@freezed
+class ValidateTokenResponse with _$ValidateTokenResponse {
+  const factory ValidateTokenResponse({
+    String? clientId,
+    String? login,
+    List<String>? scopes,
+    String? userId,
+    int? expiresIn,
+  }) = _ValidateTokenResponse;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['client_id'] = clientId;
-    data['login'] = login;
-    data['scopes'] = scopes;
-    data['user_id'] = userId;
-    data['expires_in'] = expiresIn;
-    return data;
-  }
+  factory ValidateTokenResponse.fromJson(Map<String, dynamic> json) => _$ValidateTokenResponseFromJson(json);
 }

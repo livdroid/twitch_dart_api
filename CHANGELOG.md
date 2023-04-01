@@ -1,3 +1,16 @@
+## 0.0.6
+
+* Update documentation about decommissioned endpoint GetUserFollow
+* Add various documentations
+* Add Create Clip 
+* Add Get Clip 
+* Add Get AutoMod Settings  
+* Add Update AutoMod Settings 
+* Add Get Broadcaster Subscriptions 
+* Making parseUrl public in case you need to save 
+the token for restart session purpose
+* Add Token Repository unit tests
+
 ## 0.0.5
 
 * Add Send Chat Announcement

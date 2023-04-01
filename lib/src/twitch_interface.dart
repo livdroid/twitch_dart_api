@@ -4,11 +4,13 @@ import 'package:twitch_client/src/interface/bits_repository.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
+import 'package:twitch_client/src/interface/clip_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
 import 'package:twitch_client/src/interface/stream_repository.dart';
+import 'package:twitch_client/src/interface/subscription_repository.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/interface/twitch_repositories.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
@@ -59,9 +61,16 @@ class TwitchInterface {
 
   EventSubInterface get event => twitchRepositories.eventRepository;
 
-  ChannelPointsRepository get channelPoints => twitchRepositories.channelPointsRepository;
+  ChannelPointsRepository get channelPoints =>
+      twitchRepositories.channelPointsRepository;
 
-  StreamsRepository get streamsRepository => twitchRepositories.streamsRepository;
+  StreamsRepository get streamsRepository =>
+      twitchRepositories.streamsRepository;
+
+  ClipRepository get clip => twitchRepositories.clipRepository;
+
+  SubscriptionRepository get subscription =>
+      twitchRepositories.subscriptionRepository;
 
   TwitchInterface(
       {required this.clientId,
@@ -95,7 +104,7 @@ class TwitchInterface {
   Future<bool> init({String url = ''}) async {
     String userToken = accessToken ?? '';
     if (url.isNotEmpty) {
-      userToken = _parseUrl(url: url);
+      userToken = parseUrl(url: url);
     }
     if (userToken.isEmpty) return false;
     _setTokenAndClient(token: userToken);
@@ -129,16 +138,29 @@ class TwitchInterface {
     twitchRepositories = TwitchRepositories(token: token, clientId: clientId);
   }
 
-  /// Parse the url user was redirected to after loggin in to the
-  /// Twitch Api
-  String _parseUrl({required String url}) {
-    var uri = Uri.parse(url);
-    final frag = uri.fragment.split('&').toList();
-    for (var element in frag) {
-      if (element.contains('access_token')) {
-        return element.split('=')[1];
-      }
+  /// Parses the URL and returns the access token if it exists in the URL fragment.
+  ///
+  /// Throws a [FormatException] if the [url] parameter is not a valid URL string.
+  ///
+  /// Example usage:
+  ///
+  /// ```dart
+  /// String url = 'https://example.com/#access_token=abc123&expires_in=3600';
+  /// String token = _parseUrl(url: url);
+  /// print(token); // 'abc123'
+  /// ```
+  ///
+  /// Returns an empty string if the access token is not found in the URL fragment.
+  String parseUrl({required String url}) {
+    try {
+      final uri = Uri.parse(url);
+      final fragment = uri.fragment;
+      if (fragment.isEmpty) return '';
+      final params = Uri.splitQueryString(fragment);
+      final token = params['access_token'];
+      return token != null ? Uri.decodeComponent(token) : '';
+    } on Exception {
+      return '';
     }
-    return '';
   }
 }

@@ -3,30 +3,33 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i17;
+import 'dart:async' as _i19;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:twitch_client/src/error/failure.dart' as _i18;
+import 'package:twitch_client/src/error/failure.dart' as _i20;
 import 'package:twitch_client/src/interface/analytics_repository.dart' as _i11;
 import 'package:twitch_client/src/interface/bits_repository.dart' as _i4;
 import 'package:twitch_client/src/interface/channel_points_respository.dart'
     as _i15;
 import 'package:twitch_client/src/interface/channel_repository.dart' as _i5;
 import 'package:twitch_client/src/interface/chat_repository.dart' as _i6;
+import 'package:twitch_client/src/interface/clip_repository.dart' as _i17;
 import 'package:twitch_client/src/interface/event_sub_repository.dart' as _i14;
 import 'package:twitch_client/src/interface/moderation_repository.dart' as _i7;
 import 'package:twitch_client/src/interface/polls_repository.dart' as _i12;
 import 'package:twitch_client/src/interface/predictions_repository.dart'
     as _i13;
 import 'package:twitch_client/src/interface/stream_repository.dart' as _i16;
+import 'package:twitch_client/src/interface/subscription_repository.dart'
+    as _i18;
 import 'package:twitch_client/src/interface/token_repository.dart' as _i8;
 import 'package:twitch_client/src/interface/twitch_repositories.dart' as _i3;
 import 'package:twitch_client/src/interface/user_repository.dart' as _i9;
 import 'package:twitch_client/src/interface/video_repository.dart' as _i10;
-import 'package:twitch_client/src/props/token_client_props.dart' as _i19;
+import 'package:twitch_client/src/props/token_client_props.dart' as _i21;
 import 'package:twitch_client/src/response/validate_token_response.dart'
-    as _i20;
+    as _i22;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -200,21 +203,43 @@ class _FakeStreamsRepository_14 extends _i1.SmartFake
         );
 }
 
+class _FakeClipRepository_15 extends _i1.SmartFake
+    implements _i17.ClipRepository {
+  _FakeClipRepository_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSubscriptionRepository_16 extends _i1.SmartFake
+    implements _i18.SubscriptionRepository {
+  _FakeSubscriptionRepository_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [TokenInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
   @override
-  _i17.Future<_i2.Either<_i18.Failure, bool>> revokeAccessToken(
-          {required _i19.TokenClientProps? props}) =>
+  _i19.Future<_i2.Either<_i20.Failure, bool>> revokeAccessToken(
+          {required _i21.TokenClientProps? props}) =>
       (super.noSuchMethod(
         Invocation.method(
           #revokeAccessToken,
           [],
           {#props: props},
         ),
-        returnValue: _i17.Future<_i2.Either<_i18.Failure, bool>>.value(
-            _FakeEither_0<_i18.Failure, bool>(
+        returnValue: _i19.Future<_i2.Either<_i20.Failure, bool>>.value(
+            _FakeEither_0<_i20.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -223,8 +248,8 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
           ),
         )),
         returnValueForMissingStub:
-            _i17.Future<_i2.Either<_i18.Failure, bool>>.value(
-                _FakeEither_0<_i18.Failure, bool>(
+            _i19.Future<_i2.Either<_i20.Failure, bool>>.value(
+                _FakeEither_0<_i20.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -232,34 +257,34 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
             {#props: props},
           ),
         )),
-      ) as _i17.Future<_i2.Either<_i18.Failure, bool>>);
+      ) as _i19.Future<_i2.Either<_i20.Failure, bool>>);
   @override
-  _i17.Future<_i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>
+  _i19.Future<_i2.Either<_i20.Failure, _i22.ValidateTokenResponse>>
       verifyToken() => (super.noSuchMethod(
             Invocation.method(
               #verifyToken,
               [],
             ),
-            returnValue: _i17.Future<
-                    _i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i18.Failure, _i20.ValidateTokenResponse>(
+            returnValue: _i19.Future<
+                    _i2.Either<_i20.Failure, _i22.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i20.Failure, _i22.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-            returnValueForMissingStub: _i17.Future<
-                    _i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i18.Failure, _i20.ValidateTokenResponse>(
+            returnValueForMissingStub: _i19.Future<
+                    _i2.Either<_i20.Failure, _i22.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i20.Failure, _i22.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-          ) as _i17
-              .Future<_i2.Either<_i18.Failure, _i20.ValidateTokenResponse>>);
+          ) as _i19
+              .Future<_i2.Either<_i20.Failure, _i22.ValidateTokenResponse>>);
 }
 
 /// A class which mocks [TwitchRepositories].
@@ -436,4 +461,28 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#streamsRepository),
         ),
       ) as _i16.StreamsRepository);
+  @override
+  _i17.ClipRepository get clipRepository => (super.noSuchMethod(
+        Invocation.getter(#clipRepository),
+        returnValue: _FakeClipRepository_15(
+          this,
+          Invocation.getter(#clipRepository),
+        ),
+        returnValueForMissingStub: _FakeClipRepository_15(
+          this,
+          Invocation.getter(#clipRepository),
+        ),
+      ) as _i17.ClipRepository);
+  @override
+  _i18.SubscriptionRepository get subscriptionRepository => (super.noSuchMethod(
+        Invocation.getter(#subscriptionRepository),
+        returnValue: _FakeSubscriptionRepository_16(
+          this,
+          Invocation.getter(#subscriptionRepository),
+        ),
+        returnValueForMissingStub: _FakeSubscriptionRepository_16(
+          this,
+          Invocation.getter(#subscriptionRepository),
+        ),
+      ) as _i18.SubscriptionRepository);
 }

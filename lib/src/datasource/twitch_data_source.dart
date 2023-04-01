@@ -2,7 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/utils/url_constants.dart';
 
-/// Interface between client and dio package
+/// A concrete implementation of the [TwitchDataSource] contract.
+/// This implementation uses the Dio HTTP client library to communicate with the Twitch API.
+///
+/// This implementation supports GET, POST, DELETE, PATCH, and PUT requests.
+///
+/// [dio] is the Dio instance used to communicate with the API.
+///
+/// [url] is the base URL of the API. By default, it is set to [UrlConstants.apiBaseUrl].
+///
+/// [TwitchApiDataSourceImpl] also handles exceptions based on the Twitch API documentation.
 class TwitchApiDataSourceImpl implements TwitchDataSource {
   final Dio dio;
   final String url;
@@ -23,7 +32,9 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
                     }),
             );
 
-  // All get requests
+  /// Makes a GET request to the Twitch API with the specified [path] and [queryParams].
+  /// Returns the response data if the request is successful.
+  /// Throws an exception if the request fails.
   @override
   Future<dynamic> get(
       {required String path, required Map<String, dynamic> queryParams}) async {
@@ -39,7 +50,9 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
-  // All posts requests
+  // Makes a POST request to the Twitch API with the specified [path], [data], and [queryParams].
+  /// Returns the response data if the request is successful.
+  /// Throws an exception if the request fails.
   @override
   Future<dynamic> post(
       {required String path,
@@ -59,7 +72,9 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
-  // All delete requests
+  /// Makes a DELETE request to the Twitch API with the specified [path], [data], and [queryParams].
+  /// Returns the response data if the request is successful.
+  /// Throws an exception if the request fails.
   @override
   Future<dynamic> delete(
       {required String path,
@@ -79,7 +94,9 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
-  // All patch requests
+  /// Makes a PATCH request to the Twitch API with the specified [path], [data], and [queryParams].
+  /// Returns the response data if the request is successful.
+  /// Throws an exception if the request fails.
   @override
   Future<dynamic> patch(
       {required String path,
@@ -98,7 +115,9 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
-  // All put requests
+  /// Makes a PUT request to the Twitch API with the specified [path], [data], and [queryParams].
+  /// Returns the response data if the request is successful.
+  /// Throws an exception if the request fails.
   @override
   Future put(
       {required String path,
@@ -117,8 +136,13 @@ class TwitchApiDataSourceImpl implements TwitchDataSource {
     }
   }
 
-  // Return exceptions
-  // Based on twitch api documentation
+  ///Private method to handle Dio errors and throw appropriate exceptions
+  ///based on the Twitch API documentation
+  ///param error The DioError that needs to be handled
+  ///throws ForbiddenRequestException if the HTTP status code is 403
+  ///throws BadRequestException if the HTTP status code is 400
+  ///throws UnauthorizedException if the HTTP status code is 401
+  ///throws ServerException if the HTTP status code is 500
   void _responseHandler(DioError error) {
     final message = error.response?.data?['message'] ?? 'Unknown error';
     if (error.response?.statusCode == 403) {

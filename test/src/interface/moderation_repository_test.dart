@@ -1,17 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
-import 'package:twitch_client/src/props/add_blocked_terms_props.dart';
-import 'package:twitch_client/src/props/get_blocked_terms_props.dart';
-import 'package:twitch_client/src/props/remove_blocked_terms_props.dart';
+import 'package:twitch_client/src/props/update_automod_props.dart';
 import 'package:twitch_client/src/response/add_blocked_terms_response.dart';
+import 'package:twitch_client/src/response/get_automod_settings_response.dart';
 import 'package:twitch_client/src/response/get_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
+import '../../json/asset_reader.dart';
 import 'moderation_repository_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
@@ -367,7 +369,6 @@ void main() {
   group('addBlockedTerms', () {
     const String path = 'moderation/blocked_terms';
     AddBlockedTermsProps propsAdd = const AddBlockedTermsProps(text: '123');
-    AddBlockedTermsProps emptyPropsAdd = const AddBlockedTermsProps(text: '');
 
     BroadcasterModeratorProps props = const BroadcasterModeratorProps(
         broadcasterId: '123', moderatorId: '123');
@@ -378,30 +379,28 @@ void main() {
 
     test('On success', () async {
       when(mockedDataSource.post(
-          path: path,
-          queryParams: props.toJson(),
-          data: propsAdd.toJson())).thenAnswer((realInvocation) async => response.toJson());
+              path: path, queryParams: props.toJson(), data: propsAdd.toJson()))
+          .thenAnswer((realInvocation) async => response.toJson());
 
       final result =
           await repository.addBlockedTerms(props: props, termsProps: propsAdd);
 
-      verify(mockedDataSource
-          .post(path: path, queryParams: props.toJson(), data: propsAdd.toJson()));
+      verify(mockedDataSource.post(
+          path: path, queryParams: props.toJson(), data: propsAdd.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<AddBlockedTermsResponse>());
     });
 
     test('On failure', () async {
       when(mockedDataSource.post(
-          path: path,
-          queryParams: props.toJson(),
-          data: propsAdd.toJson())).thenThrow(ForbiddenRequestException(message: 'message'));
+              path: path, queryParams: props.toJson(), data: propsAdd.toJson()))
+          .thenThrow(ForbiddenRequestException(message: 'message'));
 
       final result =
           await repository.addBlockedTerms(props: props, termsProps: propsAdd);
 
-      verify(mockedDataSource
-          .post(path: path, queryParams: props.toJson(), data: propsAdd.toJson()));
+      verify(mockedDataSource.post(
+          path: path, queryParams: props.toJson(), data: propsAdd.toJson()));
 
       expect(result.isLeft(), true);
       expect(result.asLeft().exception, isA<ForbiddenRequestException>());
@@ -428,10 +427,10 @@ void main() {
 
   group('removeBlockedTerm', () {
     const String path = 'moderation/blocked_terms';
-    RemoveBlockedTermsProps props =
-        const RemoveBlockedTermsProps(broadcasterId: '123', moderatorId: '1222', id: '123');
-    RemoveBlockedTermsProps emptyProps =
-    const RemoveBlockedTermsProps(broadcasterId: '', moderatorId: '', id: '');
+    RemoveBlockedTermsProps props = const RemoveBlockedTermsProps(
+        broadcasterId: '123', moderatorId: '1222', id: '123');
+    RemoveBlockedTermsProps emptyProps = const RemoveBlockedTermsProps(
+        broadcasterId: '', moderatorId: '', id: '');
 
     test('On success', () async {
       when(mockedDataSource.delete(
@@ -472,6 +471,117 @@ void main() {
 
       verifyNever(mockedDataSource
           .delete(path: path, queryParams: emptyProps.toJson(), data: {}));
+    });
+  });
+
+  group('getAutomodSettings', () {
+    const props = BroadcasterModeratorProps(
+      broadcasterId: '123',
+      moderatorId: '456',
+    );
+    final response =
+        jsonDecode(assetReader('response_get_automod_settings.json'));
+
+    test(
+        'should return GetAutomodSettingsResponse when the request is successful',
+        () async {
+      when(mockedDataSource.get(
+              path: anyNamed('path'), queryParams: anyNamed('queryParams')))
+          .thenAnswer((_) async => response);
+
+      final result = await repository.getAutomodSettings(props: props);
+
+      expect(result.asRight(), GetAutomodSettingsResponse.fromJson(response));
+      expect(result.isRight(), true);
+    });
+
+    test('should return Failure when the request fails', () async {
+      when(mockedDataSource.get(
+              path: anyNamed('path'), queryParams: anyNamed('queryParams')))
+          .thenThrow(Exception('Something went wrong'));
+
+      final result = await repository.getAutomodSettings(props: props);
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<Exception>());
+    });
+
+    test('should throw AssertionError if broadcasterId is empty', () async {
+      const invalidProps = BroadcasterModeratorProps(
+        broadcasterId: '',
+        moderatorId: '456',
+      );
+
+      expect(() => repository.getAutomodSettings(props: invalidProps),
+          throwsA(isA<AssertionError>()));
+    });
+
+    test('should throw AssertionError if moderatorId is empty', () async {
+      const invalidProps = BroadcasterModeratorProps(
+        broadcasterId: '123',
+        moderatorId: '',
+      );
+
+      expect(() => repository.getAutomodSettings(props: invalidProps),
+          throwsA(isA<AssertionError>()));
+    });
+  });
+
+  group('updateAutomodSettings', () {
+    const props =
+        BroadcasterModeratorProps(broadcasterId: '123', moderatorId: '456');
+    const updateProps = UpdateAutomodSettingsProps();
+    final response =
+        jsonDecode(assetReader('response_get_automod_settings.json'));
+
+    test(
+        'should return GetAutomodSettingsResponse when the request is successful',
+        () async {
+      when(mockedDataSource.put(
+              path: anyNamed('path'),
+              queryParams: anyNamed('queryParams'),
+              data: anyNamed('data')))
+          .thenAnswer((_) async => response);
+
+      final result = await repository.updateAutomodSettings(
+          props: props, updateProps: updateProps);
+
+      expect(result.asRight(), GetAutomodSettingsResponse.fromJson(response));
+      expect(result.isRight(), true);
+    });
+
+    test('should return Failure when the request fails', () async {
+      when(mockedDataSource.put(
+              path: anyNamed('path'),
+              queryParams: anyNamed('queryParams'),
+              data: anyNamed('data')))
+          .thenThrow(Exception('Something went wrong'));
+
+      final result = await repository.updateAutomodSettings(
+          props: props, updateProps: updateProps);
+
+      expect(result.isLeft(), true);
+      expect(result.asLeft().exception, isA<Exception>());
+    });
+
+    test('should throw AssertionError if broadcasterId is empty', () async {
+      const invalidProps =
+          BroadcasterModeratorProps(broadcasterId: '', moderatorId: '456');
+
+      expect(
+          () => repository.updateAutomodSettings(
+              props: invalidProps, updateProps: updateProps),
+          throwsA(isA<AssertionError>()));
+    });
+
+    test('should throw AssertionError if moderatorId is empty', () async {
+      const invalidProps =
+          BroadcasterModeratorProps(broadcasterId: '123', moderatorId: '');
+
+      expect(
+          () => repository.updateAutomodSettings(
+              props: invalidProps, updateProps: updateProps),
+          throwsA(isA<AssertionError>()));
     });
   });
 }
