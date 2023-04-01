@@ -114,3 +114,7 @@ Please call validateToken() to do this request.
 - Get Streams 
 - Get Followed Streams
 - Get Stream Key
+- Add Send Chat Announcement
+- Add Add Blocked Terms
+- Add Get Blocked Terms
+- Add Remove Blocked Terms
