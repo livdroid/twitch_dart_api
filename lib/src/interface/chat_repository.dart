@@ -74,11 +74,11 @@ class ChatInterfaceImpl implements ChatInterface {
     assert(chatProps.message.length < 501);
 
     try {
-      final response = await _twitchDataSource.post(
+      await _twitchDataSource.post(
           path: '$_path/announcements',
           queryParams: props.toJson(),
           data: chatProps.toJson());
-      return Right(true);
+      return const Right(true);
     } on Exception catch (e) {
       return Left(Failure(e));
     }
