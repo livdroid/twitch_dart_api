@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/props/get_clip_props.dart';
 import 'package:twitch_client/src/response/create_clip_response.dart';
 import 'package:twitch_client/src/response/get_clip_response.dart';
 import 'package:twitch_client/twitch_client.dart';

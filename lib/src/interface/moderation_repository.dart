@@ -10,9 +10,11 @@ import 'package:twitch_client/src/props/get_blocked_terms_props.dart';
 import 'package:twitch_client/src/props/moderation_props.dart';
 import 'package:twitch_client/src/props/remove_blocked_terms_props.dart';
 import 'package:twitch_client/src/props/remove_moderator_props.dart';
+import 'package:twitch_client/src/props/update_automod_props.dart';
 import 'package:twitch_client/src/response/add_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/ban_user_response.dart';
 import 'package:twitch_client/src/response/banned_users_response.dart';
+import 'package:twitch_client/src/response/get_automod_settings_response.dart';
 import 'package:twitch_client/src/response/get_blocked_terms_response.dart';
 import 'package:twitch_client/src/response/moderator_response.dart';
 
@@ -135,7 +137,9 @@ class ModerationInterfaceImpl implements ModerationInterface {
 
     try {
       final response = await _twitchDataSource.post(
-          path: '$_path/blocked_terms', queryParams: props.toJson(), data: termsProps.toJson());
+          path: '$_path/blocked_terms',
+          queryParams: props.toJson(),
+          data: termsProps.toJson());
       return Right(AddBlockedTermsResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -171,6 +175,39 @@ class ModerationInterfaceImpl implements ModerationInterface {
       return Left(Failure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, GetAutomodSettingsResponse>> getAutomodSettings(
+      {required BroadcasterModeratorProps props}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
+
+    try {
+      final response = await _twitchDataSource.get(
+          path: '$_path/automod/settings', queryParams: props.toJson());
+      return Right(GetAutomodSettingsResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetAutomodSettingsResponse>> updateAutomodSettings(
+      {required BroadcasterModeratorProps props,
+      required UpdateAutomodSettingsProps updateProps}) async {
+    assert(props.broadcasterId.isNotEmpty);
+    assert(props.moderatorId.isNotEmpty);
+
+    try {
+      final response = await _twitchDataSource.put(
+          path: '$_path/automod/settings',
+          queryParams: props.toJson(),
+          data: updateProps.toJson());
+      return Right(GetAutomodSettingsResponse.fromJson(response ?? {}));
+    } on Exception catch (e) {
+      return Left(Failure(e));
+    }
+  }
 }
 
 abstract class ModerationInterface {
@@ -201,4 +238,11 @@ abstract class ModerationInterface {
 
   Future<Either<Failure, bool>> removeBlockedTerms(
       {required RemoveBlockedTermsProps props});
+
+  Future<Either<Failure, GetAutomodSettingsResponse>> getAutomodSettings(
+      {required BroadcasterModeratorProps props});
+
+  Future<Either<Failure, GetAutomodSettingsResponse>> updateAutomodSettings(
+      {required BroadcasterModeratorProps props,
+      required UpdateAutomodSettingsProps updateProps});
 }
