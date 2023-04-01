@@ -37,6 +37,7 @@ export 'src/props/modify_channel_info_props.dart';
 export 'src/props/polls_props.dart';
 export 'src/props/chat_annoucement_props.dart';
 export 'src/props/predictions_props.dart';
+export 'src/props/create_clip_props.dart';
 export 'src/props/remove_moderator_props.dart';
 export 'src/props/remove_vip_props.dart';
 export 'src/props/start_commercial_props.dart';
