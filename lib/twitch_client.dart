@@ -10,6 +10,7 @@ export 'src/props/ban_user_data_props.dart';
 export 'src/props/ban_user_props.dart';
 export 'src/props/bits_leaderboard_props.dart';
 export 'src/props/create_clip_props.dart';
+export 'src/props/update_automod_props.dart';
 export 'src/props/get_clip_props.dart';
 export 'src/props/block_user_props.dart';
 export 'src/props/broadcaster_id_props.dart';
