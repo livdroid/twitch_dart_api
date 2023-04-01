@@ -11,17 +11,16 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-### This package is a work in progress and doesn't have everything implemented yet but it will be updated regularly.
-
+### 🚧 Work in Progress 🚧
 <em>
-PS : Event subs are still a work in progress.
-
-PSS : This is my first library ever, any kind advice/criticism is very welcome :)
+📝 PS: Event subs are still a work in progress.
 </em>
 
+# Twitch Client 🎮🎙
+
 Twitch Client is a package that allows you to connect with the Twitch API and
-interact with data like Bits, Channels, Chats, Games, and Moderation ...
-Twitch API documentation: <https://dev.twitch.tv/docs/api>>
+interact with data like Bits, Channels, Chats, Games, and Moderation.
+You can find the Twitch API documentation [here](https://dev.twitch.tv/docs/api).
 
 # Features
 
@@ -60,7 +59,7 @@ twitchInterface.init(url: 'url');
 
 ## Additional information
 
-IMPORTANT: Verify token
+⚠️ IMPORTANT: Verify token ⚠️
 
 As per twitch documentation, you should validate the access token every hour,
 they can audit your app and ask you to resolve the issue if you don't do it.
@@ -114,7 +113,12 @@ Please call validateToken() to do this request.
 - Get Streams 
 - Get Followed Streams
 - Get Stream Key
-- Add Send Chat Announcement
-- Add Add Blocked Terms
-- Add Get Blocked Terms
-- Add Remove Blocked Terms
+- Send Chat Announcement
+- Add Blocked Terms
+- Get Blocked Terms
+- Remove Blocked Terms
+- Create Clip
+- Get Clip
+- Get AutoMod Settings
+- Update AutoMod Settings
+- Get Broadcaster Subscriptions
