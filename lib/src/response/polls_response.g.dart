@@ -76,28 +76,3 @@ Map<String, dynamic> _$$_PollsResponseDataToJson(
   writeNotNull('started_at', instance.startedAt);
   return val;
 }
-
-_$_Choices _$$_ChoicesFromJson(Map<String, dynamic> json) => _$_Choices(
-      id: json['id'] as String?,
-      title: json['title'] as String?,
-      votes: json['votes'] as int?,
-      channelPointsVotes: json['channel_points_votes'] as int?,
-      bitsVotes: json['bits_votes'] as int?,
-    );
-
-Map<String, dynamic> _$$_ChoicesToJson(_$_Choices instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  writeNotNull('title', instance.title);
-  writeNotNull('votes', instance.votes);
-  writeNotNull('channel_points_votes', instance.channelPointsVotes);
-  writeNotNull('bits_votes', instance.bitsVotes);
-  return val;
-}

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:twitch_client/src/response/pagination_response.dart';
+import 'package:twitch_client/twitch_client.dart';
 
 part 'polls_response.freezed.dart';
 
@@ -34,18 +34,4 @@ class PollsResponseData with _$PollsResponseData {
 
   factory PollsResponseData.fromJson(Map<String, dynamic> json) =>
       _$PollsResponseDataFromJson(json);
-}
-
-@freezed
-class Choices with _$Choices {
-  const factory Choices({
-    String? id,
-    String? title,
-    int? votes,
-    int? channelPointsVotes,
-    int? bitsVotes,
-  }) = _Choices;
-
-  factory Choices.fromJson(Map<String, dynamic> json) =>
-      _$ChoicesFromJson(json);
 }

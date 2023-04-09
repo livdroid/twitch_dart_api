@@ -6,8 +6,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/interface/clip_repository.dart';
-import 'package:twitch_client/src/response/create_clip_response.dart';
-import 'package:twitch_client/src/response/get_clip_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import '../../json/asset_reader.dart';
