@@ -6,7 +6,6 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_repository.dart';
-import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import '../../json/asset_reader.dart';
@@ -16,7 +15,8 @@ import 'channel_repository_test.mocks.dart';
 void main() {
   const String path = 'channels';
   final mockedDataSource = MockTwitchDataSource();
-  final interface = ChannelInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
+  final interface =
+      ChannelInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getChannelInformation', () {
     const props = BroadcasterProps(broadcasterId: '12345');

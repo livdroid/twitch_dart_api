@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/token_repository.dart';
 import 'package:twitch_client/src/interface/twitch_repositories.dart';
-import 'package:twitch_client/src/response/validate_token_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'twitch_interface_test.mocks.dart';
@@ -69,8 +68,8 @@ void main() {
       when(mockTwitchRepositories.tokenRepository)
           .thenReturn(mockTokenInterface);
 
-      when(mockTokenInterface.verifyToken()).thenAnswer((_) async => Right(
-          ValidateTokenResponse(
+      when(mockTokenInterface.verifyToken()).thenAnswer((_) async =>
+          const Right(ValidateTokenResponse(
               clientId: 'clientId',
               login: 'login',
               scopes: ['scopes'],

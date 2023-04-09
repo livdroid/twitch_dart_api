@@ -2,10 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
-import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
-import 'package:twitch_client/src/response/update_custom_reward_redemption_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'moderation_repository_test.mocks.dart';
@@ -302,7 +300,8 @@ void main() {
 
   group('UpdateCustomRewardRedemption', () {
     const String path = 'channel_points/custom_rewards/redemptions';
-    UpdateCustomRewardRedemptionStatusProps props = const UpdateCustomRewardRedemptionStatusProps(status: 'CANCELED');
+    UpdateCustomRewardRedemptionStatusProps props =
+        const UpdateCustomRewardRedemptionStatusProps(status: 'CANCELED');
     UpdateCustomRewardRedemptionProps queryProps =
         const UpdateCustomRewardRedemptionProps(
             broadcasterId: '1', id: '1', rewardId: '1');

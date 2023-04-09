@@ -1,11 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/response/create_custom_reward_response.dart';
 import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
-import 'package:twitch_client/src/response/update_custom_reward_redemption_response.dart';
 import 'package:twitch_client/twitch_client.dart';
-
 
 class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
   static const String _path = 'channel_points';
@@ -101,7 +98,10 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
   }
 
   @override
-  Future<Either<Failure, UpdateCustomRewardRedemptionResponse>> updateCustomRewardRedemption({required UpdateCustomRewardRedemptionProps queryProps, required UpdateCustomRewardRedemptionStatusProps props}) async {
+  Future<Either<Failure, UpdateCustomRewardRedemptionResponse>>
+      updateCustomRewardRedemption(
+          {required UpdateCustomRewardRedemptionProps queryProps,
+          required UpdateCustomRewardRedemptionStatusProps props}) async {
     assert(queryProps.broadcasterId.isNotEmpty);
     assert(queryProps.id.isNotEmpty);
     assert(queryProps.rewardId.isNotEmpty);
@@ -111,7 +111,8 @@ class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
           path: '$_path/custom_rewards/redemptions',
           data: props.toJson(),
           queryParams: queryProps.toJson());
-      return Right(UpdateCustomRewardRedemptionResponse.fromJson(response ?? {}));
+      return Right(
+          UpdateCustomRewardRedemptionResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
     }
@@ -135,9 +136,10 @@ abstract class ChannelPointsRepository {
 
   Future<Either<Failure, GetCustomRewardsResponse>> updateCustomReward(
       {required BroadcasterAndIdProps queryProps,
-        required UpdateCustomRewardProps props});
+      required UpdateCustomRewardProps props});
 
-  Future<Either<Failure, UpdateCustomRewardRedemptionResponse>> updateCustomRewardRedemption(
-      {required UpdateCustomRewardRedemptionProps queryProps,
-        required UpdateCustomRewardRedemptionStatusProps props});
+  Future<Either<Failure, UpdateCustomRewardRedemptionResponse>>
+      updateCustomRewardRedemption(
+          {required UpdateCustomRewardRedemptionProps queryProps,
+          required UpdateCustomRewardRedemptionStatusProps props});
 }

@@ -258,6 +258,7 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
           ),
         )),
       ) as _i19.Future<_i2.Either<_i20.Failure, bool>>);
+
   @override
   _i19.Future<_i2.Either<_i20.Failure, _i22.ValidateTokenResponse>>
       verifyToken() => (super.noSuchMethod(
@@ -304,6 +305,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#twitchRepositories),
         ),
       ) as _i3.TwitchRepositories);
+
   @override
   _i4.BitsInterface get bitsRepository => (super.noSuchMethod(
         Invocation.getter(#bitsRepository),
@@ -316,6 +318,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#bitsRepository),
         ),
       ) as _i4.BitsInterface);
+
   @override
   _i5.ChannelInterface get channelRepository => (super.noSuchMethod(
         Invocation.getter(#channelRepository),
@@ -328,6 +331,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#channelRepository),
         ),
       ) as _i5.ChannelInterface);
+
   @override
   _i6.ChatInterface get chatRepository => (super.noSuchMethod(
         Invocation.getter(#chatRepository),
@@ -340,6 +344,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#chatRepository),
         ),
       ) as _i6.ChatInterface);
+
   @override
   _i7.ModerationInterface get moderationRepository => (super.noSuchMethod(
         Invocation.getter(#moderationRepository),
@@ -352,6 +357,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#moderationRepository),
         ),
       ) as _i7.ModerationInterface);
+
   @override
   _i8.TokenInterface get tokenRepository => (super.noSuchMethod(
         Invocation.getter(#tokenRepository),
@@ -364,6 +370,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#tokenRepository),
         ),
       ) as _i8.TokenInterface);
+
   @override
   _i9.UserInterface get userRepository => (super.noSuchMethod(
         Invocation.getter(#userRepository),
@@ -376,6 +383,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#userRepository),
         ),
       ) as _i9.UserInterface);
+
   @override
   _i10.VideoRepository get videoRepository => (super.noSuchMethod(
         Invocation.getter(#videoRepository),
@@ -388,6 +396,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#videoRepository),
         ),
       ) as _i10.VideoRepository);
+
   @override
   _i11.AnalyticsRepository get analyticsRepository => (super.noSuchMethod(
         Invocation.getter(#analyticsRepository),
@@ -400,6 +409,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#analyticsRepository),
         ),
       ) as _i11.AnalyticsRepository);
+
   @override
   _i12.PollsRepository get pollsRepository => (super.noSuchMethod(
         Invocation.getter(#pollsRepository),
@@ -412,6 +422,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#pollsRepository),
         ),
       ) as _i12.PollsRepository);
+
   @override
   _i13.PredictionRepository get predictionRepository => (super.noSuchMethod(
         Invocation.getter(#predictionRepository),
@@ -424,6 +435,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#predictionRepository),
         ),
       ) as _i13.PredictionRepository);
+
   @override
   _i14.EventSubInterface get eventRepository => (super.noSuchMethod(
         Invocation.getter(#eventRepository),
@@ -436,6 +448,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#eventRepository),
         ),
       ) as _i14.EventSubInterface);
+
   @override
   _i15.ChannelPointsRepository get channelPointsRepository =>
       (super.noSuchMethod(
@@ -449,6 +462,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#channelPointsRepository),
         ),
       ) as _i15.ChannelPointsRepository);
+
   @override
   _i16.StreamsRepository get streamsRepository => (super.noSuchMethod(
         Invocation.getter(#streamsRepository),
@@ -461,6 +475,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#streamsRepository),
         ),
       ) as _i16.StreamsRepository);
+
   @override
   _i17.ClipRepository get clipRepository => (super.noSuchMethod(
         Invocation.getter(#clipRepository),
@@ -473,6 +488,7 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#clipRepository),
         ),
       ) as _i17.ClipRepository);
+
   @override
   _i18.SubscriptionRepository get subscriptionRepository => (super.noSuchMethod(
         Invocation.getter(#subscriptionRepository),
