@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:twitch_client/twitch_client.dart';
 
 part 'prediction_response.g.dart';
 
@@ -55,27 +56,4 @@ class PredictionResponseData {
 
   factory PredictionResponseData.fromJson(Map<String, dynamic> json) =>
       _$PredictionResponseDataFromJson(json);
-}
-
-@JsonSerializable()
-class Outcomes {
-  final String? id;
-  final String? title;
-  final int? users;
-  final int? channelPoints;
-  final dynamic? topPredictors;
-  final String? color;
-
-  Outcomes(
-      {this.id,
-      this.title,
-      this.users,
-      this.channelPoints,
-      this.topPredictors,
-      this.color});
-
-  Map<String, dynamic> toJson() => _$OutcomesToJson(this);
-
-  factory Outcomes.fromJson(Map<String, dynamic> json) =>
-      _$OutcomesFromJson(json);
 }

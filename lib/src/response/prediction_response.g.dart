@@ -70,30 +70,3 @@ Map<String, dynamic> _$PredictionResponseDataToJson(
   writeNotNull('locked_at', instance.lockedAt);
   return val;
 }
-
-Outcomes _$OutcomesFromJson(Map<String, dynamic> json) => Outcomes(
-      id: json['id'] as String?,
-      title: json['title'] as String?,
-      users: json['users'] as int?,
-      channelPoints: json['channel_points'] as int?,
-      topPredictors: json['top_predictors'],
-      color: json['color'] as String?,
-    );
-
-Map<String, dynamic> _$OutcomesToJson(Outcomes instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  writeNotNull('title', instance.title);
-  writeNotNull('users', instance.users);
-  writeNotNull('channel_points', instance.channelPoints);
-  writeNotNull('top_predictors', instance.topPredictors);
-  writeNotNull('color', instance.color);
-  return val;
-}
