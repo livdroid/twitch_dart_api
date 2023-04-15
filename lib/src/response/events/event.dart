@@ -163,17 +163,6 @@ class MaxPerPerStream with _$MaxPerPerStream {
       _$MaxPerPerStreamFromJson(json);
 }
 
-@freezed
-class Reward with _$Reward {
-  const factory Reward({
-    String? id,
-    String? title,
-    int? cost,
-    String? prompt,
-  }) = _Reward;
-
-  factory Reward.fromJson(Map<String, dynamic> json) => _$RewardFromJson(json);
-}
 
 @freezed
 class TsVoting with _$TsVoting {

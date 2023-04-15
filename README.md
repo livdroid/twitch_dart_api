@@ -13,7 +13,8 @@ and the Flutter guide for
 
 ### 🚧 Work in Progress 🚧
 <em>
-📝 PS: Event subs are still a work in progress.
+📝 PS: Event subs are still a work in progress but since it's out of beta you can start
+playing with it with the 0.0.8.
 </em>
 
 # Twitch Client 🎮🎙
@@ -56,6 +57,18 @@ parse the URL to keep the access token and add it to the TwitchInterface, this i
 ```dart
 twitchInterface.init(url: 'url');
 ```
+
+Now you should be connected, here's how to call a method :
+
+```dart
+  final data = await twitchInterface.streamsRepository.getFollowedStreams(props: GetFollowedStreamsProps(userId: twitchInterface.userId));
+```
+
+To get the id of the user that isConnected :
+
+```dart
+ twitchInterface.userId
+ ```
 
 ## Additional information
 

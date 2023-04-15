@@ -216,7 +216,7 @@ mixin _$GetBlockedTermsResponseData {
   String? get text => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  dynamic? get expiresAt => throw _privateConstructorUsedError;
+  String? get expiresAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -239,7 +239,7 @@ abstract class $GetBlockedTermsResponseDataCopyWith<$Res> {
       String? text,
       DateTime? createdAt,
       DateTime? updatedAt,
-      dynamic? expiresAt});
+      String? expiresAt});
 }
 
 /// @nodoc
@@ -292,7 +292,7 @@ class _$GetBlockedTermsResponseDataCopyWithImpl<$Res,
       expiresAt: freezed == expiresAt
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
     ) as $Val);
   }
 }
@@ -313,7 +313,7 @@ abstract class _$$_GetBlockedTermsResponseDataCopyWith<$Res>
       String? text,
       DateTime? createdAt,
       DateTime? updatedAt,
-      dynamic? expiresAt});
+      String? expiresAt});
 }
 
 /// @nodoc
@@ -365,7 +365,7 @@ class __$$_GetBlockedTermsResponseDataCopyWithImpl<$Res>
       expiresAt: freezed == expiresAt
           ? _value.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
     ));
   }
 }
@@ -398,7 +398,7 @@ class _$_GetBlockedTermsResponseData implements _GetBlockedTermsResponseData {
   @override
   final DateTime? updatedAt;
   @override
-  final dynamic? expiresAt;
+  final String? expiresAt;
 
   @override
   String toString() {
@@ -420,20 +420,14 @@ class _$_GetBlockedTermsResponseData implements _GetBlockedTermsResponseData {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other.expiresAt, expiresAt));
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      broadcasterId,
-      moderatorId,
-      id,
-      text,
-      createdAt,
-      updatedAt,
-      const DeepCollectionEquality().hash(expiresAt));
+  int get hashCode => Object.hash(runtimeType, broadcasterId, moderatorId, id,
+      text, createdAt, updatedAt, expiresAt);
 
   @JsonKey(ignore: true)
   @override
@@ -459,7 +453,7 @@ abstract class _GetBlockedTermsResponseData
       final String? text,
       final DateTime? createdAt,
       final DateTime? updatedAt,
-      final dynamic? expiresAt}) = _$_GetBlockedTermsResponseData;
+      final String? expiresAt}) = _$_GetBlockedTermsResponseData;
 
   factory _GetBlockedTermsResponseData.fromJson(Map<String, dynamic> json) =
       _$_GetBlockedTermsResponseData.fromJson;
@@ -477,7 +471,7 @@ abstract class _GetBlockedTermsResponseData
   @override
   DateTime? get updatedAt;
   @override
-  dynamic? get expiresAt;
+  String? get expiresAt;
   @override
   @JsonKey(ignore: true)
   _$$_GetBlockedTermsResponseDataCopyWith<_$_GetBlockedTermsResponseData>

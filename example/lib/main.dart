@@ -48,32 +48,18 @@ class Home extends StatelessWidget {
               child: const Text('Parse Url and init library')),
           TextButton(
               onPressed: () async {
-                // Call init with the url retrieved after redirection
-                final events = await twitchInterface.event
-                    .getEventSubSubscriptions(props: GetEventSubProps());
-                events.fold((l) => print(l.exception), (r) {
-                  print('dataaaa');
-                  r.data?.forEach((event) async {
-                    final deleted = await twitchInterface.event
-                        .deleteEventSubSubscriptions(
-                            props: GetEventSubProps(id: event.id));
-                    print(deleted.isRight());
-                  });
-                });
-              },
-              child: const Text('Stop event subs')),
-          TextButton(
-              onPressed: () async {
                 final stream = await twitchInterface.event.subscribeTo(
-                    type: TwitchSubscriptionType.allSubscriptions.join("&"),
-                    userId: '123');
+                    type: TwitchSubscriptionType.channelUpdate,
+                    userId: twitchInterface.userId);
                 stream.listen((event) {
                   print(event.runtimeType);
                   if (event.runtimeType == WSEventResponse) {
-                    final ev = event as WSEventResponse;
+                   /// usually a connection status
                   } else if (event.runtimeType == SubscriptionEvent) {
+                    /// an actual event you sub to
                     final ev = event as SubscriptionEvent;
-                    print('event received ${ev.toString()}');
+                    print('event received ${ev.subscriptionType}');
+                    print('event received ${ev.event?.title}');
                   }
                 });
               },
@@ -84,7 +70,7 @@ class Home extends StatelessWidget {
               final data = await twitchInterface.streamsRepository
                   .getFollowedStreams(
                       props: GetFollowedStreamsProps(
-                          userId: twitchInterface.tokenResponse?.userId ?? ''));
+                          userId: twitchInterface.userId));
               data.fold(
                   (l) => print(l.exception),
                   (r) => showDialog(

@@ -6,8 +6,6 @@ import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
-import 'package:twitch_client/src/response/get_automod_settings_response.dart';
-import 'package:twitch_client/src/response/get_blocked_terms_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import '../../json/asset_reader.dart';

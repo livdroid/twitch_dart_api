@@ -367,29 +367,6 @@ Map<String, dynamic> _$$_MaxPerPerStreamToJson(_$_MaxPerPerStream instance) {
   return val;
 }
 
-_$_Reward _$$_RewardFromJson(Map<String, dynamic> json) => _$_Reward(
-      id: json['id'] as String?,
-      title: json['title'] as String?,
-      cost: json['cost'] as int?,
-      prompt: json['prompt'] as String?,
-    );
-
-Map<String, dynamic> _$$_RewardToJson(_$_Reward instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', instance.id);
-  writeNotNull('title', instance.title);
-  writeNotNull('cost', instance.cost);
-  writeNotNull('prompt', instance.prompt);
-  return val;
-}
-
 _$_TsVoting _$$_TsVotingFromJson(Map<String, dynamic> json) => _$_TsVoting(
       isEnabled: json['is_enabled'] as bool?,
       amountPerVote: json['amount_per_vote'] as int?,

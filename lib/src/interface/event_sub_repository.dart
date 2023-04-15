@@ -61,7 +61,7 @@ class EventSubInterfaceImpl implements EventSubInterface {
   Future<Stream<dynamic>> subscribeTo(
       {required String type, required String userId}) async {
     final channel =
-        IOWebSocketChannel.connect(Uri.parse('ws://127.0.0.1:8080/ws'));
+        IOWebSocketChannel.connect(Uri.parse('wss://eventsub.wss.twitch.tv/ws'));
     channel.stream.listen((message) async {
       print('message');
     }).onData((eventData) async {
@@ -80,12 +80,13 @@ class EventSubInterfaceImpl implements EventSubInterface {
         final eventD = jsonDecode(eventData);
         if (eventD['metadata']['message_type'] == 'session_keepalive') {
           /// KeepAlive Event
+          /// TODO : Do something with it
         } else {
           /// Notification Event
           final data = eventD['payload']['event'];
           final event = Event.fromJson(data);
           final cat = TwitchSubscriptionType.allSubscriptions.singleWhere(
-              (element) => element == eventD['metadata']['message_type'],
+              (element) => element == eventD['metadata']['subscription_type'],
               orElse: () => '');
           final subEvent =
               SubscriptionEvent(subscriptionType: cat, event: event);

@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/response/get_custom_reward_redemptions_response.dart';
-import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 class ChannelPointsRepositoryImpl implements ChannelPointsRepository {
