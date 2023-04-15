@@ -5,6 +5,7 @@
 * Add sub events now that websocket is out of beta
 * Add sub events to example
 * Update Readme
+* Update Example
 
 ## 0.0.7
 
