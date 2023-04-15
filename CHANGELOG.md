@@ -1,3 +1,8 @@
+## 0.0.8
+
+* Add missings exports
+* Update dependencies
+
 ## 0.0.7
 
 * Add missing exports
