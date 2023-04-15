@@ -1,5 +1,6 @@
 library twitch_client;
 
+export 'src/response/events/event.dart';
 export 'src/twitch_interface.dart';
 export 'src/utils/extensions.dart';
 export 'src/error/failure.dart';
@@ -88,7 +89,6 @@ export 'src/response/get_automod_settings_response.dart';
 export 'src/response/get_blocked_terms_response.dart';
 export 'src/response/get_broadcaster_subscription_response.dart';
 export 'src/response/get_clip_response.dart';
-export 'src/response/get_custom_reward_redemptions_response.dart';
 export 'src/response/get_custom_rewards_response.dart';
 export 'src/response/get_streams_response.dart';
 export 'src/response/image_response.dart';

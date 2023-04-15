@@ -2,6 +2,7 @@
 
 * Add missings exports
 * Update dependencies
+* Add sub events now that websocket is out of beta
 
 ## 0.0.7
 

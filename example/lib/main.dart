@@ -47,6 +47,38 @@ class Home extends StatelessWidget {
               },
               child: const Text('Parse Url and init library')),
           TextButton(
+              onPressed: () async {
+                // Call init with the url retrieved after redirection
+                final events = await twitchInterface.event
+                    .getEventSubSubscriptions(props: GetEventSubProps());
+                events.fold((l) => print(l.exception), (r) {
+                  print('dataaaa');
+                  r.data?.forEach((event) async {
+                    final deleted = await twitchInterface.event
+                        .deleteEventSubSubscriptions(
+                            props: GetEventSubProps(id: event.id));
+                    print(deleted.isRight());
+                  });
+                });
+              },
+              child: const Text('Stop event subs')),
+          TextButton(
+              onPressed: () async {
+                final stream = await twitchInterface.event.subscribeTo(
+                    type: TwitchSubscriptionType.allSubscriptions.join("&"),
+                    userId: '123');
+                stream.listen((event) {
+                  print(event.runtimeType);
+                  if (event.runtimeType == WSEventResponse) {
+                    final ev = event as WSEventResponse;
+                  } else if (event.runtimeType == SubscriptionEvent) {
+                    final ev = event as SubscriptionEvent;
+                    print('event received ${ev.toString()}');
+                  }
+                });
+              },
+              child: const Text('WebSocket')),
+          TextButton(
             child: const Text('getFollowedStreams'),
             onPressed: () async {
               final data = await twitchInterface.streamsRepository
