@@ -79,7 +79,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.3"
+    version: "5.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -239,7 +239,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.6"
+    version: "0.0.7"
   typed_data:
     dependency: transitive
     description:
