@@ -15,7 +15,8 @@ import 'bits_repository_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<TwitchDataSource>()])
 void main() {
   final mockedDataSource = MockTwitchDataSource();
-  final bitsInterface = BitsInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
+  final bitsInterface =
+      BitsInterfaceImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getBitsLeaderBoard', () {
     const props = BitsLeaderBoardProps();

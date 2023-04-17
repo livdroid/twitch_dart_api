@@ -1,3 +1,8 @@
+## 0.0.7
+
+* Add missing exports
+* Optimize imports
+
 ## 0.0.6
 
 * Update documentation about decommissioned endpoint GetUserFollow

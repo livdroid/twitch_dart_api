@@ -2,14 +2,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
-import 'package:twitch_client/src/response/polls_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'analytics_repository_test.mocks.dart';
 
 void main() {
   final mockedDataSource = MockTwitchDataSource();
-  final repository = PollsRepositoryImpl('token', 'clientid', dataSource: mockedDataSource);
+  final repository =
+      PollsRepositoryImpl('token', 'clientid', dataSource: mockedDataSource);
 
   group('getPolls', () {
     const String path = 'polls';
@@ -22,8 +22,7 @@ void main() {
 
       final result = await repository.getPolls(props: props);
 
-      verify(
-          mockedDataSource.get(path: path, queryParams: props.toJson()));
+      verify(mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isRight(), true);
       expect(result.asRight(), isA<PollsResponse>());
     });
@@ -34,8 +33,7 @@ void main() {
 
       final result = await repository.getPolls(props: props);
 
-      verify(
-          mockedDataSource.get(path: path, queryParams: props.toJson()));
+      verify(mockedDataSource.get(path: path, queryParams: props.toJson()));
       expect(result.isLeft(), true);
     });
   });

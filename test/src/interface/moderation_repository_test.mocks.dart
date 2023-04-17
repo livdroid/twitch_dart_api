@@ -40,6 +40,7 @@ class MockTwitchDataSource extends _i1.Mock implements _i2.TwitchDataSource {
         returnValue: _i3.Future<dynamic>.value(),
         returnValueForMissingStub: _i3.Future<dynamic>.value(),
       ) as _i3.Future<dynamic>);
+
   @override
   _i3.Future<dynamic> patch({
     required String? path,
@@ -59,6 +60,7 @@ class MockTwitchDataSource extends _i1.Mock implements _i2.TwitchDataSource {
         returnValue: _i3.Future<dynamic>.value(),
         returnValueForMissingStub: _i3.Future<dynamic>.value(),
       ) as _i3.Future<dynamic>);
+
   @override
   _i3.Future<dynamic> post({
     required String? path,
@@ -78,6 +80,7 @@ class MockTwitchDataSource extends _i1.Mock implements _i2.TwitchDataSource {
         returnValue: _i3.Future<dynamic>.value(),
         returnValueForMissingStub: _i3.Future<dynamic>.value(),
       ) as _i3.Future<dynamic>);
+
   @override
   _i3.Future<dynamic> delete({
     required String? path,
@@ -97,6 +100,7 @@ class MockTwitchDataSource extends _i1.Mock implements _i2.TwitchDataSource {
         returnValue: _i3.Future<dynamic>.value(),
         returnValueForMissingStub: _i3.Future<dynamic>.value(),
       ) as _i3.Future<dynamic>);
+
   @override
   _i3.Future<dynamic> put({
     required String? path,

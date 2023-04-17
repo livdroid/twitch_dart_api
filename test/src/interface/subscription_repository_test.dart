@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/interface/subscription_repository.dart';
-import 'package:twitch_client/src/props/get_broadcaster_subscription_props.dart';
 import 'package:twitch_client/src/response/get_broadcaster_subscription_response.dart';
 import 'package:twitch_client/twitch_client.dart';
+
 import '../../json/asset_reader.dart';
 import 'analytics_repository_test.mocks.dart';
 

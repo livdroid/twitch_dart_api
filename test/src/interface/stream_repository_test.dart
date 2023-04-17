@@ -2,13 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/stream_repository.dart';
-import 'package:twitch_client/src/response/pagination_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'analytics_repository_test.mocks.dart';
 
 void main() {
-
   final mockedDataSource = MockTwitchDataSource();
   final repository =
       StreamsRepositoryImpl('token', 'clientid', dataSource: mockedDataSource);

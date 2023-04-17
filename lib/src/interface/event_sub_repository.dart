@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
-import 'package:twitch_client/src/response/event_sub_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 import 'package:web_socket_channel/io.dart';
 
