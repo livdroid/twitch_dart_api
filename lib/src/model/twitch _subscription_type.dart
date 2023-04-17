@@ -1,7 +1,7 @@
 class TwitchSubscriptionType {
   ///A broadcaster updates their channel properties e.g.,
   ///category, title, mature flag, broadcast, or language.
-  static String channelUpdates = 'channel.update';
+  static String channelUpdate = 'channel.update';
 
   /// A specified channel receives a follow.
   static String channelFollow = 'channel.follow';
@@ -151,7 +151,7 @@ class TwitchSubscriptionType {
   static String userUpdate = 'user.update';
 
   static List<String> allSubscriptions = [
-    channelUpdates,
+    channelUpdate,
     channelFollow,
     channelSubscribe,
     channelSubscriptionEnd,

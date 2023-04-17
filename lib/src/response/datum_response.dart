@@ -1,6 +1,6 @@
 import 'package:twitch_client/src/response/tier_response.dart';
 
-class Datum {
+class CheermotesResponseData {
   final String prefix;
   final List<Tier> tiers;
   final String type;
@@ -8,7 +8,7 @@ class Datum {
   final DateTime lastUpdated;
   final bool isCharitable;
 
-  Datum({
+  CheermotesResponseData({
     required this.prefix,
     required this.tiers,
     required this.type,
@@ -17,7 +17,7 @@ class Datum {
     required this.isCharitable,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory CheermotesResponseData.fromJson(Map<String, dynamic> json) => CheermotesResponseData(
         prefix: json["prefix"],
         tiers: List<Tier>.from(json["tiers"].map((v) => Tier.fromJson(v))),
         type: json["type"],

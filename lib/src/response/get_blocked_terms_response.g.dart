@@ -46,7 +46,7 @@ _$_GetBlockedTermsResponseData _$$_GetBlockedTermsResponseDataFromJson(
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
-      expiresAt: json['expires_at'],
+      expiresAt: json['expires_at'] as String?,
     );
 
 Map<String, dynamic> _$$_GetBlockedTermsResponseDataToJson(

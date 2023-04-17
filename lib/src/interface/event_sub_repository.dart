@@ -16,10 +16,10 @@ class EventSubInterfaceImpl implements EventSubInterface {
       : _twitchDataSource =
             dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
-  final StreamController<WSEventResponse> _controller =
-      StreamController<WSEventResponse>.broadcast();
+  final StreamController<dynamic> _controller =
+      StreamController<dynamic>.broadcast();
 
-  Stream<WSEventResponse> get stream => _controller.stream;
+  Stream<dynamic> get stream => _controller.stream;
 
   @override
   Future<Either<Failure, EventSubResponse>> createEventSubSubscription(
@@ -58,19 +58,16 @@ class EventSubInterfaceImpl implements EventSubInterface {
   }
 
   @override
-  Future<Stream<WSEventResponse>> subscribeTo(
+  Future<Stream<dynamic>> subscribeTo(
       {required String type, required String userId}) async {
-    final channel = IOWebSocketChannel.connect(
-        Uri.parse('wss://eventsub-beta.wss.twitch.tv/ws'));
-
+    final channel =
+        IOWebSocketChannel.connect(Uri.parse('wss://eventsub.wss.twitch.tv/ws'));
     channel.stream.listen((message) async {
-      final event = WSEventResponse.fromJson(jsonDecode(message));
-      _controller.add(event);
-    }).onData((data) async {
-      final newEvent = WSEventResponse.fromJson(jsonDecode(data));
-      _controller.add(newEvent);
-
+      print('message');
+    }).onData((eventData) async {
+      final newEvent = WSEventResponse.fromJson(jsonDecode(eventData));
       if (newEvent.payload?.session?.id?.isNotEmpty ?? false) {
+        /// Connect Event
         await createEventSubSubscription(
             props: CreateEventSubProps(
                 type: type,
@@ -79,6 +76,22 @@ class EventSubInterfaceImpl implements EventSubInterface {
                 transport: Transport(
                     method: 'websocket',
                     sessionId: newEvent.payload?.session?.id)));
+      } else {
+        final eventD = jsonDecode(eventData);
+        if (eventD['metadata']['message_type'] == 'session_keepalive') {
+          /// KeepAlive Event
+          /// TODO : Do something with it
+        } else {
+          /// Notification Event
+          final data = eventD['payload']['event'];
+          final event = Event.fromJson(data);
+          final cat = TwitchSubscriptionType.allSubscriptions.singleWhere(
+              (element) => element == eventD['metadata']['subscription_type'],
+              orElse: () => '');
+          final subEvent =
+              SubscriptionEvent(subscriptionType: cat, event: event);
+          _controller.add(subEvent);
+        }
       }
     });
     return stream;
@@ -95,6 +108,6 @@ abstract class EventSubInterface {
   Future<Either<Failure, bool>> deleteEventSubSubscriptions(
       {required GetEventSubProps props});
 
-  Future<Stream<WSEventResponse>> subscribeTo(
+  Future<Stream<dynamic>> subscribeTo(
       {required String type, required String userId});
 }

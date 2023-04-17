@@ -6,7 +6,7 @@ void main() {
     final subs = TwitchSubscriptionType.allSubscriptions;
     expect(subs.isNotEmpty, true);
     expect(subs.length, 43);
-    expect(subs.contains(TwitchSubscriptionType.channelUpdates), true); //First
+    expect(subs.contains(TwitchSubscriptionType.channelUpdate), true); //First
     expect(subs.contains(TwitchSubscriptionType.userUpdate), true); //Last
   });
 }

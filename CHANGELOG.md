@@ -1,3 +1,12 @@
+## 0.0.8
+
+* Add missing exports
+* Update dependencies
+* Add sub events now that websocket is out of beta
+* Add sub events to example
+* Update Readme
+* Update Example
+
 ## 0.0.7
 
 * Add missing exports

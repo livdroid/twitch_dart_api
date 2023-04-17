@@ -4,7 +4,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/interface/analytics_repository.dart';
-import 'package:twitch_client/src/response/game_analytics_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'channel_repository_test.mocks.dart';

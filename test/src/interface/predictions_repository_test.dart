@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
-import 'package:twitch_client/src/response/prediction_response.dart';
 import 'package:twitch_client/twitch_client.dart';
 
 import 'analytics_repository_test.mocks.dart';

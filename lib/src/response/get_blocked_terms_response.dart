@@ -25,7 +25,7 @@ class GetBlockedTermsResponseData with _$GetBlockedTermsResponseData {
     String? text,
     DateTime? createdAt,
     DateTime? updatedAt,
-    dynamic? expiresAt,
+    String? expiresAt,
   }) = _GetBlockedTermsResponseData;
 
   factory GetBlockedTermsResponseData.fromJson(Map<String, dynamic> json) =>

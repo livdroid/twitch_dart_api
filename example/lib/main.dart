@@ -47,12 +47,30 @@ class Home extends StatelessWidget {
               },
               child: const Text('Parse Url and init library')),
           TextButton(
+              onPressed: () async {
+                final stream = await twitchInterface.event.subscribeTo(
+                    type: TwitchSubscriptionType.channelUpdate,
+                    userId: twitchInterface.userId);
+                stream.listen((event) {
+                  print(event.runtimeType);
+                  if (event.runtimeType == WSEventResponse) {
+                   /// usually a connection status
+                  } else if (event.runtimeType == SubscriptionEvent) {
+                    /// an actual event you sub to
+                    final ev = event as SubscriptionEvent;
+                    print('event received ${ev.subscriptionType}');
+                    print('event received ${ev.event?.title}');
+                  }
+                });
+              },
+              child: const Text('WebSocket')),
+          TextButton(
             child: const Text('getFollowedStreams'),
             onPressed: () async {
               final data = await twitchInterface.streamsRepository
                   .getFollowedStreams(
                       props: GetFollowedStreamsProps(
-                          userId: twitchInterface.tokenResponse?.userId ?? ''));
+                          userId: twitchInterface.userId));
               data.fold(
                   (l) => print(l.exception),
                   (r) => showDialog(
