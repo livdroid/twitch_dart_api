@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'create_custom_reward_props.freezed.dart';
 part 'create_custom_reward_props.g.dart';
