@@ -6,6 +6,10 @@ import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/twitch_client.dart';
 import 'package:web_socket_channel/io.dart';
 
+/// The implementation of the EventSubInterface.
+///
+/// This class provides methods to interact with the Twitch EventSub API,
+/// allowing you to create and manage event subscriptions, as well as listen for incoming events.
 class EventSubInterfaceImpl implements EventSubInterface {
   static const String _path = 'eventsub';
 
@@ -14,13 +18,19 @@ class EventSubInterfaceImpl implements EventSubInterface {
   EventSubInterfaceImpl(String token, String clientId,
       {TwitchDataSource? dataSource})
       : _twitchDataSource =
-            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+      dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   final StreamController<dynamic> _controller =
-      StreamController<dynamic>.broadcast();
+  StreamController<dynamic>.broadcast();
 
+  /// The stream that broadcasts incoming events.
   Stream<dynamic> get stream => _controller.stream;
 
+  /// Create an EventSub subscription.
+  ///
+  /// The [props] parameter contains the properties required to create the event subscription.
+  /// Returns a [Future] that either yields a [Right] containing the [EventSubResponse] on success,
+  /// or a [Left] containing a [Failure] on failure.
   @override
   Future<Either<Failure, EventSubResponse>> createEventSubSubscription(
       {required CreateEventSubProps props}) async {
@@ -33,6 +43,11 @@ class EventSubInterfaceImpl implements EventSubInterface {
     }
   }
 
+  /// Get EventSub subscriptions.
+  ///
+  /// The [props] parameter contains the properties required to fetch event subscriptions.
+  /// Returns a [Future] that either yields a [Right] containing the [EventSubResponse] on success,
+  /// or a [Left] containing a [Failure] on failure.
   @override
   Future<Either<Failure, EventSubResponse>> getEventSubSubscriptions(
       {required GetEventSubProps props}) async {
@@ -45,6 +60,11 @@ class EventSubInterfaceImpl implements EventSubInterface {
     }
   }
 
+  /// Delete EventSub subscriptions.
+  ///
+  /// The [props] parameter contains the properties required to delete event subscriptions.
+  /// Returns a [Future] that either yields a [Right] containing `true` on success,
+  /// or a [Left] containing a [Failure] on failure.
   @override
   Future<Either<Failure, bool>> deleteEventSubSubscriptions(
       {required GetEventSubProps props}) async {
@@ -57,11 +77,16 @@ class EventSubInterfaceImpl implements EventSubInterface {
     }
   }
 
+  /// Subscribe to events of a specific type for a user.
+  ///
+  /// The [type] parameter specifies the type of event to subscribe to.
+  /// The [userId] parameter specifies the ID of the user to subscribe to.
+  /// Returns a [Stream] that broadcasts incoming events.
   @override
   Future<Stream<dynamic>> subscribeTo(
       {required String type, required String userId}) async {
     final channel =
-        IOWebSocketChannel.connect(Uri.parse('wss://eventsub.wss.twitch.tv/ws'));
+    IOWebSocketChannel.connect(Uri.parse('wss://eventsub.wss.twitch.tv/ws'));
     channel.stream.listen((message) async {
       print('message');
     }).onData((eventData) async {
@@ -86,10 +111,10 @@ class EventSubInterfaceImpl implements EventSubInterface {
           final data = eventD['payload']['event'];
           final event = Event.fromJson(data);
           final cat = TwitchSubscriptionType.allSubscriptions.singleWhere(
-              (element) => element == eventD['metadata']['subscription_type'],
+                  (element) => element == eventD['metadata']['subscription_type'],
               orElse: () => '');
           final subEvent =
-              SubscriptionEvent(subscriptionType: cat, event: event);
+          SubscriptionEvent(subscriptionType: cat, event: event);
           _controller.add(subEvent);
         }
       }
@@ -98,16 +123,40 @@ class EventSubInterfaceImpl implements EventSubInterface {
   }
 }
 
+/// The contract for the EventSubInterface.
+///
+/// This abstract class defines the methods to interact with the Twitch EventSub API,
+/// allowing you to create and manage event subscriptions, as well as listen for incoming events.
 abstract class EventSubInterface {
+  /// Create an EventSub subscription.
+  ///
+  /// The [props] parameter contains the properties required to create the event subscription.
+  /// Returns a [Future] that either yields a [Right] containing the [EventSubResponse] on success,
+  /// or a [Left] containing a [Failure] on failure.
   Future<Either<Failure, EventSubResponse>> createEventSubSubscription(
       {required CreateEventSubProps props});
 
+  /// Get EventSub subscriptions.
+  ///
+  /// The [props] parameter contains the properties required to fetch event subscriptions.
+  /// Returns a [Future] that either yields a [Right] containing the [EventSubResponse] on success,
+  /// or a [Left] containing a [Failure] on failure.
   Future<Either<Failure, EventSubResponse>> getEventSubSubscriptions(
       {required GetEventSubProps props});
 
+  /// Delete EventSub subscriptions.
+  ///
+  /// The [props] parameter contains the properties required to delete event subscriptions.
+  /// Returns a [Future] that either yields a [Right] containing `true` on success,
+  /// or a [Left] containing a [Failure] on failure.
   Future<Either<Failure, bool>> deleteEventSubSubscriptions(
       {required GetEventSubProps props});
 
+  /// Subscribe to events of a specific type for a user.
+  ///
+  /// The [type] parameter specifies the type of event to subscribe to.
+  /// The [userId] parameter specifies the ID of the user to subscribe to.
+  /// Returns a [Stream] that broadcasts incoming events.
   Future<Stream<dynamic>> subscribeTo(
       {required String type, required String userId});
 }
