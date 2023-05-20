@@ -7,7 +7,7 @@ part 'top_games_response.g.dart';
 @freezed
 class TopGamesResponse with _$TopGamesResponse {
   factory TopGamesResponse({
-    required List<TopGame> data,
+     List<TopGame?>? data,
     Pagination? pagination,
   }) = _TopGamesResponse;
 
@@ -18,10 +18,10 @@ class TopGamesResponse with _$TopGamesResponse {
 @freezed
 class TopGame with _$TopGame {
   factory TopGame({
-    required String id,
-    required String name,
-    required String boxArtUrl,
-    required String igdbId,
+     String? id,
+     String? name,
+     String? boxArtUrl,
+     String? igdbId,
   }) = _TopGame;
 
   factory TopGame.fromJson(Map<String, dynamic> json) =>

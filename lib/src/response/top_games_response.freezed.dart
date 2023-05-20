@@ -20,7 +20,7 @@ TopGamesResponse _$TopGamesResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TopGamesResponse {
-  List<TopGame> get data => throw _privateConstructorUsedError;
+  List<TopGame?>? get data => throw _privateConstructorUsedError;
   Pagination? get pagination => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $TopGamesResponseCopyWith<$Res> {
           TopGamesResponse value, $Res Function(TopGamesResponse) then) =
       _$TopGamesResponseCopyWithImpl<$Res, TopGamesResponse>;
   @useResult
-  $Res call({List<TopGame> data, Pagination? pagination});
+  $Res call({List<TopGame?>? data, Pagination? pagination});
 
   $PaginationCopyWith<$Res>? get pagination;
 }
@@ -53,14 +53,14 @@ class _$TopGamesResponseCopyWithImpl<$Res, $Val extends TopGamesResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = null,
+    Object? data = freezed,
     Object? pagination = freezed,
   }) {
     return _then(_value.copyWith(
-      data: null == data
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<TopGame>,
+              as List<TopGame?>?,
       pagination: freezed == pagination
           ? _value.pagination
           : pagination // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$_TopGamesResponseCopyWith<$Res>
       __$$_TopGamesResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<TopGame> data, Pagination? pagination});
+  $Res call({List<TopGame?>? data, Pagination? pagination});
 
   @override
   $PaginationCopyWith<$Res>? get pagination;
@@ -106,14 +106,14 @@ class __$$_TopGamesResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = null,
+    Object? data = freezed,
     Object? pagination = freezed,
   }) {
     return _then(_$_TopGamesResponse(
-      data: null == data
+      data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<TopGame>,
+              as List<TopGame?>?,
       pagination: freezed == pagination
           ? _value.pagination
           : pagination // ignore: cast_nullable_to_non_nullable
@@ -125,18 +125,20 @@ class __$$_TopGamesResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TopGamesResponse implements _TopGamesResponse {
-  _$_TopGamesResponse({required final List<TopGame> data, this.pagination})
+  _$_TopGamesResponse({final List<TopGame?>? data, this.pagination})
       : _data = data;
 
   factory _$_TopGamesResponse.fromJson(Map<String, dynamic> json) =>
       _$$_TopGamesResponseFromJson(json);
 
-  final List<TopGame> _data;
+  final List<TopGame?>? _data;
   @override
-  List<TopGame> get data {
+  List<TopGame?>? get data {
+    final value = _data;
+    if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -178,14 +180,14 @@ class _$_TopGamesResponse implements _TopGamesResponse {
 
 abstract class _TopGamesResponse implements TopGamesResponse {
   factory _TopGamesResponse(
-      {required final List<TopGame> data,
+      {final List<TopGame?>? data,
       final Pagination? pagination}) = _$_TopGamesResponse;
 
   factory _TopGamesResponse.fromJson(Map<String, dynamic> json) =
       _$_TopGamesResponse.fromJson;
 
   @override
-  List<TopGame> get data;
+  List<TopGame?>? get data;
   @override
   Pagination? get pagination;
   @override
@@ -200,10 +202,10 @@ TopGame _$TopGameFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TopGame {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get boxArtUrl => throw _privateConstructorUsedError;
-  String get igdbId => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get boxArtUrl => throw _privateConstructorUsedError;
+  String? get igdbId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -215,7 +217,7 @@ abstract class $TopGameCopyWith<$Res> {
   factory $TopGameCopyWith(TopGame value, $Res Function(TopGame) then) =
       _$TopGameCopyWithImpl<$Res, TopGame>;
   @useResult
-  $Res call({String id, String name, String boxArtUrl, String igdbId});
+  $Res call({String? id, String? name, String? boxArtUrl, String? igdbId});
 }
 
 /// @nodoc
@@ -231,28 +233,28 @@ class _$TopGameCopyWithImpl<$Res, $Val extends TopGame>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? boxArtUrl = null,
-    Object? igdbId = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? boxArtUrl = freezed,
+    Object? igdbId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      boxArtUrl: null == boxArtUrl
+              as String?,
+      boxArtUrl: freezed == boxArtUrl
           ? _value.boxArtUrl
           : boxArtUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      igdbId: null == igdbId
+              as String?,
+      igdbId: freezed == igdbId
           ? _value.igdbId
           : igdbId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -264,7 +266,7 @@ abstract class _$$_TopGameCopyWith<$Res> implements $TopGameCopyWith<$Res> {
       __$$_TopGameCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String boxArtUrl, String igdbId});
+  $Res call({String? id, String? name, String? boxArtUrl, String? igdbId});
 }
 
 /// @nodoc
@@ -277,28 +279,28 @@ class __$$_TopGameCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? boxArtUrl = null,
-    Object? igdbId = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? boxArtUrl = freezed,
+    Object? igdbId = freezed,
   }) {
     return _then(_$_TopGame(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      boxArtUrl: null == boxArtUrl
+              as String?,
+      boxArtUrl: freezed == boxArtUrl
           ? _value.boxArtUrl
           : boxArtUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      igdbId: null == igdbId
+              as String?,
+      igdbId: freezed == igdbId
           ? _value.igdbId
           : igdbId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -306,23 +308,19 @@ class __$$_TopGameCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TopGame implements _TopGame {
-  _$_TopGame(
-      {required this.id,
-      required this.name,
-      required this.boxArtUrl,
-      required this.igdbId});
+  _$_TopGame({this.id, this.name, this.boxArtUrl, this.igdbId});
 
   factory _$_TopGame.fromJson(Map<String, dynamic> json) =>
       _$$_TopGameFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String boxArtUrl;
+  final String? boxArtUrl;
   @override
-  final String igdbId;
+  final String? igdbId;
 
   @override
   String toString() {
@@ -361,21 +359,21 @@ class _$_TopGame implements _TopGame {
 
 abstract class _TopGame implements TopGame {
   factory _TopGame(
-      {required final String id,
-      required final String name,
-      required final String boxArtUrl,
-      required final String igdbId}) = _$_TopGame;
+      {final String? id,
+      final String? name,
+      final String? boxArtUrl,
+      final String? igdbId}) = _$_TopGame;
 
   factory _TopGame.fromJson(Map<String, dynamic> json) = _$_TopGame.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get boxArtUrl;
+  String? get boxArtUrl;
   @override
-  String get igdbId;
+  String? get igdbId;
   @override
   @JsonKey(ignore: true)
   _$$_TopGameCopyWith<_$_TopGame> get copyWith =>
