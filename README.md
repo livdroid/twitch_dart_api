@@ -135,3 +135,5 @@ Please call validateToken() to do this request.
 - Get AutoMod Settings
 - Update AutoMod Settings
 - Get Broadcaster Subscriptions
+- Start a raid
+- Cancel a raid
