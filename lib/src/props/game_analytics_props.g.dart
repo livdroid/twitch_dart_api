@@ -6,6 +6,16 @@ part of 'game_analytics_props.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+GameAnalyticsProps _$GameAnalyticsPropsFromJson(Map<String, dynamic> json) =>
+    GameAnalyticsProps(
+      gameId: json['game_id'] as String?,
+      type: json['type'] as String?,
+      startedAd: json['started_at'] as String?,
+      endedAt: json['ended_at'] as String?,
+      first: json['first'] as int?,
+      after: json['after'] as String?,
+    );
+
 Map<String, dynamic> _$GameAnalyticsPropsToJson(GameAnalyticsProps instance) {
   final val = <String, dynamic>{};
 
