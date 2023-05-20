@@ -48,13 +48,22 @@ class Home extends StatelessWidget {
               child: const Text('Parse Url and init library')),
           TextButton(
               onPressed: () async {
+                // Call init with the url retrieved after redirection
+                final response = await twitchInterface.raid.startRaid(
+                    props: RaidProps(
+                        fromBroadcasterId: twitchInterface.userId,
+                        toBroadcasterId: '123'));
+              },
+              child: const Text('Raid a channel')),
+          TextButton(
+              onPressed: () async {
                 final stream = await twitchInterface.event.subscribeTo(
                     type: TwitchSubscriptionType.channelUpdate,
                     userId: twitchInterface.userId);
                 stream.listen((event) {
                   print(event.runtimeType);
                   if (event.runtimeType == WSEventResponse) {
-                   /// usually a connection status
+                    /// usually a connection status
                   } else if (event.runtimeType == SubscriptionEvent) {
                     /// an actual event you sub to
                     final ev = event as SubscriptionEvent;

@@ -21,6 +21,8 @@ export 'src/props/chat_annoucement_props.dart';
 export 'src/props/chat_modify_props.dart';
 export 'src/props/chatters_props.dart';
 export 'src/props/cheermotes_props.dart';
+export 'src/props/start_raid_props.dart';
+export 'src/response/raid_response.dart';
 export 'src/props/condition.dart';
 export 'src/props/create_clip_props.dart';
 export 'src/props/create_custom_reward_props.dart';

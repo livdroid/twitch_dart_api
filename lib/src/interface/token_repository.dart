@@ -5,6 +5,9 @@ import 'package:twitch_client/src/props/token_client_props.dart';
 import 'package:twitch_client/src/response/validate_token_response.dart';
 import 'package:twitch_client/src/utils/url_constants.dart';
 
+/// The implementation of the [TokenInterface] interface.
+///
+/// This class provides methods to revoke an access token and verify the token's validity.
 class TokenInterfaceImpl implements TokenInterface {
   static const String _path = 'oauth2';
 
@@ -13,10 +16,10 @@ class TokenInterfaceImpl implements TokenInterface {
   TokenInterfaceImpl(String token, String clientId,
       {TwitchDataSource? dataSource})
       : _twitchDataSource = dataSource ??
-            TwitchApiDataSourceImpl(token, clientId,
-                url: UrlConstants.idBaseUrl);
+      TwitchApiDataSourceImpl(token, clientId,
+          url: UrlConstants.idBaseUrl);
 
-  /// Revoke a token, user will need to reconnect again to use the app
+  /// Revoke an access token, requiring the user to reconnect to use the app.
   @override
   Future<Either<Failure, bool>> revokeAccessToken(
       {required TokenClientProps props}) async {
@@ -29,13 +32,14 @@ class TokenInterfaceImpl implements TokenInterface {
     }
   }
 
-  /// Verify the token validity, must be done at least once an hour according to
-  /// twitch official documentation
+  /// Verify the validity of the access token.
+  ///
+  /// According to Twitch's official documentation, this should be done at least once an hour.
   @override
   Future<Either<Failure, ValidateTokenResponse>> verifyToken() async {
     try {
       final result =
-          await _twitchDataSource.get(path: '$_path/validate', queryParams: {});
+      await _twitchDataSource.get(path: '$_path/validate', queryParams: {});
       return Right(ValidateTokenResponse.fromJson(result ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -43,9 +47,16 @@ class TokenInterfaceImpl implements TokenInterface {
   }
 }
 
+/// The interface for interacting with Twitch authentication tokens.
+///
+/// Use this interface to revoke an access token and verify the token's validity.
 abstract class TokenInterface {
+  /// Revoke an access token, requiring the user to reconnect to use the app.
   Future<Either<Failure, bool>> revokeAccessToken(
       {required TokenClientProps props});
 
+  /// Verify the validity of the access token.
+  ///
+  /// According to Twitch's official documentation, this should be done at least once an hour.
   Future<Either<Failure, ValidateTokenResponse>> verifyToken();
 }

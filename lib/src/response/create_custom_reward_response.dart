@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 import 'package:twitch_client/src/response/get_custom_rewards_response.dart';
 

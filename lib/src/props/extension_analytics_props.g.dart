@@ -6,6 +6,17 @@ part of 'extension_analytics_props.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ExtensionAnalyticsProps _$ExtensionAnalyticsPropsFromJson(
+        Map<String, dynamic> json) =>
+    ExtensionAnalyticsProps(
+      extensionId: json['extension_id'] as String?,
+      type: json['type'] as String?,
+      startedAt: json['started_at'] as String?,
+      endedAt: json['ended_at'] as String?,
+      first: json['first'] as String?,
+      after: json['after'] as String?,
+    );
+
 Map<String, dynamic> _$ExtensionAnalyticsPropsToJson(
     ExtensionAnalyticsProps instance) {
   final val = <String, dynamic>{};

@@ -2,6 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/twitch_client.dart';
 
+/// The implementation of the [StreamsRepository] interface.
+///
+/// This class provides methods to interact with the Twitch streams API,
+/// allowing you to retrieve streams, retrieve followed streams, and retrieve stream keys.
 class StreamsRepositoryImpl implements StreamsRepository {
   static const String _path = 'streams';
 
@@ -10,7 +14,7 @@ class StreamsRepositoryImpl implements StreamsRepository {
   StreamsRepositoryImpl(String token, String clientId,
       {TwitchDataSource? dataSource})
       : _twitchDataSource =
-            dataSource ?? TwitchApiDataSourceImpl(token, clientId);
+      dataSource ?? TwitchApiDataSourceImpl(token, clientId);
 
   /// Retrieve all streams with or without parameters
   @override
@@ -18,7 +22,7 @@ class StreamsRepositoryImpl implements StreamsRepository {
       {required GetStreamsProps props}) async {
     try {
       final response =
-          await _twitchDataSource.get(path: _path, queryParams: props.toJson());
+      await _twitchDataSource.get(path: _path, queryParams: props.toJson());
       return Right(GetStreamsResponse.fromJson(response ?? {}));
     } on Exception catch (e) {
       return Left(Failure(e));
@@ -56,13 +60,19 @@ class StreamsRepositoryImpl implements StreamsRepository {
   }
 }
 
+/// The interface for interacting with Twitch streams.
+///
+/// Use this interface to retrieve streams, retrieve followed streams, and retrieve stream keys.
 abstract class StreamsRepository {
-  Future<Either<Failure, GetStreamsResponse>> getFollowedStreams(
-      {required GetFollowedStreamsProps props});
-
+  /// Retrieve all streams with or without parameters.
   Future<Either<Failure, GetStreamsResponse>> getStreams(
       {required GetStreamsProps props});
 
+  /// Retrieve all streams that you follow.
+  Future<Either<Failure, GetStreamsResponse>> getFollowedStreams(
+      {required GetFollowedStreamsProps props});
+
+  /// Retrieve a stream key for a streaming software.
   Future<Either<Failure, StreamKeyResponse>> getStreamKey(
       {required BroadcasterProps props});
 }
