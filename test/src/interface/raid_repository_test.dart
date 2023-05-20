@@ -10,11 +10,14 @@ import 'analytics_repository_test.mocks.dart';
 void main() {
   late RaidRepositoryImpl raidRepository;
   late MockTwitchDataSource mockDataSource;
+
   const props = RaidProps(
     fromBroadcasterId: 'broadcasterId',
     toBroadcasterId: 'targetDisplayName',
   );
-
+  const cancelProps = BroadcasterProps(
+    broadcasterId: 'broadcasterId',
+  );
 
   setUp(() {
     mockDataSource = MockTwitchDataSource();
@@ -31,8 +34,8 @@ void main() {
 
     when(mockDataSource.post(
       path: 'raids',
-      data: props.toJson(),
-      queryParams: {},
+      queryParams: props.toJson(),
+      data: {},
     )).thenAnswer((_) async => mockResponse);
 
     final result = await raidRepository.startRaid(props: props);
@@ -40,25 +43,54 @@ void main() {
     expect(result, equals(Right(RaidResponse.fromJson(mockResponse))));
     verify(mockDataSource.post(
       path: 'raids',
-      data: props.toJson(),
-      queryParams: {},
+      queryParams: props.toJson(),
+      data: {},
     ));
   });
 
   test('startRaid should return a Failure when the request throws an exception',
       () async {
-    // Mock the Twitch API client
     when(mockDataSource.post(
       path: 'raids',
-      data: props.toJson(),
-      queryParams: {},
+      queryParams: props.toJson(),
+      data: {},
     )).thenThrow(ForbiddenRequestException(message: 'message'));
 
-    // Create the repository instance with the mocked Twitch API client
-    // Act
     final result = await raidRepository.startRaid(props: props);
 
-    // Assert
+    expect(result.isLeft(), true);
+    expect(result.asLeft().exception, isA<Exception>());
+  });
+
+  /// Cancel
+  test('should return a RaidResponse when the request is successful', () async {
+    when(mockDataSource.delete(
+      path: 'raids',
+      queryParams: cancelProps.toJson(),
+      data: {},
+    )).thenAnswer((_) async => true);
+
+    final result = await raidRepository.cancelRaid(props: cancelProps);
+
+    expect(result, equals(const Right(true)));
+    verify(mockDataSource.delete(
+      path: 'raids',
+      queryParams: cancelProps.toJson(),
+      data: {},
+    ));
+  });
+
+  test(
+      'cancelRaid should return a Failure when the request throws an exception',
+      () async {
+    when(mockDataSource.delete(
+      path: 'raids',
+      queryParams: cancelProps.toJson(),
+      data: {},
+    )).thenThrow(ForbiddenRequestException(message: 'message'));
+
+    final result = await raidRepository.cancelRaid(props: cancelProps);
+
     expect(result.isLeft(), true);
     expect(result.asLeft().exception, isA<Exception>());
   });
