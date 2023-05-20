@@ -1,3 +1,7 @@
+## 0.0.9
+* Add documentation on repositories
+* Add raid start and cancel
+
 ## 0.0.8
 
 * Add missing exports
