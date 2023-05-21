@@ -5,7 +5,7 @@ homepage: https://github.com/livdroid/twitch_dart_api
 repository: https://github.com/livdroid/twitch_dart_api
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=2.18.5 <4.0.0'
 
 dependencies:
   flutter:
