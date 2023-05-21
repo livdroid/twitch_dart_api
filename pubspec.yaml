@@ -1,6 +1,6 @@
 name: twitch_client
 description: A package for developers to interact with the Twitch API easily, not all endpoints are implemented yet but they will eventually.
-version: 0.0.9
+version: 0.0.10
 homepage: https://github.com/livdroid/twitch_dart_api
 repository: https://github.com/livdroid/twitch_dart_api
 
