@@ -6,6 +6,7 @@ import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/interface/clip_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
+import 'package:twitch_client/src/interface/games_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
@@ -73,8 +74,9 @@ class TwitchInterface {
   SubscriptionRepository get subscription =>
       twitchRepositories.subscriptionRepository;
 
-  RaidRepository get raid =>
-      twitchRepositories.raidRepository;
+  RaidRepository get raid => twitchRepositories.raidRepository;
+
+  GamesRepository get games => twitchRepositories.gamesRepository;
 
   TwitchInterface(
       {required this.clientId,

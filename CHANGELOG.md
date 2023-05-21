@@ -1,3 +1,7 @@
+## 0.0.10
+* Add top games request
+* Add games request
+
 ## 0.0.9
 * Add documentation on repositories
 * Add raid start and cancel

@@ -5,6 +5,7 @@ import 'package:twitch_client/src/interface/channel_repository.dart';
 import 'package:twitch_client/src/interface/chat_repository.dart';
 import 'package:twitch_client/src/interface/clip_repository.dart';
 import 'package:twitch_client/src/interface/event_sub_repository.dart';
+import 'package:twitch_client/src/interface/games_repository.dart';
 import 'package:twitch_client/src/interface/moderation_repository.dart';
 import 'package:twitch_client/src/interface/polls_repository.dart';
 import 'package:twitch_client/src/interface/predictions_repository.dart';
@@ -85,6 +86,9 @@ abstract class TwitchRepositories {
 
   /// The repository for interacting with Twitch raid-related API endpoints.
   RaidRepository get raidRepository;
+
+  /// The repository for interacting with Twitch games-related API endpoints.
+  GamesRepository get gamesRepository;
 }
 
 class _TwitchRepositoriesImpl implements TwitchRepositories {
@@ -104,6 +108,7 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
         streamsRepository = StreamsRepositoryImpl(token, clientId),
         clipRepository = ClipRepositoryImpl(token, clientId),
         subscriptionRepository = SubscriptionRepositoryImpl(token, clientId),
+        gamesRepository = GamesRepositoryImpl(token, clientId),
         raidRepository = RaidRepositoryImpl(token, clientId);
 
   @override
@@ -156,4 +161,7 @@ class _TwitchRepositoriesImpl implements TwitchRepositories {
 
   @override
   final RaidRepository raidRepository;
+
+  @override
+  final GamesRepository  gamesRepository;
 }
