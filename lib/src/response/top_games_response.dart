@@ -5,25 +5,25 @@ part 'top_games_response.freezed.dart';
 part 'top_games_response.g.dart';
 
 @freezed
-class TopGamesResponse with _$TopGamesResponse {
-  factory TopGamesResponse({
-     List<TopGame?>? data,
+class GamesResponse with _$GamesResponse {
+  factory GamesResponse({
+     List<Game?>? data,
     Pagination? pagination,
-  }) = _TopGamesResponse;
+  }) = _GamesResponse;
 
-  factory TopGamesResponse.fromJson(Map<String, dynamic> json) =>
-      _$TopGamesResponseFromJson(json);
+  factory GamesResponse.fromJson(Map<String, dynamic> json) =>
+      _$GamesResponseFromJson(json);
 }
 
 @freezed
-class TopGame with _$TopGame {
-  factory TopGame({
+class Game with _$Game {
+  factory Game({
      String? id,
      String? name,
      String? boxArtUrl,
      String? igdbId,
-  }) = _TopGame;
+  }) = _Game;
 
-  factory TopGame.fromJson(Map<String, dynamic> json) =>
-      _$TopGameFromJson(json);
+  factory Game.fromJson(Map<String, dynamic> json) =>
+      _$GameFromJson(json);
 }

@@ -6,18 +6,18 @@ part of 'top_games_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TopGamesResponse _$$_TopGamesResponseFromJson(Map<String, dynamic> json) =>
-    _$_TopGamesResponse(
+_$_GamesResponse _$$_GamesResponseFromJson(Map<String, dynamic> json) =>
+    _$_GamesResponse(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) =>
-              e == null ? null : TopGame.fromJson(e as Map<String, dynamic>))
+              e == null ? null : Game.fromJson(e as Map<String, dynamic>))
           .toList(),
       pagination: json['pagination'] == null
           ? null
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TopGamesResponseToJson(_$_TopGamesResponse instance) {
+Map<String, dynamic> _$$_GamesResponseToJson(_$_GamesResponse instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -31,14 +31,14 @@ Map<String, dynamic> _$$_TopGamesResponseToJson(_$_TopGamesResponse instance) {
   return val;
 }
 
-_$_TopGame _$$_TopGameFromJson(Map<String, dynamic> json) => _$_TopGame(
+_$_Game _$$_GameFromJson(Map<String, dynamic> json) => _$_Game(
       id: json['id'] as String?,
       name: json['name'] as String?,
       boxArtUrl: json['box_art_url'] as String?,
       igdbId: json['igdb_id'] as String?,
     );
 
-Map<String, dynamic> _$$_TopGameToJson(_$_TopGame instance) {
+Map<String, dynamic> _$$_GameToJson(_$_Game instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

@@ -111,3 +111,5 @@ export 'src/response/validate_token_response.dart';
 export 'src/response/video_response.dart';
 export 'src/response/ws_event_response.dart';
 export 'src/response/get_custom_reward_redemptions_response.dart';
+export 'src/response/top_games_response.dart';
+export 'src/props/get_games_props.dart';
