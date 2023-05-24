@@ -1,3 +1,7 @@
+## 0.0.11
+* Remove Flutter in pubspec, now the library work on the web
+* Adapt unit test to test lib
+
 ## 0.0.10
 * Add top games request
 * Add games request
