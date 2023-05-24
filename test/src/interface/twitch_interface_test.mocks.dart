@@ -3,11 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i20;
+import 'dart:async' as _i21;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:twitch_client/src/error/failure.dart' as _i21;
+import 'package:twitch_client/src/error/failure.dart' as _i22;
 import 'package:twitch_client/src/interface/analytics_repository.dart' as _i11;
 import 'package:twitch_client/src/interface/bits_repository.dart' as _i4;
 import 'package:twitch_client/src/interface/channel_points_respository.dart'
@@ -16,6 +16,7 @@ import 'package:twitch_client/src/interface/channel_repository.dart' as _i5;
 import 'package:twitch_client/src/interface/chat_repository.dart' as _i6;
 import 'package:twitch_client/src/interface/clip_repository.dart' as _i17;
 import 'package:twitch_client/src/interface/event_sub_repository.dart' as _i14;
+import 'package:twitch_client/src/interface/games_repository.dart' as _i20;
 import 'package:twitch_client/src/interface/moderation_repository.dart' as _i7;
 import 'package:twitch_client/src/interface/polls_repository.dart' as _i12;
 import 'package:twitch_client/src/interface/predictions_repository.dart'
@@ -28,9 +29,9 @@ import 'package:twitch_client/src/interface/token_repository.dart' as _i8;
 import 'package:twitch_client/src/interface/twitch_repositories.dart' as _i3;
 import 'package:twitch_client/src/interface/user_repository.dart' as _i9;
 import 'package:twitch_client/src/interface/video_repository.dart' as _i10;
-import 'package:twitch_client/src/props/token_client_props.dart' as _i22;
+import 'package:twitch_client/src/props/token_client_props.dart' as _i23;
 import 'package:twitch_client/src/response/validate_token_response.dart'
-    as _i23;
+    as _i24;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -237,21 +238,32 @@ class _FakeRaidRepository_17 extends _i1.SmartFake
         );
 }
 
+class _FakeGamesRepository_18 extends _i1.SmartFake
+    implements _i20.GamesRepository {
+  _FakeGamesRepository_18(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [TokenInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
   @override
-  _i20.Future<_i2.Either<_i21.Failure, bool>> revokeAccessToken(
-          {required _i22.TokenClientProps? props}) =>
+  _i21.Future<_i2.Either<_i22.Failure, bool>> revokeAccessToken(
+          {required _i23.TokenClientProps? props}) =>
       (super.noSuchMethod(
         Invocation.method(
           #revokeAccessToken,
           [],
           {#props: props},
         ),
-        returnValue: _i20.Future<_i2.Either<_i21.Failure, bool>>.value(
-            _FakeEither_0<_i21.Failure, bool>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, bool>>.value(
+            _FakeEither_0<_i22.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -260,8 +272,8 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
           ),
         )),
         returnValueForMissingStub:
-            _i20.Future<_i2.Either<_i21.Failure, bool>>.value(
-                _FakeEither_0<_i21.Failure, bool>(
+            _i21.Future<_i2.Either<_i22.Failure, bool>>.value(
+                _FakeEither_0<_i22.Failure, bool>(
           this,
           Invocation.method(
             #revokeAccessToken,
@@ -269,34 +281,34 @@ class MockTokenInterface extends _i1.Mock implements _i8.TokenInterface {
             {#props: props},
           ),
         )),
-      ) as _i20.Future<_i2.Either<_i21.Failure, bool>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, bool>>);
   @override
-  _i20.Future<_i2.Either<_i21.Failure, _i23.ValidateTokenResponse>>
+  _i21.Future<_i2.Either<_i22.Failure, _i24.ValidateTokenResponse>>
       verifyToken() => (super.noSuchMethod(
             Invocation.method(
               #verifyToken,
               [],
             ),
-            returnValue: _i20.Future<
-                    _i2.Either<_i21.Failure, _i23.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i21.Failure, _i23.ValidateTokenResponse>(
+            returnValue: _i21.Future<
+                    _i2.Either<_i22.Failure, _i24.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i22.Failure, _i24.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-            returnValueForMissingStub: _i20.Future<
-                    _i2.Either<_i21.Failure, _i23.ValidateTokenResponse>>.value(
-                _FakeEither_0<_i21.Failure, _i23.ValidateTokenResponse>(
+            returnValueForMissingStub: _i21.Future<
+                    _i2.Either<_i22.Failure, _i24.ValidateTokenResponse>>.value(
+                _FakeEither_0<_i22.Failure, _i24.ValidateTokenResponse>(
               this,
               Invocation.method(
                 #verifyToken,
                 [],
               ),
             )),
-          ) as _i20
-              .Future<_i2.Either<_i21.Failure, _i23.ValidateTokenResponse>>);
+          ) as _i21
+              .Future<_i2.Either<_i22.Failure, _i24.ValidateTokenResponse>>);
 }
 
 /// A class which mocks [TwitchRepositories].
@@ -509,4 +521,16 @@ class MockTwitchRepositories extends _i1.Mock
           Invocation.getter(#raidRepository),
         ),
       ) as _i19.RaidRepository);
+  @override
+  _i20.GamesRepository get gamesRepository => (super.noSuchMethod(
+        Invocation.getter(#gamesRepository),
+        returnValue: _FakeGamesRepository_18(
+          this,
+          Invocation.getter(#gamesRepository),
+        ),
+        returnValueForMissingStub: _FakeGamesRepository_18(
+          this,
+          Invocation.getter(#gamesRepository),
+        ),
+      ) as _i20.GamesRepository);
 }

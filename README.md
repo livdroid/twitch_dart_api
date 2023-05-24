@@ -137,3 +137,5 @@ Please call validateToken() to do this request.
 - Get Broadcaster Subscriptions
 - Start a raid
 - Cancel a raid
+- Get Top Games
+- Get Games

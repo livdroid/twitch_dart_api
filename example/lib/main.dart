@@ -99,6 +99,56 @@ class Home extends StatelessWidget {
                         ));
                       }));
             },
+          ),
+          TextButton(
+            child: const Text('getTopGames'),
+            onPressed: () async {
+              final data = await twitchInterface.games
+                  .getTopGames();
+              data.fold(
+                      (l) => print(l.exception),
+                      (r) => showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                            content: SizedBox(
+                              height: MediaQuery.of(context).size.height / 2,
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return Text(
+                                        r.data?[index].toString() ?? 'no name');
+                                  },
+                                  itemCount: r.data?.length ?? 0),
+                            ));
+                      }));
+            },
+          ),
+          TextButton(
+            child: const Text('getGames'),
+            onPressed: () async {
+              final data = await twitchInterface.games
+                  .getGames(props: GameProps(id: '33214'));
+              data.fold(
+                      (l) => print(l.exception),
+                      (r) => showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                            content: SizedBox(
+                              height: MediaQuery.of(context).size.height / 2,
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return Text(
+                                        r.data?[index].toString() ?? 'no name');
+                                  },
+                                  itemCount: r.data?.length ?? 0),
+                            ));
+                      }));
+            },
           )
         ],
       ),
