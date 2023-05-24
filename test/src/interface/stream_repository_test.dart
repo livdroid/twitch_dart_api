@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/stream_repository.dart';
@@ -76,7 +76,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getFollowedStreams(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: '$path/followed', queryParams: emptyProps.toJson()));
@@ -117,7 +117,7 @@ void main() {
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.getStreamKey(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: '$path/key', queryParams: emptyProps.toJson()));

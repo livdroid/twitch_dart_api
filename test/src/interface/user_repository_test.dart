@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/user_repository.dart';
@@ -68,7 +68,7 @@ void main() {
           data: {})).thenThrow(AssertionError('message'));
 
       expect(() => repository.updateUserInformation(props: updateUserPropsLong),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
       verifyNever(mockedDataSource.put(
           path: path, queryParams: updateUserPropsLong.toJson(), data: {}));
     });
@@ -112,7 +112,7 @@ void main() {
           .thenThrow(AssertionError('message'));
 
       expect(() => repository.getUserFollow(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
       verifyNever(mockedDataSource.get(
           path: '$path/follows/', queryParams: emptyProps.toJson()));
     });
@@ -213,7 +213,7 @@ void main() {
           data: {})).thenThrow(AssertionError('message'));
 
       expect(() => repository.unblockUser(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
       verifyNever(mockedDataSource.delete(
           path: '$path/blocks/', queryParams: emptyProps.toJson(), data: {}));
     });

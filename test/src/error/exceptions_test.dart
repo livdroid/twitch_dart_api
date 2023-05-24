@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 
 void main() {
@@ -9,7 +9,8 @@ void main() {
     });
 
     test('DataParsingException should return correct message', () {
-      final exception = DataParsingException(message: 'Error while parsing data');
+      final exception =
+          DataParsingException(message: 'Error while parsing data');
       expect(exception.toString(), 'Error while parsing data');
     });
 
@@ -19,7 +20,8 @@ void main() {
     });
 
     test('UnauthorizedException should return correct message', () {
-      final exception = UnauthorizedException(message: 'Invalid token or scope');
+      final exception =
+          UnauthorizedException(message: 'Invalid token or scope');
       expect(exception.toString(), 'Invalid token or scope');
     });
 

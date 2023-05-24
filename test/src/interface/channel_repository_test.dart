@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
@@ -39,7 +39,7 @@ void main() {
       expect(
           () => interface.getChannelInformation(
               props: const BroadcasterProps(broadcasterId: '')),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: path,
@@ -93,7 +93,7 @@ void main() {
               modifyChannelInformationProps: ModifyChannelInformationProp(
                   gameId: '', title: '', broadcasterLanguage: ''),
               broadcasterProps: const BroadcasterProps(broadcasterId: '')),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: path,
@@ -148,7 +148,7 @@ void main() {
       expect(
           () => interface.getChannelEditors(
               broadcasterProps: const BroadcasterProps(broadcasterId: '')),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: '$path/editors',
@@ -199,7 +199,7 @@ void main() {
           .thenAnswer((realInvocation) async => jsonDecode(apiResponse));
 
       expect(() => interface.startCommercial(startCommercialProps: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: '$path/commercial',
@@ -216,7 +216,7 @@ void main() {
 
       expect(
           () => interface.startCommercial(startCommercialProps: tooLongProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: '$path/commercial',
@@ -264,7 +264,8 @@ void main() {
               path: '$path/vips', data: emptyProps.toJson(), queryParams: {}))
           .thenAnswer((realInvocation) async => response.toJson());
 
-      expect(() => interface.getVIPs(props: emptyProps), throwsAssertionError);
+      expect(() => interface.getVIPs(props: emptyProps),
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: '$path/vips', queryParams: emptyProps.toJson()));
@@ -308,7 +309,8 @@ void main() {
           queryParams: emptyProps.toJson(),
           data: {})).thenAnswer((realInvocation) async => null);
 
-      expect(() => interface.addVip(props: emptyProps), throwsAssertionError);
+      expect(() => interface.addVip(props: emptyProps),
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: '$path/vips', queryParams: emptyProps.toJson(), data: {}));
@@ -355,8 +357,8 @@ void main() {
           queryParams: emptyProps.toJson(),
           data: {})).thenAnswer((realInvocation) async => null);
 
-      expect(
-          () => interface.removeVip(props: emptyProps), throwsAssertionError);
+      expect(() => interface.removeVip(props: emptyProps),
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.delete(
           path: '$path/vips', queryParams: emptyProps.toJson(), data: {}));

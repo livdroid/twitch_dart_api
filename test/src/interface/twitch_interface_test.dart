@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
@@ -38,7 +38,7 @@ void main() {
 
     test('Throw error on empty scopes', () {
       expect(() => twitchInterface.getConnectionUrl(scopes: []),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
     });
   });
 

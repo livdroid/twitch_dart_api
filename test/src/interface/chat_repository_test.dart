@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
@@ -51,7 +51,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getChatters(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
@@ -97,7 +97,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getChatSettings(props: emptyBroadcasterProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.get(
           path: path, queryParams: emptyBroadcasterProps.toJson()));
@@ -156,7 +156,7 @@ void main() {
       expect(
           () => repository.updateChatSettings(
               props: emptyBroadcasterProps, chatProps: modifyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.patch(
           path: path,
@@ -220,7 +220,7 @@ void main() {
       expect(
           () => repository.sendChatAnnouncement(
               props: emptyBroadcasterProps, chatProps: chatProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: path,
@@ -238,7 +238,7 @@ void main() {
       expect(
           () => repository.sendChatAnnouncement(
               props: props, chatProps: longChatProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: path,

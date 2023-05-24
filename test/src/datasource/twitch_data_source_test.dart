@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
@@ -11,8 +11,7 @@ import '../../json/asset_reader.dart';
 void main() {
   const String baseURL = UrlConstants.apiBaseUrl;
 
-  final dio = Dio(BaseOptions(
-      baseUrl: baseURL));
+  final dio = Dio(BaseOptions(baseUrl: baseURL));
 
   final dioAdapter = DioAdapter(dio: dio);
   dio.httpClientAdapter = dioAdapter;

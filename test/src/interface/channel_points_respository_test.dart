@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/error/exceptions.dart';
 import 'package:twitch_client/src/interface/channel_points_respository.dart';
@@ -104,7 +104,7 @@ void main() {
           data: {})).thenAnswer((realInvocation) async => {});
 
       expect(() => repository.deleteCustomReward(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .delete(path: path, queryParams: emptyProps.toJson(), data: {}));
@@ -155,7 +155,7 @@ void main() {
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.getCustomRewards(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
@@ -211,7 +211,7 @@ void main() {
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.getCustomRewardRedemptions(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
@@ -222,7 +222,7 @@ void main() {
           .thenAnswer((realInvocation) async => {});
 
       expect(() => repository.getCustomRewardRedemptions(props: propsError),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: propsError.toJson()));
@@ -289,7 +289,7 @@ void main() {
       expect(
           () => repository.updateCustomReward(
               props: props, queryProps: emptyQueryProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .patch(path: path, queryParams: emptyQueryProps.toJson(), data: {}));
@@ -360,7 +360,7 @@ void main() {
       expect(
           () => repository.updateCustomRewardRedemption(
               props: props, queryProps: emptyQueryProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .patch(path: path, queryParams: emptyQueryProps.toJson(), data: {}));

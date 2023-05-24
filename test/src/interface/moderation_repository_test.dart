@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twitch_client/src/datasource/twitch_data_source.dart';
@@ -58,7 +58,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getBannedUsers(props: empryProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: empryProps.toJson()));
@@ -106,8 +106,8 @@ void main() {
           queryParams: empryProps.toJson(),
           data: {})).thenAnswer((realInvocation) async => {});
 
-      expect(
-          () => repository.unbanUser(props: empryProps), throwsAssertionError);
+      expect(() => repository.unbanUser(props: empryProps),
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .delete(path: path, queryParams: empryProps.toJson(), data: {}));
@@ -166,7 +166,7 @@ void main() {
 
       expect(
           () => repository.banUser(props: props, queryProps: emptyQueryProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: path,
@@ -210,7 +210,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getModerators(props: empryProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: empryProps.toJson()));
@@ -259,7 +259,7 @@ void main() {
           data: {})).thenAnswer((realInvocation) async => {});
 
       expect(() => repository.addModerator(props: emptyprops),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .post(path: path, queryParams: emptyprops.toJson(), data: {}));
@@ -308,7 +308,7 @@ void main() {
           data: {})).thenAnswer((realInvocation) async => {});
 
       expect(() => repository.removeModerator(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .delete(path: path, queryParams: emptyProps.toJson(), data: {}));
@@ -354,7 +354,7 @@ void main() {
           .thenAnswer((realInvocation) async => response.toJson());
 
       expect(() => repository.getBlockedTerms(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(
           mockedDataSource.get(path: path, queryParams: emptyProps.toJson()));
@@ -411,7 +411,7 @@ void main() {
       expect(
           () => repository.addBlockedTerms(
               props: emptyProps, termsProps: propsAdd),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource.post(
           path: path,
@@ -462,7 +462,7 @@ void main() {
           data: {})).thenAnswer((realInvocation) async => {});
 
       expect(() => repository.removeBlockedTerms(props: emptyProps),
-          throwsAssertionError);
+          throwsA(const TypeMatcher<AssertionError>()));
 
       verifyNever(mockedDataSource
           .delete(path: path, queryParams: emptyProps.toJson(), data: {}));
